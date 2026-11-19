@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "الآية التالية",
+  "mode.sambung.desc": "شاهد آية واحدة، ثم اختر الآية التي تليها.",
+  "mode.tebak-surah.title": "خمّن السورة",
+  "mode.tebak-surah.desc": "شاهد آية واحدة، ثم خمّن اسم سورتها.",
+  "mode.lengkapi.title": "أكمل الآية",
+  "mode.lengkapi.desc": "آية أُخفيت كلمتها الأخيرة.",
+  "mode.tebak-audio.title": "تعرّف على الآية من الصوت",
+  "mode.tebak-audio.desc": "استمع إلى التلاوة، ثم اختر النص المطابق. يحتاج إلى الإنترنت.",
+  "mode.tebak-juz.title": "خمّن الجزء",
+  "mode.tebak-juz.desc": "شاهد آية واحدة، ثم خمّن في أي جزء هي.",
+  "mode.sebelum.title": "الآية السابقة",
+  "mode.sebelum.desc": "شاهد آية واحدة، ثم اختر الآية التي قبلها.",
+  "site.tagline": "درّب حفظك للقرآن الكريم بستة أنواع من الاختبارات",
+  "site.description": "اختبارات مجانية لحفظ القرآن الكريم: الآية التالية، تخمين السورة، إكمال الآية، والتعرّف على الآية من الصوت. بلا تسجيل دخول، ويعمل دون إنترنت.",
+  "daily.share": "التحدي اليومي في Sambung Ayat {date}: {score}/{total} {check} {dash} sambungayat.com/ar/harian",
+  "recap.anonymous": "مجهول",
+  "recap.line": "نتيجة اختبار Sambung Ayat: {score}/{total}."
+}

@@ -1,0 +1,181 @@
+---
+// Home: one real sample question per mode, built at build time from the data (never typed by hand).
+// Static HTML + a tiny vanilla script: Next cycles the modes, answering reveals right/wrong and the translation.
+import { readFileSync } from "node:fs";
+import { LANGS, t, type Lang } from "../../lib/i18n";
+import { createLoader } from "../../lib/quran/loader";
+import { generateQuiz } from "../../lib/quiz/engine";
+import { answerAyahRef } from "../../lib/quiz/answerRef";
+import type { OptionLabel, Question, QuizMode } from "../../lib/quiz/types";
+import { trTexts } from "../../lib/translationFile";
+import { MODES } from "../../config/site";
+import { audioUrl, DEFAULT_RECITER } from "../../config/reciters";
+
+interface Props {
+  lang: Lang;
+  dict: Record<string, string>;
+}
+const { lang, dict } = Astro.props;
+
+const loader = createLoader(async (p) => JSON.parse(readFileSync(`public/data/v1/${p}`, "utf8")));
+const scope = { kind: "juz" as const, juz: [30] };
+const data = await loader.load(scope);
+
+const SAJDAH = new RegExp(" ?" + String.fromCharCode(0x06e9));
+const labelText = (l: OptionLabel) => (l.type === "ayah" ? l.text.length : 0);
+// Prefer a short question so the sample stays compact on a phone.
+function pick(mode: QuizMode): Question {
+  const qs = generateQuiz({ mode, scope, count: 20, difficulty: "mudah", seed: "home" }, data).questions;
+  const short = qs.find(
+    (q) => (q.prompt.text?.length ?? 0) <= 60 && q.options.every((o) => labelText(o.label) <= 60),
+  );
+  return (short ?? qs[0])!;
+}
+
+const trCache = new Map<number, string[] | undefined>();
+function translationOf(q: Question): string {
+  if (lang === "id") return q.answerTranslation;
+  const ref = answerAyahRef(q);
+  if (!trCache.has(ref.s)) trCache.set(ref.s, trTexts(lang, ref.s));
+  return trCache.get(ref.s)?.[ref.a - 1] ?? q.answerTranslation;
+}
+
+const items = MODES.map((m) => {
+  const q = pick(m.id as QuizMode);
+  return { mode: m.id as QuizMode, q, tr: translationOf(q) };
+});
+const surahName = (s: number) => data.index[s - 1]?.nameLatin ?? "";
+---
+
+<section aria-label={t(dict, "home.example.options")} class="sheet sheet-lift p-4 sm:p-5" data-sample>
+  <div class="flex items-center justify-between gap-3">
+    <p class="font-semibold" data-sample-mode></p>
+    <button type="button" class="btn-quiet min-h-11 px-3 text-sm" data-sample-next>
+      <span>{t(dict, "quiz.next")}</span>
+      <svg class="size-4 rtl:-scale-x-100" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+  </div>
+  <div class="strip mt-3" style="--n:5" aria-hidden="true" data-strip>
+    {[0, 1, 2, 3, 4].map(() => <span></span>)}
+  </div>
+
+  {items.map(({ mode, q, tr }, idx) => (
+    <div data-panel={mode} data-title={t(dict, `lib.mode.${mode}.title`)} hidden={idx !== 0}>
+      <h2 class="mt-4 text-lg font-extrabold">{t(dict, `quiz.prompt.${mode}`)}</h2>
+
+      {q.prompt.ayahRef && (
+        <p class="num mt-2 text-sm text-muted">
+          {t(dict, "quiz.context", { surah: surahName(q.prompt.ayahRef.s), ayah: q.prompt.ayahRef.a })}
+        </p>
+      )}
+      {mode === "tebak-audio" ? (
+        <div class="flex items-center justify-center py-4">
+          <audio crossorigin="anonymous" preload="none" src={q.prompt.audioUrl ?? audioUrl(DEFAULT_RECITER, q.source.s, q.source.a)} data-audio></audio>
+          <button type="button" class="btn-quiet min-h-12 min-w-44 px-4" data-play>
+            <svg viewBox="0 0 20 20" aria-hidden="true" class="size-5 shrink-0 fill-current"><path d="M5.5 2.8v14.4L17 10z"></path></svg>
+            {t(dict, "quiz.play")}
+          </button>
+        </div>
+      ) : (
+        <p lang="ar" dir="rtl" class="ayah text-start">
+          {q.prompt.ellipsisStart && <span aria-hidden="true">... </span>}
+          {q.prompt.text}
+          {q.prompt.ellipsisEnd && <span aria-hidden="true"> ...</span>}
+          {q.prompt.hiddenWords ? (
+            <>
+              <span class="sr-only" lang={lang} dir={LANGS[lang].dir}>{t(dict, "quiz.hidden_words", { n: q.prompt.hiddenWords })}</span>
+              {Array.from({ length: q.prompt.hiddenWords }, () => (
+                <span aria-hidden="true" class="mx-1 inline-block h-8 w-14 rounded-sm border-2 border-dashed border-rule align-middle"></span>
+              ))}
+            </>
+          ) : null}
+        </p>
+      )}
+
+      <div class="mt-3 flex flex-col gap-2" role="group" aria-label={t(dict, "home.example.options")}>
+        {q.options.map((o, i) => (
+          <button type="button" class="opt" data-ok={o.key === q.correctKey ? "" : undefined}>
+            <span class="opt-key">{i + 1}</span>
+            {o.label.type === "ayah" ? (
+              <span lang="ar" dir="rtl" class="flex-1 font-arabic text-2xl leading-loose">{o.label.text.replace(SAJDAH, "")}</span>
+            ) : o.label.type === "juz" ? (
+              <span class="num flex-1 text-lg font-semibold">{t(dict, "quiz.juz_n", { n: o.label.n })}</span>
+            ) : (
+              <span class="flex flex-1 items-center justify-between gap-3">
+                <span class="num font-semibold">{o.label.n}. {o.label.nameLatin}</span>
+                <span lang="ar" dir="rtl" class="font-arabic text-2xl leading-normal">{o.label.nameAr}</span>
+              </span>
+            )}
+            <span class="opt-tag" hidden>{o.key === q.correctKey ? t(dict, "home.example.correct") : t(dict, "quiz.wrong_tag")}</span>
+          </button>
+        ))}
+      </div>
+      <p class="mt-3 text-sm text-muted" data-tr hidden>{t(dict, "home.example.translation", { text: tr })}</p>
+    </div>
+  ))}
+</section>
+
+<script>
+  // Next cycles through the modes; the mode picker in the start form jumps to the matching sample.
+  document.querySelectorAll<HTMLElement>("[data-sample]").forEach((box) => {
+    const panels = [...box.querySelectorAll<HTMLElement>("[data-panel]")];
+    const label = box.querySelector<HTMLElement>("[data-sample-mode]")!;
+    const cell = box.querySelector<HTMLElement>("[data-strip] > span")!;
+    let cur = 0;
+
+    const reset = (p: HTMLElement) => {
+      p.querySelectorAll<HTMLButtonElement>("button.opt").forEach((o) => {
+        o.disabled = false;
+        delete o.dataset.s;
+        o.querySelector<HTMLElement>(".opt-tag")!.hidden = true;
+      });
+      p.querySelector<HTMLElement>("[data-tr]")!.hidden = true;
+      const a = p.querySelector<HTMLAudioElement>("[data-audio]");
+      if (a) a.pause();
+      delete cell.dataset.s;
+      cell.textContent = "";
+    };
+    const show = (i: number) => {
+      cur = (i + panels.length) % panels.length;
+      panels.forEach((p, k) => {
+        p.hidden = k !== cur;
+        if (k !== cur) reset(p);
+      });
+      reset(panels[cur]!);
+      label.textContent = panels[cur]!.dataset.title ?? "";
+    };
+    show(0);
+
+    box.querySelector("[data-sample-next]")!.addEventListener("click", () => show(cur + 1));
+    document.querySelectorAll<HTMLInputElement>('input[name="mode"]').forEach((r) =>
+      r.addEventListener("change", () => {
+        const k = panels.findIndex((p) => p.dataset.panel === r.value);
+        if (k >= 0) show(k);
+      }),
+    );
+
+    panels.forEach((p) => {
+      const opts = [...p.querySelectorAll<HTMLButtonElement>("button.opt")];
+      opts.forEach((b) =>
+        b.addEventListener("click", () => {
+          opts.forEach((o) => {
+            const ok = o.hasAttribute("data-ok");
+            o.dataset.s = ok ? "ok" : o === b ? "no" : "dim";
+            if (ok || o === b) o.querySelector<HTMLElement>(".opt-tag")!.hidden = false;
+            o.disabled = true;
+          });
+          p.querySelector<HTMLElement>("[data-tr]")!.hidden = false;
+          const good = b.hasAttribute("data-ok");
+          cell.dataset.s = good ? "ok" : "no";
+          cell.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${good ? "M4.5 12.5l5 5L19.5 6.5" : "M6.5 6.5l11 11M17.5 6.5l-11 11"}" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        }),
+      );
+      const play = p.querySelector<HTMLButtonElement>("[data-play]");
+      const audio = p.querySelector<HTMLAudioElement>("[data-audio]");
+      play?.addEventListener("click", () => {
+        if (audio!.paused) audio!.play().catch(() => {});
+        else audio!.pause();
+      });
+    });
+  });
+</script>

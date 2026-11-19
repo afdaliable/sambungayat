@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "آیت جاری رکھیں",
+  "mode.sambung.desc": "ایک آیت دیکھیں، اس کے بعد والی آیت چنیں۔",
+  "mode.tebak-surah.title": "سورہ پہچانیں",
+  "mode.tebak-surah.desc": "ایک آیت دیکھیں، اندازہ لگائیں کہ کس سورہ کی ہے۔",
+  "mode.lengkapi.title": "آیت مکمل کریں",
+  "mode.lengkapi.desc": "ایسی آیت جس کا آخری لفظ چھپا ہو۔",
+  "mode.tebak-audio.title": "آڈیو سن کر آیت پہچانیں",
+  "mode.tebak-audio.desc": "تلاوت سنیں، درست متن چنیں۔ انٹرنیٹ درکار ہے۔",
+  "mode.tebak-juz.title": "پارہ پہچانیں",
+  "mode.tebak-juz.desc": "ایک آیت دیکھیں، اندازہ لگائیں کہ کس پارے میں ہے۔",
+  "mode.sebelum.title": "پچھلی آیت",
+  "mode.sebelum.desc": "ایک آیت دیکھیں، اس سے پہلے والی آیت چنیں۔",
+  "site.tagline": "6 طرح کے کوئز سے اپنا قرآن حفظ پکا کریں",
+  "site.description": "قرآن حفظ کے مفت کوئز: آیت جاری رکھیں، سورہ پہچانیں، آیت مکمل کریں اور آڈیو سن کر آیت پہچانیں۔ لاگ اِن نہیں، آف لائن بھی چلتا ہے۔",
+  "daily.share": "Sambung Ayat روزانہ چیلنج {date}: {score}/{total} {check} {dash} sambungayat.com/ur/harian",
+  "recap.anonymous": "گمنام",
+  "recap.line": "Sambung Ayat کوئز کا نتیجہ: {score}/{total}۔"
+}

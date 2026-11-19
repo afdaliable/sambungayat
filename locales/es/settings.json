@@ -1,0 +1,20 @@
+{
+  "title": "Ajustes",
+  "translation": "Mostrar la traducción",
+  "context": "Mostrar el nombre de la sura y el número de aleya",
+  "autoplay": "Reproducir audio automáticamente",
+  "sound": "Efectos de sonido",
+  "reciter": "Recitador",
+  "arabic_size": "Tamaño de la fuente árabe",
+  "size.S": "Pequeño",
+  "size.M": "Mediano",
+  "size.L": "Grande",
+  "size.XL": "Muy grande",
+  "theme": "Tema",
+  "theme.system": "Seguir el sistema",
+  "theme.light": "Claro",
+  "theme.dark": "Oscuro",
+  "clear": "Borrar todos mis datos",
+  "confirm_clear": "¿Seguro? Toca otra vez para borrar",
+  "close": "Cerrar"
+}

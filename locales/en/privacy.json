@@ -1,0 +1,21 @@
+{
+  "title": "Privacy Policy | Sambung Ayat",
+  "description": "What the Sambung Ayat website and Android app store and send, and how you control it.",
+  "h1": "Privacy policy",
+  "updated": "Updated {date}",
+  "intro": "Sambung Ayat has no accounts and sells no data. This page explains what stays on your device and what leaves it, for sambungayat.com and the Android app.",
+  "1.h": "Data on your device",
+  "1.p": "Settings, quiz history, mastery and the daily score are stored on your own device (browser local storage or app storage). They are not sent to our servers. Erase everything any time from Settings, \"Delete all my data\", or by uninstalling the app.",
+  "2.h": "Website: visit statistics",
+  "2.p": "The website uses Google Analytics 4 (Google LLC) to learn which pages are opened, approximate location (country or city), and device and browser type. Google Analytics sets cookies or identifiers in your browser and does not store full IP addresses. Your name, quiz answers and memorisation content are not sent. To opt out, block googletagmanager.com or install Google's Analytics opt-out add-on.",
+  "3.h": "Completed-quiz counter",
+  "3.p": "When a quiz is finished the site may add one anonymous count to a public counter: only the quiz mode and the date. To limit spam, the IP address is turned into a random daily code that is deleted automatically the next day.",
+  "4.h": "Android app",
+  "4.p": "The app does not use Google Analytics, has no accounts, shows no ads and sends no usage data. Its only network traffic is audio from everyayah.com (see below). Audio you save lives in the app's private storage and is removed when you uninstall or use the Delete button.",
+  "5.h": "Third-party services",
+  "5.p": "everyayah.com provides the recitation audio: their server sees your IP address and the file requested. The site is hosted on Cloudflare, which keeps standard technical logs. The share button opens the app you choose and sends only the text or link you pick.",
+  "6.h": "Children",
+  "6.p": "We do not ask anyone for personal data, children included. The Android app has no accounts, ads or tracking.",
+  "7.h": "Contact and changes",
+  "7.p": "Privacy questions or requests: {email}. Changes to this policy are published on this page with the update date above."
+}

@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+// Developer-facing page, English only (the guides it points to are English too).
+const repo = SITE.repo;
+const doc = (file: string) => `${repo}/blob/main/${file}`;
+const steps = [
+  ["Set up", "Node from .nvmrc, then npm ci, npm run data:fetch -- --missing-only, npm run data:build, npm run dev."],
+  ["Pick a task", "Issues labelled good first issue are small and self-contained. Translation reviews need no programming."],
+  ["Check before you push", "npm run lint, npm run typecheck, npm test, npm run build, and npm run test:e2e for UI changes."],
+  ["Open a pull request", "One topic per pull request, a screenshot at 360 px for visible changes. A maintainer reviews every one."],
+] as const;
+---
+
+<BaseLayout
+  title="Contribute | Sambung Ayat"
+  description="How to contribute to Sambung Ayat, the free open-source Quran memorization quiz: developers, translators and reviewers."
+>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <div class="measure">
+      <h1 class="title">Contribute to Sambung Ayat</h1>
+      <p class="mt-3 text-lg text-muted">
+        Sambung Ayat is free and open source (MIT). It is a static Astro and React app with an Android build made with Capacitor.
+        Developers, translators and reviewers are welcome.
+      </p>
+
+      <h2 class="sub mt-8">Quick start</h2>
+      <ol class="rows mt-2">
+        {
+          steps.map(([h, p], i) => (
+            <li class="py-4">
+              <h3 class="font-extrabold num">{i + 1}. {h}</h3>
+              <p class="mt-1 text-muted">{p}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <h2 class="sub mt-8">Three rules that protect users</h2>
+      <ul class="mt-2 list-disc ps-5 text-muted">
+        <li>Never type or edit Quran text by hand. It comes only from the data pipeline.</li>
+        <li>Do not change quiz generation, seeds, scope keys, mode ids or slugs by accident: they define links that teachers have already shared.</li>
+        <li>No tracking, no ads, no accounts.</li>
+      </ul>
+
+      <h2 class="sub mt-8">Guides</h2>
+      <ul class="mt-2 list-disc ps-5">
+        <li><a class="lnk" href={doc("docs/developer-guide.md")}>Developer guide</a>: architecture, repository map, data pipeline, tests, Android.</li>
+        <li><a class="lnk" href={doc("CONTRIBUTING.md")}>CONTRIBUTING</a>: rules, set up, pull requests.</li>
+        <li><a class="lnk" href={doc("docs/translation-review-guide.md")}>Translation review guide</a>: review the interface in your language.</li>
+        <li><a class="lnk" href={`${repo}/issues`}>Open issues</a> and <a class="lnk" href={`${repo}/discussions`}>discussions</a>.</li>
+      </ul>
+
+      <p class="mt-8">
+        <a class="btn" href={repo}>Source code on GitHub</a>
+      </p>
+      <p class="mt-6 text-sm text-muted">
+        Security problems: use the private report on GitHub or write to {SITE.email}. Name and logo are not covered by the MIT licence, see
+        <a class="lnk" href={doc("BRAND.md")}>BRAND.md</a>.
+      </p>
+    </div>
+  </main>
+</BaseLayout>

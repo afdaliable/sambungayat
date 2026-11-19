@@ -1,0 +1,57 @@
+---
+import { DEFAULT_LANG, getDict, t, type Lang } from "../../lib/i18n";
+import { shareLinks } from "../../lib/shareLinks";
+
+interface Props {
+  url: string;
+  text: string;
+  heading?: string;
+  lang?: Lang;
+}
+const { url, text, lang = DEFAULT_LANG, heading: headingProp } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+const heading = headingProp ?? t(dict, "pages.share.heading");
+const links = shareLinks(url, text);
+const cls = "btn-quiet min-h-11 px-4 text-sm";
+---
+
+<section aria-label={heading} class="mt-12 border-t border-line pt-5" data-share-url={url} data-share-text={text}
+  data-native={t(dict, "pages.share.native")}
+  data-copied={t(dict, "pages.share.copied")}
+  data-failed={t(dict, "pages.share.failed")}
+>
+  <h2 class="font-semibold">{heading}</h2>
+  <div class="mt-2 flex flex-wrap gap-2">
+    {
+      links.map((l) => (
+        <a class={cls} href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+      ))
+    }
+    <button type="button" class={cls} data-share-copy>{t(dict, "pages.share.copy")}</button>
+  </div>
+  <p class="mt-1 min-h-5 text-sm text-muted" aria-live="polite" data-share-note></p>
+</section>
+
+<script>
+  import { canShare, shareText } from "../../lib/share";
+
+  // Native share sheet when available, otherwise copy the link.
+  document.querySelectorAll<HTMLElement>("[data-share-url]").forEach((box) => {
+    const btn = box.querySelector<HTMLButtonElement>("[data-share-copy]")!;
+    const note = box.querySelector<HTMLElement>("[data-share-note]")!;
+    const url = box.dataset.shareUrl!;
+    if (canShare()) btn.textContent = box.dataset.native ?? btn.textContent;
+    btn.addEventListener("click", async () => {
+      if (canShare()) {
+        await shareText(box.dataset.shareText ?? "", url);
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        note.textContent = box.dataset.copied ?? "";
+      } catch {
+        note.textContent = box.dataset.failed ?? "";
+      }
+    });
+  });
+</script>

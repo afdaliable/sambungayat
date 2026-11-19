@@ -1,0 +1,64 @@
+---
+import translations from "../../data/translations.json";
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import { link, rich } from "../lib/i18n/rich";
+import BaseLayout from "../layouts/BaseLayout.astro";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["about", "common"]);
+const a = (key: string) => t(dict, `about.${key}`);
+const howHtml = rich(a("how.3"), {
+  daily: link(localePath(lang, "/harian"), a("how.daily")),
+  teacher: link(localePath(lang, "/guru"), a("how.teacher")),
+});
+const tanzilHtml = rich(a("attr.text"), { tanzil: link("https://tanzil.net", "Tanzil Project") });
+// Credits the translation edition shown for this language (data/translations.json); Indonesian = id.indonesian.
+const edition = (lang === DEFAULT_LANG ? undefined : translations[lang]) as
+  | { edition: string; name: string }
+  | undefined;
+const translationHtml = rich(a("attr.translation"), {
+  code: edition ? `<code>${edition.edition}</code> (${edition.name})` : "<code>id.indonesian</code>",
+});
+const apiHtml = rich(a("attr.api"), { alquran: link("https://alquran.cloud", "AlQuran.cloud") });
+const audioHtml = rich(a("attr.audio"), { everyayah: link("https://everyayah.com", "EveryAyah") });
+const contactHtml = rich(a("contact.p"), { contact: link(localePath(lang, "/kontak"), a("contact.link")) });
+---
+
+<BaseLayout lang={lang} title={a("title")} description={a("description")}>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <div class="prose measure">
+    <h1 class="title">{a("h1")}</h1>
+
+    <h2>{a("goal.h")}</h2>
+    <p>{a("goal.p")}</p>
+    <p class="sheet p-4">
+      <strong>{a("goal.noteLabel")}</strong>{" "}{a("goal.note")}
+    </p>
+
+    <h2>{a("how.h")}</h2>
+    <ol class="list-decimal space-y-1 ps-5">
+      <li>{a("how.1")}</li>
+      <li>{a("how.2")}</li>
+      <li set:html={howHtml} />
+    </ol>
+
+    <h2 id="atribusi">{a("attr.h")}</h2>
+    <ul class="list-disc space-y-1 ps-5">
+      <li set:html={tanzilHtml} />
+      <li set:html={translationHtml} />
+      <li set:html={apiHtml} />
+      <li set:html={audioHtml} />
+      <li>{a("attr.font")}</li>
+    </ul>
+
+    <h2>{a("privacy.h")}</h2>
+    <p>{a("privacy.p")}</p>
+    <p><a class="lnk" href={localePath(lang, "/privasi")}>{t(dict, "common.footer.privacy")}</a></p>
+
+    <h2>{a("contact.h")}</h2>
+    <p set:html={contactHtml} />
+    </div>
+  </main>
+</BaseLayout>

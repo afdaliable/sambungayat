@@ -1,0 +1,52 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import { link, rich } from "../lib/i18n/rich";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShareBar from "../components/ui/ShareBar.astro";
+import { MODES, SITE } from "../config/site";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["faq", "lib"]);
+const f = (key: string, vars?: Record<string, string | number>) => t(dict, `faq.${key}`, vars);
+
+const modeTitles = MODES.map((m) => t(dict, `lib.mode.${m.id}.title`)).join(", ");
+const faqs = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => ({
+  q: f(`${n}.q`),
+  a: n === 3 ? f("3.a", { count: MODES.length, modes: modeTitles }) : f(`${n}.a`),
+}));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  inLanguage: lang,
+  mainEntity: faqs.map((x) => ({
+    "@type": "Question",
+    name: x.q,
+    acceptedAnswer: { "@type": "Answer", text: x.a },
+  })),
+};
+const unansweredHtml = rich(f("unanswered"), {
+  contact: link(localePath(lang, "/kontak"), f("unanswered.link")),
+});
+---
+
+<BaseLayout lang={lang} title={f("title")} description={f("description")} jsonLd={jsonLd}>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title">{f("h1")}</h1>
+    <div class="rows measure mt-6">
+      {
+        faqs.map((x) => (
+          <details>
+            <summary class="text-lg font-semibold">{x.q}</summary>
+            <p class="pb-4 text-muted">{x.a}</p>
+          </details>
+        ))
+      }
+    </div>
+    <p class="prose mt-8" set:html={unansweredHtml} />
+    <ShareBar lang={lang} url={`${SITE.url}${localePath(lang, "/faq")}`} text={f("share")} />
+  </main>
+</BaseLayout>

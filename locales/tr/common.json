@@ -1,0 +1,22 @@
+{
+  "skip": "İçeriğe geç",
+  "nav.label": "Ana gezinme",
+  "nav.quiz": "Sınav",
+  "nav.daily": "Günlük",
+  "nav.juz": "Cüz",
+  "nav.surah": "Sure",
+  "nav.teacher": "Öğretmen",
+  "nav.history": "Geçmiş",
+  "theme": "Tema",
+  "footer.disclaimer": "Tekrar (murâcaa) için bir yardımcı araçtır; öğretmenle talaqqi'nin yerini tutmaz. Metin: Tanzil Project. Ses: EveryAyah.",
+  "footer.about": "Hakkında ve kaynaklar",
+  "footer.faq": "SSS",
+  "footer.guide": "Ezber rehberi",
+  "footer.contact": "İletişim",
+  "lang.label": "Dil",
+  "webview.title": "Android System WebView güncellenmeli",
+  "webview.body": "Sambung Ayat, Android System WebView 111 veya daha yeni bir sürüm gerektirir. Google Play'den güncelleyin, ardından uygulamayı yeniden açın.",
+  "webview.link": "Google Play'i aç",
+  "footer.privacy": "Gizlilik politikası",
+  "footer.contribute": "Katkıda bulun"
+}

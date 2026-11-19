@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "अगली आयत",
+  "mode.sambung.desc": "एक आयत देखिए, फिर उसके बाद आने वाली आयत चुनिए।",
+  "mode.tebak-surah.title": "सूरह पहचानें",
+  "mode.tebak-surah.desc": "एक आयत देखिए, अनुमान लगाइए कि वह किस सूरह की है।",
+  "mode.lengkapi.title": "आयत पूरी करें",
+  "mode.lengkapi.desc": "आख़िरी शब्द छिपी हुई एक आयत।",
+  "mode.tebak-audio.title": "ऑडियो से आयत पहचानें",
+  "mode.tebak-audio.desc": "तिलावत सुनिए, मेल खाता पाठ चुनिए। इंटरनेट चाहिए।",
+  "mode.tebak-juz.title": "पारा पहचानें",
+  "mode.tebak-juz.desc": "एक आयत देखिए, अनुमान लगाइए कि वह किस पारे में है।",
+  "mode.sebelum.title": "पिछली आयत",
+  "mode.sebelum.desc": "एक आयत देखिए, उससे ठीक पहले वाली आयत चुनिए।",
+  "site.tagline": "6 तरह की क्विज़ से क़ुरआन हिफ़्ज़ का अभ्यास करें",
+  "site.description": "मुफ़्त क़ुरआन हिफ़्ज़ क्विज़: अगली आयत, सूरह पहचानना, आयत पूरी करना और ऑडियो सुनकर आयत पहचानना। लॉगिन के बिना, ऑफ़लाइन भी चलती है।",
+  "daily.share": "Sambung Ayat दैनिक चुनौती {date}: {score}/{total} {check} {dash} sambungayat.com/hi/harian",
+  "recap.anonymous": "अज्ञात",
+  "recap.line": "Sambung Ayat क्विज़ का नतीजा: {score}/{total}।"
+}

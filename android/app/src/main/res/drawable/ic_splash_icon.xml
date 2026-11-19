@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Benang symbol on the teal splash background (cream thread, tan last line). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp" android:height="240dp" android:viewportWidth="240" android:viewportHeight="240">
+    <group android:scaleX="2" android:scaleY="2" android:translateX="24" android:translateY="24">
+        <path android:pathData="M58 48A12 12 0 0 1 58 72H26" android:strokeColor="#D9B382" android:strokeWidth="12" android:strokeLineCap="round" android:strokeLineJoin="round"/>
+        <path android:pathData="M70 24H38A12 12 0 0 0 38 48H52" android:strokeColor="#F6F0DE" android:strokeWidth="12" android:strokeLineCap="round" android:strokeLineJoin="round"/>
+        <path android:pathData="M52 48H58" android:strokeColor="#F6F0DE" android:strokeWidth="12" android:strokeLineCap="butt" android:strokeLineJoin="round"/>
+    </group>
+</vector>

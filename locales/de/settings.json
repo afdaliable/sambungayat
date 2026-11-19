@@ -1,0 +1,20 @@
+{
+  "title": "Einstellungen",
+  "translation": "Übersetzung anzeigen",
+  "context": "Surenname und Versnummer anzeigen",
+  "autoplay": "Audio automatisch abspielen",
+  "sound": "Soundeffekte",
+  "reciter": "Rezitator",
+  "arabic_size": "Größe der arabischen Schrift",
+  "size.S": "Klein",
+  "size.M": "Mittel",
+  "size.L": "Groß",
+  "size.XL": "Sehr groß",
+  "theme": "Design",
+  "theme.system": "Wie System",
+  "theme.light": "Hell",
+  "theme.dark": "Dunkel",
+  "clear": "Alle meine Daten löschen",
+  "confirm_clear": "Sicher? Zum Löschen noch einmal tippen",
+  "close": "Schließen"
+}

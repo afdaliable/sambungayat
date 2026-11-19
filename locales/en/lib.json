@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Continue the Verse",
+  "mode.sambung.desc": "See one verse, pick the verse that follows.",
+  "mode.tebak-surah.title": "Guess the Surah",
+  "mode.tebak-surah.desc": "See one verse, guess which surah it is from.",
+  "mode.lengkapi.title": "Complete the Verse",
+  "mode.lengkapi.desc": "A verse with its last word hidden.",
+  "mode.tebak-audio.title": "Guess the Verse from Audio",
+  "mode.tebak-audio.desc": "Listen to the recitation, pick the matching text. Needs internet.",
+  "mode.tebak-juz.title": "Guess the Juz",
+  "mode.tebak-juz.desc": "See one verse, guess which juz it is in.",
+  "mode.sebelum.title": "Previous Verse",
+  "mode.sebelum.desc": "See one verse, pick the verse that comes before it.",
+  "site.tagline": "Train your Quran memorization with 6 kinds of quizzes",
+  "site.description": "Free Quran memorization quizzes: continue the verse, guess the surah, complete the verse, and guess the verse from audio. No login, works offline.",
+  "daily.share": "Sambung Ayat Daily Challenge {date}: {score}/{total} {check} {dash} sambungayat.com/en/harian",
+  "recap.anonymous": "Anonymous",
+  "recap.line": "Sambung Ayat quiz result: {score}/{total}."
+}

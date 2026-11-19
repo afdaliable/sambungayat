@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Continuer le verset",
+  "mode.sambung.desc": "Voyez un verset, choisissez le suivant.",
+  "mode.tebak-surah.title": "Deviner la sourate",
+  "mode.tebak-surah.desc": "Voyez un verset, devinez de quelle sourate il vient.",
+  "mode.lengkapi.title": "Compléter le verset",
+  "mode.lengkapi.desc": "Un verset dont le dernier mot est caché.",
+  "mode.tebak-audio.title": "Deviner le verset à l’audio",
+  "mode.tebak-audio.desc": "Écoutez la récitation, choisissez le texte correspondant. Nécessite internet.",
+  "mode.tebak-juz.title": "Deviner le juz",
+  "mode.tebak-juz.desc": "Voyez un verset, devinez dans quel juz il se trouve.",
+  "mode.sebelum.title": "Verset précédent",
+  "mode.sebelum.desc": "Voyez un verset, choisissez celui qui le précède.",
+  "site.tagline": "Entraînez votre mémorisation du Coran avec 6 types de quiz",
+  "site.description": "Quiz gratuits de mémorisation du Coran : continuer le verset, deviner la sourate, compléter le verset et reconnaître un verset à l’audio. Sans connexion, utilisable hors ligne.",
+  "daily.share": "Défi du jour Sambung Ayat {date} : {score}/{total} {check} {dash} sambungayat.com/fr/harian",
+  "recap.anonymous": "Anonyme",
+  "recap.line": "Résultat du quiz Sambung Ayat : {score}/{total}."
+}

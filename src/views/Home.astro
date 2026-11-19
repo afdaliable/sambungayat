@@ -1,0 +1,269 @@
+---
+import { DEFAULT_LANG, LANGS, getDict, localePath, t, type Lang } from "../lib/i18n";
+import { link, rich } from "../lib/i18n/rich";
+import { readFileSync } from "node:fs";
+import HomeSample from "../components/ui/HomeSample.astro";
+import ShareBar from "../components/ui/ShareBar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { MODES, SITE } from "../config/site";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["home", "lib", "quiz"]);
+const h = (key: string, vars?: Record<string, string | number>) => t(dict, `home.${key}`, vars);
+
+const totalAyah = (
+  JSON.parse(readFileSync("public/data/v1/index.json", "utf8")) as { ayahCount: number }[]
+).reduce((sum, s) => sum + s.ayahCount, 0);
+const fmt = (n: number) => n.toLocaleString(LANGS[lang].locale);
+
+const steps = [1, 2, 3].map((n) => ({ t: h(`how.${n}.t`), d: h(`how.${n}.d`) }));
+const trust = [1, 2, 3].map((n) => ({ t: h(`trust.${n}.t`), d: h(`trust.${n}.d`) }));
+const audiences = [
+  { n: 1, href: "/panduan" },
+  { n: 2, href: "/guru" },
+  { n: 3, href: "/harian" },
+].map((x) => ({
+  t: h(`who.${x.n}.t`),
+  d: h(`who.${x.n}.d`),
+  href: localePath(lang, x.href),
+  cta: h(`who.${x.n}.cta`),
+}));
+const faqTeaser = [1, 2, 3].map((n) => ({ q: h(`faq.${n}.q`), a: h(`faq.${n}.a`) }));
+
+const tagline = h("tagline");
+const description = h("description");
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.name,
+    url: SITE.url,
+    inLanguage: lang,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE.name,
+    url: SITE.url,
+    logo: `${SITE.url}/icons/icon-512.png`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: SITE.name,
+    url: SITE.url,
+    description,
+    applicationCategory: "EducationalApplication",
+    operatingSystem: "Any",
+    inLanguage: lang,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "IDR" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: lang,
+    mainEntity: faqTeaser.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+const moreHtml = rich(h("form.more", { settings: "{settings}", juzPages: "{juzPages}" }), {
+  settings: link(localePath(lang, "/kuis"), h("form.moreSettings")),
+  juzPages: link(localePath(lang, "/juz"), h("form.moreJuz")),
+});
+const sourcesHtml = rich(h("trust.sources"), {
+  about: link(localePath(lang, "/tentang#atribusi"), h("trust.aboutLink")),
+});
+const faqMoreHtml = rich(h("faq.more"), {
+  faq: link(localePath(lang, "/faq"), h("faq.moreFaq")),
+  contact: link(localePath(lang, "/kontak"), h("faq.moreContact")),
+});
+---
+
+<BaseLayout lang={lang} title={h("title")} description={description} jsonLd={jsonLd} preloadFont>
+  <main id="main">
+    <div class="band pt-5 pb-10 lg:pt-10 lg:pb-14">
+      <div class="wrap grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:items-start lg:gap-14">
+        <div>
+          <h1 class="text-[clamp(2.75rem,1.6rem+5.6vw,4.75rem)] leading-[0.95] font-extrabold tracking-[-0.02em]">{SITE.name}</h1>
+          <p class="mt-3 text-xl leading-snug text-band-soft lg:text-2xl">{tagline}</p>
+
+          <form id="mulai" action={localePath(lang, "/kuis")} method="get" class="mt-6 flex scroll-mt-4 flex-col gap-5">
+            <input type="hidden" name="n" value="10" />
+            <input type="hidden" name="d" value="mudah" />
+            <fieldset class="min-w-0">
+              <legend class="text-lg font-extrabold">{h("form.mode")}</legend>
+              <div class="relative mt-2 grid grid-cols-2 gap-2 pb-[4.75rem] sm:grid-cols-3">
+                {MODES.map((m, i) => (
+                  <label class="pick">
+                    <input type="radio" name="mode" value={m.id} checked={i === 0} class="peer sr-only" />
+                    <span>{t(dict, `lib.mode.${m.id}.title`)}</span>
+                    <span class="absolute inset-x-0 bottom-0 hidden h-16 text-start text-sm leading-snug font-normal text-band-soft peer-checked:block">{t(dict, `lib.mode.${m.id}.desc`)}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <div>
+              <label for="home-juz" class="text-lg font-extrabold">{h("form.juz")}</label>
+              <select id="home-juz" name="scope" class="field num mt-2 text-lg">
+                {Array.from({ length: 30 }, (_, i) => i + 1).map((n) => (
+                  <option value={`juz:${n}`} selected={n === 30}>{h("form.juzOption", { n })}</option>
+                ))}
+              </select>
+            </div>
+
+            <button type="submit" class="btn-band btn-lg w-full">{h("form.submit")}</button>
+            <p class="-mt-2 text-sm text-band-soft [&_a]:text-band-ink [&_a]:underline" set:html={moreHtml} />
+          </form>
+        </div>
+
+        <HomeSample lang={lang} dict={dict} />
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:items-start lg:gap-14">
+        <p class="measure text-lg">{h("intro", { total: fmt(totalAyah) })}</p>
+        <a href={localePath(lang, "/harian")} class="sheet group flex items-center gap-4 p-4 hover:border-accent">
+          <span class="flex-1">
+            <span class="block text-lg font-extrabold text-accent">{h("daily.title")}</span>
+            <span class="block text-sm text-muted">{h("daily.desc")}</span>
+          </span>
+          <svg class="size-5 shrink-0 text-accent rtl:-scale-x-100" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+      </div>
+
+      <div class="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-14">
+        <section aria-labelledby="cara">
+          <h2 id="cara" class="sub">{h("how.heading")}</h2>
+          <ol class="rows mt-4">
+            {steps.map((x, i) => (
+              <li class="flex gap-4 py-4">
+                <span class="num w-8 shrink-0 text-4xl leading-none font-extrabold text-accent">{i + 1}</span>
+                <div>
+                  <h3 class="font-extrabold">{x.t}</h3>
+                  <p class="mt-1 text-muted">{x.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="untuk">
+          <h2 id="untuk" class="sub">{h("who.heading")}</h2>
+          <ul class="rows mt-4">
+            {audiences.map((x) => (
+              <li class="py-4">
+                <h3 class="font-extrabold">{x.t}</h3>
+                <p class="mt-1 text-muted">{x.d}</p>
+                <a class="lnk mt-1 inline-block" href={x.href}>{x.cta}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="percaya">
+          <h2 id="percaya" class="sub">{h("trust.heading")}</h2>
+          <dl class="rows mt-4">
+            {trust.map((x) => (
+              <div class="py-4">
+                <dt class="font-extrabold">{x.t}</dt>
+                <dd class="mt-1 text-muted">{x.d}</dd>
+              </div>
+            ))}
+          </dl>
+          <div id="home-stats" hidden data-locale={LANGS[lang].locale} class="border-b border-line py-4">
+            <div class="flex flex-wrap gap-x-8 gap-y-2">
+              <p>
+                <span data-n="total" class="num text-2xl font-extrabold text-accent"></span>
+                <span class="text-sm text-muted">{h("stats.quizzes")}</span>
+              </p>
+              <p data-tile="week">
+                <span data-n="week" class="num text-2xl font-extrabold text-accent"></span>
+                <span class="text-sm text-muted">{h("stats.week")}</span>
+              </p>
+            </div>
+            <p class="mt-1 text-xs text-muted">{h("stats.note")}</p>
+          </div>
+          <p class="mt-3 text-sm text-muted [&_a]:text-accent" set:html={sourcesHtml} />
+        </section>
+
+        <section aria-labelledby="faq">
+          <h2 id="faq" class="sub">{h("faq.heading")}</h2>
+          <div class="rows mt-4">
+            {faqTeaser.map((x) => (
+              <details class="py-1">
+                <summary class="font-extrabold">{x.q}</summary>
+                <p class="pb-3 text-muted">{x.a}</p>
+              </details>
+            ))}
+          </div>
+          <p class="mt-3 text-sm text-muted [&_a]:text-accent" set:html={faqMoreHtml} />
+        </section>
+      </div>
+
+      <section class="band mt-14 flex flex-col gap-4 rounded-[0.625rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <div>
+          <h2 class="sub">{h("cta.heading")}</h2>
+          <p class="mt-1 text-band-soft">{h("cta.desc")}</p>
+        </div>
+        <a href="#mulai" class="btn-band shrink-0">{h("cta.button")}</a>
+      </section>
+
+      <ShareBar
+        lang={lang}
+        url={SITE.url + (lang === DEFAULT_LANG ? "" : localePath(lang, "/"))}
+        text={`${SITE.name}: ${tagline}`}
+        heading={h("share.heading")}
+      />
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { isNative } from "../lib/native/platform";
+
+  // Public counter: shown only when the number is large enough to mean something. Hidden on any error
+  // (offline, preview without the API, Android app). Fetches when the block nears the viewport.
+  const box = document.getElementById("home-stats");
+  const MIN_TOTAL = 20;
+  const MIN_WEEK = 10;
+  if (box && !isNative()) {
+    const load = async () => {
+      try {
+        const r = await fetch("/api/stats");
+        if (!r.ok) return;
+        const d = (await r.json()) as { total?: number; week?: number };
+        const total = Number(d.total);
+        const week = Number(d.week);
+        if (!(total >= MIN_TOTAL)) return;
+        const nf = new Intl.NumberFormat(box.dataset.locale);
+        box.querySelector('[data-n="total"]')!.textContent = nf.format(total);
+        const tile = box.querySelector<HTMLElement>('[data-tile="week"]')!;
+        if (week >= MIN_WEEK) box.querySelector('[data-n="week"]')!.textContent = nf.format(week);
+        else tile.hidden = true;
+        box.hidden = false;
+      } catch {
+        /* keep hidden */
+      }
+    };
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (e) => {
+          if (e.some((x) => x.isIntersecting)) {
+            io.disconnect();
+            void load();
+          }
+        },
+        { rootMargin: "400px" },
+      );
+      io.observe(box.parentElement!);
+    } else void load();
+  }
+</script>

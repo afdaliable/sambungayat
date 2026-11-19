@@ -1,0 +1,22 @@
+{
+  "skip": "मुख्य सामग्री पर जाएँ",
+  "nav.label": "मुख्य नेविगेशन",
+  "nav.quiz": "क्विज़",
+  "nav.daily": "दैनिक",
+  "nav.juz": "पारा",
+  "nav.surah": "सूरह",
+  "nav.teacher": "शिक्षक",
+  "nav.history": "इतिहास",
+  "theme": "थीम",
+  "footer.disclaimer": "यह दोहराव का सहायक है, शिक्षक के साथ talaqqi का विकल्प नहीं। पाठ: Tanzil Project। ऑडियो: EveryAyah।",
+  "footer.about": "परिचय और आभार",
+  "footer.faq": "अक्सर पूछे जाने वाले प्रश्न",
+  "footer.guide": "हिफ़्ज़ गाइड",
+  "footer.contact": "संपर्क",
+  "lang.label": "भाषा",
+  "webview.title": "Android System WebView अपडेट करें",
+  "webview.body": "Sambung Ayat को Android System WebView 111 या नया संस्करण चाहिए। Google Play से अपडेट करें, फिर ऐप दोबारा खोलें।",
+  "webview.link": "Google Play खोलें",
+  "footer.privacy": "गोपनीयता नीति",
+  "footer.contribute": "योगदान दें"
+}

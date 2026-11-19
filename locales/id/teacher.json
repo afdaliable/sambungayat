@@ -1,0 +1,23 @@
+{
+  "load_failed": "Data surah belum bisa dimuat. Periksa koneksi.",
+  "qr_failed": "QR code gagal dibuat, tetapi link tetap bisa dipakai.",
+  "copied": "Link disalin.",
+  "copy_failed": "Tidak bisa menyalin otomatis. Salin dari kolom di atas.",
+  "title": "Buat link kuis untuk kelas",
+  "submit": "Buat link",
+  "ready": "Link kuis siap dibagikan",
+  "same_questions": "Semua santri yang membuka link ini mendapat soal yang sama.",
+  "link_label": "Link kuis",
+  "copy": "Salin link",
+  "wa_text": "Kerjakan kuis Sambung Ayat: {link}",
+  "wa": "Bagikan ke WhatsApp",
+  "qr_alt": "QR code link kuis",
+  "recap.label": "Tempel pesan dari grup WhatsApp",
+  "recap.placeholder": "Salin chat grup berisi kiriman skor santri, lalu tempel di sini.",
+  "recap.none": "Belum ada skor yang dikenali. Santri harus memakai tombol \"Kirim ke guru\" di halaman hasil.",
+  "recap.students.one": "{n} santri",
+  "recap.students.other": "{n} santri",
+  "recap.name": "Nama",
+  "recap.score": "Skor",
+  "recap.code": "Kode kuis"
+}

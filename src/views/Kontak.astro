@@ -1,0 +1,75 @@
+---
+import { DEFAULT_LANG, getDict, t, type Lang } from "../lib/i18n";
+import { link, rich } from "../lib/i18n/rich";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["contact"]);
+const c = (key: string, vars?: Record<string, string | number>) => t(dict, `contact.${key}`, vars);
+const noteHtml = rich(c("note"), { email: link(`mailto:${SITE.email}`, SITE.email) });
+const unsetHtml = rich(c("unset"), {
+  code1: "<code>SITE.email</code>",
+  code2: "<code>src/config/site.ts</code>",
+});
+const repoHtml = rich(c("repo"), { repo: link(SITE.repo, c("repo.link")) });
+---
+
+<BaseLayout lang={lang} title={c("title")} description={c("description")}>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <div class="measure">
+    <h1 class="title">{c("h1")}</h1>
+    <p class="mt-3 text-lg text-muted">{c("intro")}</p>
+
+    {
+      SITE.email ? (
+        <form
+          id="contact-form"
+          class="mt-6 flex flex-col gap-4"
+          data-email={SITE.email}
+          data-from={c("mail.from", { name: "{name}" })}
+        >
+          <div>
+            <label for="c-topic" class="font-semibold">{c("topic")}</label>
+            <select id="c-topic" class="field mt-1">
+              <option>{c("topic.feature")}</option>
+              <option>{c("topic.report")}</option>
+              <option>{c("topic.tech")}</option>
+              <option>{c("topic.collab")}</option>
+            </select>
+          </div>
+          <div>
+            <label for="c-name" class="font-semibold">{c("name")}</label>
+            <input id="c-name" maxlength="60" class="field mt-1" />
+          </div>
+          <div>
+            <label for="c-msg" class="font-semibold">{c("message")}</label>
+            <textarea id="c-msg" rows="6" required class="field mt-1" />
+          </div>
+          <button type="submit" class="btn btn-lg">
+            {c("submit")}
+          </button>
+          <p class="prose text-sm text-muted" set:html={noteHtml} />
+        </form>
+      ) : (
+        <p class="sheet mt-6 p-4" set:html={unsetHtml} />
+      )
+    }
+    {SITE.repo && <p class="prose mt-6" set:html={repoHtml} />}
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = (id: string) => (document.getElementById(id) as HTMLInputElement).value.trim();
+    // data-from is the localized "From: {name}" template.
+    const from = v("c-name") ? (form.dataset.from ?? "").replace("{name}", v("c-name")) : "";
+    const body = `${v("c-msg")}\n\n${from}`.trim();
+    location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`[Sambung Ayat] ${v("c-topic")}`)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

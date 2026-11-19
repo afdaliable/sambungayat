@@ -1,0 +1,22 @@
+{
+  "skip": "Zum Inhalt springen",
+  "nav.label": "Hauptnavigation",
+  "nav.quiz": "Quiz",
+  "nav.daily": "Täglich",
+  "nav.juz": "Dschuz",
+  "nav.surah": "Sure",
+  "nav.teacher": "Lehrer",
+  "nav.history": "Verlauf",
+  "theme": "Design",
+  "footer.disclaimer": "Eine Wiederholungshilfe, kein Ersatz für das Talaqqi mit einem Lehrer. Text: Tanzil Project. Audio: EveryAyah.",
+  "footer.about": "Über uns & Quellen",
+  "footer.faq": "FAQ",
+  "footer.guide": "Leitfaden zum Auswendiglernen",
+  "footer.contact": "Kontakt",
+  "lang.label": "Sprache",
+  "webview.title": "Android System WebView aktualisieren",
+  "webview.body": "Sambung Ayat benötigt Android System WebView 111 oder neuer. Aktualisiere es in Google Play und öffne die App danach erneut.",
+  "webview.link": "Google Play öffnen",
+  "footer.privacy": "Datenschutz",
+  "footer.contribute": "Mitwirken"
+}

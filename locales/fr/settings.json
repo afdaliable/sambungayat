@@ -1,0 +1,20 @@
+{
+  "title": "Paramètres",
+  "translation": "Afficher la traduction",
+  "context": "Afficher le nom de la sourate et le numéro du verset",
+  "autoplay": "Lecture audio automatique",
+  "sound": "Effets sonores",
+  "reciter": "Récitateur",
+  "arabic_size": "Taille de la police arabe",
+  "size.S": "Petite",
+  "size.M": "Moyenne",
+  "size.L": "Grande",
+  "size.XL": "Très grande",
+  "theme": "Thème",
+  "theme.system": "Suivre le système",
+  "theme.light": "Clair",
+  "theme.dark": "Sombre",
+  "clear": "Supprimer toutes mes données",
+  "confirm_clear": "Sûr ? Touchez encore pour supprimer",
+  "close": "Fermer"
+}

@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getDict, t } from "../lib/i18n";
+
+const dict = getDict("id", ["pages"]);
+---
+
+<BaseLayout title={t(dict, "pages.notFound.title")} noindex>
+  <main id="main" class="wrap py-14 lg:py-24">
+    <h1 class="title">{t(dict, "pages.notFound.h1")}</h1>
+    <p class="measure mt-3 text-lg text-muted">{t(dict, "pages.notFound.body")}</p>
+    <a
+      href="/"
+      class="btn btn-lg mt-8"
+    >
+      {t(dict, "pages.notFound.home")}
+    </a>
+  </main>
+</BaseLayout>

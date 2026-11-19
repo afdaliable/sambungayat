@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Continuar la aleya",
+  "mode.sambung.desc": "Mira una aleya y elige la siguiente.",
+  "mode.tebak-surah.title": "Adivinar la sura",
+  "mode.tebak-surah.desc": "Mira una aleya y adivina de qué sura es.",
+  "mode.lengkapi.title": "Completar la aleya",
+  "mode.lengkapi.desc": "Una aleya con la última palabra oculta.",
+  "mode.tebak-audio.title": "Adivinar la aleya por el audio",
+  "mode.tebak-audio.desc": "Escucha la recitación y elige el texto correspondiente. Necesita internet.",
+  "mode.tebak-juz.title": "Adivinar el yuz",
+  "mode.tebak-juz.desc": "Mira una aleya y adivina en qué yuz está.",
+  "mode.sebelum.title": "Aleya anterior",
+  "mode.sebelum.desc": "Mira una aleya y elige la que viene justo antes.",
+  "site.tagline": "Entrena tu memorización del Corán con 6 tipos de cuestionarios",
+  "site.description": "Cuestionarios gratuitos para memorizar el Corán: continuar la aleya, adivinar la sura, completar la aleya y reconocer la aleya por el audio. Sin iniciar sesión y con uso sin conexión.",
+  "daily.share": "Reto diario de Sambung Ayat {date}: {score}/{total} {check} {dash} sambungayat.com/es/harian",
+  "recap.anonymous": "Anónimo",
+  "recap.line": "Resultado del cuestionario Sambung Ayat: {score}/{total}."
+}

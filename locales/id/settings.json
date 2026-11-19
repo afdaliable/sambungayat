@@ -1,0 +1,20 @@
+{
+  "title": "Pengaturan",
+  "translation": "Tampilkan terjemahan",
+  "context": "Tampilkan nama surah dan nomor ayat",
+  "autoplay": "Putar audio otomatis",
+  "sound": "Efek suara",
+  "reciter": "Qari",
+  "arabic_size": "Ukuran font Arab",
+  "size.S": "Kecil",
+  "size.M": "Sedang",
+  "size.L": "Besar",
+  "size.XL": "Sangat besar",
+  "theme": "Tema",
+  "theme.system": "Ikuti sistem",
+  "theme.light": "Terang",
+  "theme.dark": "Gelap",
+  "clear": "Hapus semua data saya",
+  "confirm_clear": "Yakin? Ketuk lagi untuk menghapus",
+  "close": "Tutup"
+}

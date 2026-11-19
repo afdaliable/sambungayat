@@ -1,0 +1,21 @@
+{
+  "title": "Kebijakan Privasi | Sambung Ayat",
+  "description": "Data apa yang disimpan dan dikirim oleh situs dan aplikasi Android Sambung Ayat, dan bagaimana mengendalikannya.",
+  "h1": "Kebijakan privasi",
+  "updated": "Diperbarui {date}",
+  "intro": "Sambung Ayat tidak punya akun dan tidak menjual data. Halaman ini menjelaskan apa yang tersimpan di perangkatmu dan apa yang keluar dari sana, untuk situs sambungayat.com dan aplikasi Android.",
+  "1.h": "Data di perangkatmu",
+  "1.p": "Pengaturan, riwayat kuis, tingkat penguasaan, dan skor harian disimpan di perangkatmu sendiri (penyimpanan lokal peramban atau penyimpanan aplikasi). Data ini tidak dikirim ke server kami. Hapus semuanya kapan saja lewat Pengaturan, \"Hapus semua data saya\", atau dengan mencopot aplikasi.",
+  "2.h": "Situs web: statistik kunjungan",
+  "2.p": "Situs web memakai Google Analytics 4 (Google LLC) untuk mengetahui halaman mana yang dibuka, perkiraan lokasi (negara atau kota), jenis perangkat dan peramban. Google Analytics memasang cookie atau pengenal di peramban dan tidak menyimpan alamat IP lengkap. Nama, jawaban kuis, dan isi hafalanmu tidak dikirim. Untuk menolak, blokir googletagmanager.com atau pasang pengaya penolakan Google Analytics di peramban.",
+  "3.h": "Penghitung kuis selesai",
+  "3.p": "Saat kuis selesai, situs dapat menambah satu hitungan anonim ke penghitung umum: hanya mode kuis dan tanggal. Untuk membatasi spam, alamat IP diubah menjadi kode acak harian yang dihapus otomatis keesokan harinya.",
+  "4.h": "Aplikasi Android",
+  "4.p": "Aplikasi tidak memakai Google Analytics, tidak punya akun, tidak menampilkan iklan, dan tidak mengirim data pemakaian. Satu-satunya lalu lintas jaringan adalah audio dari everyayah.com (lihat bawah). Audio yang kamu simpan berada di penyimpanan pribadi aplikasi dan terhapus saat aplikasi dicopot atau lewat tombol Hapus.",
+  "5.h": "Layanan pihak ketiga",
+  "5.p": "everyayah.com menyediakan audio murattal: server mereka melihat alamat IP-mu dan berkas yang diminta. Situs dihosting di Cloudflare, yang mencatat log teknis standar. Tombol bagikan membuka aplikasi pilihanmu dan hanya mengirim teks atau tautan yang kamu pilih.",
+  "6.h": "Anak-anak",
+  "6.p": "Kami tidak meminta data pribadi dari siapa pun, termasuk anak-anak. Tidak ada akun, iklan, atau pelacakan di aplikasi Android.",
+  "7.h": "Kontak dan perubahan",
+  "7.p": "Pertanyaan atau permintaan terkait privasi: {email}. Perubahan kebijakan ditulis di halaman ini dengan tanggal pembaruan di atas."
+}

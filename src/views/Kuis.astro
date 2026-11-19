@@ -1,0 +1,54 @@
+---
+import { DEFAULT_LANG, getDict, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizApp from "../components/quiz/QuizApp";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+const islandDict = getDict(lang, ["quiz", "settings", "teacher", "lib", "common"]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(dict, "pages.kuis.title")}
+  description={t(dict, "pages.kuis.description")}
+  preloadFont
+>
+  <script slot="head" is:inline>
+    // Start downloading quiz data while the JS bundle loads (the browser HTTP cache serves it to the loader later).
+    // Mirrors neededSurahs() in src/lib/quran/scope.ts: scope surahs plus one neighbour each side.
+    (() => {
+      const get = (p) => fetch("/data/v1/" + p).then((r) => r.json());
+      const warm = (list) => {
+        const set = new Set();
+        for (const n of list) for (const m of [n - 1, n, n + 1]) if (m >= 1 && m <= 114) set.add(m);
+        for (const m of set) get("surah/" + String(m).padStart(3, "0") + ".json");
+      };
+      try {
+        get("index.json");
+        get("ambiguous.json");
+        const m = /^(juz|surah|range|ayat):(.+)$/.exec(
+          new URLSearchParams(location.search).get("scope") || "juz:30",
+        );
+        if (!m) return;
+        if (m[1] === "ayat") return warm([Number(m[2].split(":")[0])]);
+        const nums = m[1] === "range" ? m[2].split("-").map(Number) : m[2].split(",").map(Number);
+        if (m[1] === "surah") warm(nums);
+        else if (m[1] === "range")
+          warm(Array.from({ length: nums[1] - nums[0] + 1 }, (_, i) => nums[0] + i));
+        else
+          get("juz.json").then((juz) =>
+            warm(juz.filter((x) => nums.includes(x.juz)).flatMap((x) => x.surahs)),
+          );
+      } catch {
+        /* warm-up is best effort */
+      }
+    })();
+  </script>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="sr-only">{t(dict, "pages.kuis.h1")}</h1>
+    <QuizApp client:load lang={lang} dict={islandDict} />
+  </main>
+</BaseLayout>

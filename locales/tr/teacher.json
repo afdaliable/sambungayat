@@ -1,0 +1,23 @@
+{
+  "load_failed": "Sure verileri yüklenemedi. Bağlantını kontrol et.",
+  "qr_failed": "QR kodu oluşturulamadı ama bağlantı yine de çalışır.",
+  "copied": "Bağlantı kopyalandı.",
+  "copy_failed": "Otomatik kopyalanamadı. Yukarıdaki alandan kopyala.",
+  "title": "Sınıf için sınav bağlantısı oluştur",
+  "submit": "Bağlantı oluştur",
+  "ready": "Sınav bağlantısı paylaşıma hazır",
+  "same_questions": "Bu bağlantıyı açan her öğrenci aynı soruları alır.",
+  "link_label": "Sınav bağlantısı",
+  "copy": "Bağlantıyı kopyala",
+  "wa_text": "Sambung Ayat sınavını çöz: {link}",
+  "wa": "WhatsApp'ta paylaş",
+  "qr_alt": "Sınav bağlantısı için QR kodu",
+  "recap.label": "WhatsApp grubundaki mesajları yapıştır",
+  "recap.placeholder": "Öğrencilerin skor mesajlarının bulunduğu grup sohbetini kopyala ve buraya yapıştır.",
+  "recap.none": "Henüz tanınan bir skor yok. Öğrenciler sonuç sayfasındaki \"Öğretmene gönder\" düğmesini kullanmalı.",
+  "recap.students.one": "{n} öğrenci",
+  "recap.students.other": "{n} öğrenci",
+  "recap.name": "Ad",
+  "recap.score": "Skor",
+  "recap.code": "Sınav kodu"
+}

@@ -1,0 +1,113 @@
+---
+import { SITE } from "../../config/site";
+import names from "../../../locales/names.json";
+import { DEFAULT_LANG, LANG_CODES, getDict, localePath, stripLang, t, type Lang } from "../../lib/i18n";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["common"]);
+// Same page in every language. Query string and hash are appended on click (static HTML cannot know them).
+const here = stripLang(Astro.url.pathname.replace(/\.html$/, "")).path;
+const switchLinks = LANG_CODES.map((code) => ({
+  code,
+  name: (names as Record<string, string>)[code] ?? code,
+  href: localePath(code, here),
+}));
+const currentName = (names as Record<string, string>)[lang] ?? lang;
+const links = [
+  { href: "/kuis", key: "nav.quiz" },
+  { href: "/harian", key: "nav.daily" },
+  { href: "/juz", key: "nav.juz" },
+  { href: "/surah", key: "nav.surah" },
+  { href: "/guru", key: "nav.teacher" },
+  { href: "/riwayat", key: "nav.history" },
+];
+---
+
+<header class="band">
+  <div class="wrap flex flex-wrap items-center gap-x-1 py-1 lg:flex-nowrap lg:gap-x-3">
+    <a href={localePath(lang, "/")} class="me-auto inline-flex items-center py-2 whitespace-nowrap lg:me-3" aria-label={SITE.name}>
+      <img src="/brand/lockup-horizontal-warna-gelap.svg" alt="" width="145" height="24" class="h-6 w-auto" />
+    </a>
+    <button
+      id="theme-toggle"
+      type="button"
+      class="inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 text-sm text-band-soft hover:bg-white/10 hover:text-band-ink lg:order-3"
+      aria-pressed="false"
+    >
+      <svg class="size-4" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path></svg>
+      <span>{t(dict, "common.theme")}</span>
+    </button>
+    {
+      switchLinks.length > 1 && (
+        <details id="lang-switch" class="relative lg:order-4">
+          <summary
+            class="inline-flex min-h-11 cursor-pointer list-none items-center gap-1 rounded-md px-2 text-sm text-band-soft hover:bg-white/10 hover:text-band-ink [&::-webkit-details-marker]:hidden"
+            aria-label={t(dict, "common.lang.label")}
+          >
+            {currentName}
+            <svg class="size-3" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </summary>
+          <ul class="sheet sheet-lift absolute end-0 z-40 mt-1 max-h-72 w-48 overflow-y-auto p-1">
+            {switchLinks.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  hreflang={l.code}
+                  lang={l.code}
+                  aria-current={l.code === lang ? "true" : undefined}
+                  class="flex min-h-11 items-center rounded px-3 text-sm hover:bg-paper aria-[current=true]:font-extrabold aria-[current=true]:text-accent"
+                >
+                  {l.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+    <nav
+      class="order-last -mx-2 flex w-full flex-wrap items-center justify-between border-t border-white/20 lg:order-2 lg:mx-0 lg:w-auto lg:flex-1 lg:flex-nowrap lg:justify-start lg:gap-x-1 lg:border-0"
+      aria-label={t(dict, "common.nav.label")}
+    >
+      {links.map((l) => (
+        <a
+          href={localePath(lang, l.href)}
+          aria-current={here === l.href || here.startsWith(l.href + "/") ? "page" : undefined}
+          class="inline-flex min-h-11 items-center px-2 text-band-soft hover:text-band-ink aria-[current=page]:font-extrabold aria-[current=page]:text-band-ink aria-[current=page]:shadow-[inset_0_-3px_0_var(--band-ink)]"
+        >{t(dict, `common.${l.key}`)}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Language links keep the current query string and hash (e.g. a quiz link keeps its seed).
+  document.querySelectorAll<HTMLAnchorElement>("#lang-switch a").forEach((a) =>
+    a.addEventListener("click", () => {
+      a.href = a.getAttribute("href")! + location.search + location.hash;
+    }),
+  );
+</script>
+
+<script>
+  // Tiny vanilla toggle so static pages ship no framework JS.
+  const KEY = "sa:v1:settings";
+  const btn = document.getElementById("theme-toggle")!;
+  const root = document.documentElement;
+  const sync = () => btn.setAttribute("aria-pressed", String(root.classList.contains("dark")));
+  sync();
+  btn.addEventListener("click", () => {
+    const dark = !root.classList.contains("dark");
+    root.classList.toggle("dark", dark);
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY) || "{}");
+      localStorage.setItem(KEY, JSON.stringify({ ...s, theme: dark ? "dark" : "light" }));
+    } catch {
+      /* storage unavailable */
+    }
+    sync();
+    window.dispatchEvent(new Event("sa:settings")); // tell the React settings cache to reload
+  });
+</script>

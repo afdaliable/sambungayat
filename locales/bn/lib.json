@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "পরবর্তী আয়াত",
+  "mode.sambung.desc": "একটি আয়াত দেখুন, তারপর যে আয়াতটি এর পরে আসে সেটি বেছে নিন।",
+  "mode.tebak-surah.title": "সূরা চিনুন",
+  "mode.tebak-surah.desc": "একটি আয়াত দেখুন, কোন সূরার আয়াত তা অনুমান করুন।",
+  "mode.lengkapi.title": "আয়াত সম্পূর্ণ করুন",
+  "mode.lengkapi.desc": "শেষ শব্দটি লুকানো একটি আয়াত।",
+  "mode.tebak-audio.title": "অডিও শুনে আয়াত চিনুন",
+  "mode.tebak-audio.desc": "তিলাওয়াত শুনুন, মিল থাকা পাঠটি বেছে নিন। ইন্টারনেট লাগে।",
+  "mode.tebak-juz.title": "পারা চিনুন",
+  "mode.tebak-juz.desc": "একটি আয়াত দেখুন, কোন পারায় আছে তা অনুমান করুন।",
+  "mode.sebelum.title": "আগের আয়াত",
+  "mode.sebelum.desc": "একটি আয়াত দেখুন, এর ঠিক আগের আয়াতটি বেছে নিন।",
+  "site.tagline": "৬ ধরনের কুইজে কুরআন হিফজের অনুশীলন করুন",
+  "site.description": "বিনামূল্যে কুরআন হিফজ কুইজ: পরবর্তী আয়াত, সূরা চেনা, আয়াত সম্পূর্ণ করা এবং অডিও শুনে আয়াত চেনা। লগইন ছাড়াই, অফলাইনেও চলে।",
+  "daily.share": "Sambung Ayat দৈনিক চ্যালেঞ্জ {date}: {score}/{total} {check} {dash} sambungayat.com/bn/harian",
+  "recap.anonymous": "অজ্ঞাত",
+  "recap.line": "Sambung Ayat কুইজের ফল: {score}/{total}।"
+}

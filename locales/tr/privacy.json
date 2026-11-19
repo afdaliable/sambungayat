@@ -1,0 +1,21 @@
+{
+  "title": "Gizlilik Politikası | Sambung Ayat",
+  "description": "Sambung Ayat web sitesi ve Android uygulamasının hangi verileri sakladığı ve gönderdiği, ve bunları nasıl denetleyeceğiniz.",
+  "h1": "Gizlilik politikası",
+  "updated": "Güncelleme: {date}",
+  "intro": "Sambung Ayat'ta hesap yoktur ve veri satılmaz. Bu sayfa, sambungayat.com ve Android uygulaması için cihazınızda nelerin kaldığını ve nelerin dışarı çıktığını açıklar.",
+  "1.h": "Cihazınızdaki veriler",
+  "1.p": "Ayarlar, test geçmişi, ustalık düzeyi ve günlük skor kendi cihazınızda (tarayıcı yerel depolaması veya uygulama depolaması) tutulur. Sunucularımıza gönderilmez. Her şeyi Ayarlar'daki \"Tüm verilerimi sil\" ile veya uygulamayı kaldırarak istediğiniz zaman silebilirsiniz.",
+  "2.h": "Web sitesi: ziyaret istatistikleri",
+  "2.p": "Web sitesi, hangi sayfaların açıldığını, yaklaşık konumu (ülke veya şehir) ile cihaz ve tarayıcı türünü öğrenmek için Google Analytics 4 (Google LLC) kullanır. Google Analytics tarayıcınıza çerez veya tanımlayıcı yerleştirir ve tam IP adresini saklamaz. Adınız, test cevaplarınız ve ezber içeriğiniz gönderilmez. Reddetmek için googletagmanager.com'u engelleyin veya Google Analytics devre dışı bırakma eklentisini kurun.",
+  "3.h": "Tamamlanan test sayacı",
+  "3.p": "Bir test bittiğinde site, herkese açık bir sayaca anonim bir sayı ekleyebilir: yalnızca test modu ve tarih. Spam'i sınırlamak için IP adresi, ertesi gün otomatik silinen günlük rastgele bir koda dönüştürülür.",
+  "4.h": "Android uygulaması",
+  "4.p": "Uygulama Google Analytics kullanmaz, hesabı yoktur, reklam göstermez ve kullanım verisi göndermez. Tek ağ trafiği everyayah.com'dan gelen sestir (aşağıya bakın). Kaydettiğiniz ses uygulamanın özel depolamasında durur; uygulamayı kaldırınca veya Sil düğmesiyle silinir.",
+  "5.h": "Üçüncü taraf hizmetler",
+  "5.p": "everyayah.com tilavet seslerini sağlar: sunucuları IP adresinizi ve istenen dosyayı görür. Site, standart teknik kayıtlar tutan Cloudflare'de barındırılır. Paylaş düğmesi seçtiğiniz uygulamayı açar ve yalnızca seçtiğiniz metni veya bağlantıyı gönderir.",
+  "6.h": "Çocuklar",
+  "6.p": "Çocuklar dahil kimseden kişisel veri istemeyiz. Android uygulamasında hesap, reklam veya izleme yoktur.",
+  "7.h": "İletişim ve değişiklikler",
+  "7.p": "Gizlilikle ilgili soru veya talepler: {email}. Politika değişiklikleri yukarıdaki güncelleme tarihiyle bu sayfada yayımlanır."
+}

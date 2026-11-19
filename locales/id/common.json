@@ -1,0 +1,22 @@
+{
+  "skip": "Lewati ke konten",
+  "nav.label": "Navigasi utama",
+  "nav.quiz": "Kuis",
+  "nav.daily": "Harian",
+  "nav.juz": "Juz",
+  "nav.surah": "Surah",
+  "nav.teacher": "Guru",
+  "nav.history": "Riwayat",
+  "theme": "Tema",
+  "footer.disclaimer": "Alat bantu murajaah, bukan pengganti talaqqi dengan guru. Teks: Tanzil Project. Audio: EveryAyah.",
+  "footer.about": "Tentang & atribusi",
+  "footer.faq": "FAQ",
+  "footer.guide": "Panduan hafalan",
+  "footer.contact": "Kontak",
+  "lang.label": "Bahasa",
+  "webview.title": "WebView Android perlu diperbarui",
+  "webview.body": "Sambung Ayat membutuhkan Android System WebView versi 111 atau lebih baru. Perbarui lewat Google Play, lalu buka kembali aplikasi.",
+  "webview.link": "Buka Google Play",
+  "footer.privacy": "Kebijakan privasi",
+  "footer.contribute": "Berkontribusi"
+}

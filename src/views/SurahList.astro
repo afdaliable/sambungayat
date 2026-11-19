@@ -1,0 +1,47 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, tp, type Lang } from "../lib/i18n";
+import { readFileSync } from "node:fs";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { SurahMeta } from "../lib/quran/types";
+
+const surahs = JSON.parse(readFileSync("public/data/v1/index.json", "utf8")) as SurahMeta[];
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(dict, "pages.list.surah.title")}
+  description={t(dict, "pages.list.surah.description")}
+>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title">{t(dict, "pages.list.surah.h1")}</h1>
+    <ol class="mt-6 grid gap-x-10 border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+      {surahs.map((s) => (
+        <li class="border-b border-line">
+          <a
+            href={localePath(lang, `/surah/${s.slug}`)}
+            class="group flex min-h-16 items-center gap-3 py-2 no-underline"
+          >
+            <span class="num w-8 shrink-0 text-muted">{s.n}</span>
+            <span class="min-w-0 flex-1">
+              <span class="font-semibold group-hover:text-accent group-hover:underline">{s.nameLatin}</span>
+              <span class="block text-sm text-muted">
+                {t(dict, "pages.surah.meta", {
+                  revelation: t(dict, `pages.revelation.${s.revelation}`),
+                  ayahs: tp(lang, dict, "pages.ayahCount", s.ayahCount),
+                })}
+              </span>
+            </span>
+            <span lang="ar" dir="rtl" class="font-arabic shrink-0 text-2xl">
+              {s.nameAr}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </main>
+</BaseLayout>

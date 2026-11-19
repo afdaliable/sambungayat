@@ -1,0 +1,23 @@
+---
+import { DEFAULT_LANG, getDict, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HistoryView from "../components/quiz/HistoryView";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+const islandDict = getDict(lang, ["quiz", "settings", "teacher", "lib", "common"]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(dict, "pages.riwayat.title")}
+  noindex
+  description={t(dict, "pages.riwayat.description")}
+>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title mb-6">{t(dict, "pages.riwayat.h1")}</h1>
+    <HistoryView client:load lang={lang} dict={islandDict} />
+  </main>
+</BaseLayout>

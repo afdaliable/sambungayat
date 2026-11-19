@@ -1,0 +1,22 @@
+{
+  "skip": "انتقل إلى المحتوى",
+  "nav.label": "التنقل الرئيسي",
+  "nav.quiz": "اختبار",
+  "nav.daily": "اليومي",
+  "nav.juz": "الجزء",
+  "nav.surah": "السورة",
+  "nav.teacher": "المعلّم",
+  "nav.history": "السجل",
+  "theme": "المظهر",
+  "footer.disclaimer": "أداة مساعدة للمراجعة، وليست بديلًا عن التلقّي على المعلّم. النص: Tanzil Project. الصوت: EveryAyah.",
+  "footer.about": "عن الموقع والمصادر",
+  "footer.faq": "الأسئلة الشائعة",
+  "footer.guide": "دليل الحفظ",
+  "footer.contact": "اتصل بنا",
+  "lang.label": "اللغة",
+  "webview.title": "حدّث Android System WebView",
+  "webview.body": "يحتاج Sambung Ayat إلى Android System WebView بالإصدار 111 أو أحدث. حدّثه من Google Play ثم أعد فتح التطبيق.",
+  "webview.link": "افتح Google Play",
+  "footer.privacy": "سياسة الخصوصية",
+  "footer.contribute": "ساهم"
+}

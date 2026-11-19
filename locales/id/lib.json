@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Sambung Ayat",
+  "mode.sambung.desc": "Lihat satu ayat, pilih ayat berikutnya.",
+  "mode.tebak-surah.title": "Tebak Surah",
+  "mode.tebak-surah.desc": "Lihat satu ayat, tebak nama surahnya.",
+  "mode.lengkapi.title": "Lengkapi Ayat",
+  "mode.lengkapi.desc": "Ayat dengan kata terakhir disembunyikan.",
+  "mode.tebak-audio.title": "Tebak Ayat dari Audio",
+  "mode.tebak-audio.desc": "Dengarkan murattal, pilih teksnya. Butuh internet.",
+  "mode.tebak-juz.title": "Tebak Juz",
+  "mode.tebak-juz.desc": "Lihat satu ayat, tebak ada di juz berapa.",
+  "mode.sebelum.title": "Ayat Sebelumnya",
+  "mode.sebelum.desc": "Lihat satu ayat, pilih ayat yang mendahuluinya.",
+  "site.tagline": "Latih hafalan Al-Qur'an dengan 6 jenis kuis",
+  "site.description": "Kuis hafalan Al-Qur'an gratis: sambung ayat, tebak surah, lengkapi ayat, dan tebak ayat dari audio. Tanpa login, bisa dipakai offline.",
+  "daily.share": "Tantangan Harian Sambung Ayat {date}: {score}/{total} {check} {dash} sambungayat.com/harian",
+  "recap.anonymous": "Anonim",
+  "recap.line": "Hasil kuis Sambung Ayat: {score}/{total}."
+}

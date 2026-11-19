@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Sambung Ayat",
+  "mode.sambung.desc": "Lihat satu ayat, pilih ayat yang seterusnya.",
+  "mode.tebak-surah.title": "Teka Surah",
+  "mode.tebak-surah.desc": "Lihat satu ayat, teka nama surahnya.",
+  "mode.lengkapi.title": "Lengkapkan Ayat",
+  "mode.lengkapi.desc": "Ayat dengan perkataan terakhir disembunyikan.",
+  "mode.tebak-audio.title": "Teka Ayat daripada Audio",
+  "mode.tebak-audio.desc": "Dengar bacaan murattal, pilih teksnya. Perlukan internet.",
+  "mode.tebak-juz.title": "Teka Juz",
+  "mode.tebak-juz.desc": "Lihat satu ayat, teka ia berada di juz yang mana.",
+  "mode.sebelum.title": "Ayat Sebelumnya",
+  "mode.sebelum.desc": "Lihat satu ayat, pilih ayat yang mendahuluinya.",
+  "site.tagline": "Latih hafazan Al-Quran dengan 6 jenis kuiz",
+  "site.description": "Kuiz hafazan Al-Quran percuma: sambung ayat, teka surah, lengkapkan ayat dan teka ayat daripada audio. Tanpa log masuk, boleh digunakan luar talian.",
+  "daily.share": "Cabaran Harian Sambung Ayat {date}: {score}/{total} {check} {dash} sambungayat.com/ms/harian",
+  "recap.anonymous": "Tanpa nama",
+  "recap.line": "Keputusan kuiz Sambung Ayat: {score}/{total}."
+}

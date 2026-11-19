@@ -1,0 +1,9 @@
+---
+import View from "../../views/SurahDetail.astro";
+import { surahPaths } from "../../lib/staticPaths";
+
+export const getStaticPaths = () =>
+  surahPaths().map((p) => ({ params: { slug: p.slug }, props: p.props }));
+---
+
+<View {...Astro.props} />

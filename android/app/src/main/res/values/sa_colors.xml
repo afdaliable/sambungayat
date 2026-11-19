@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Same as the band token in src/styles/global.css. Window background, shown behind the system bars on
+         WebViews that do not draw edge-to-edge (WebView below 140). It must be a plain colour: Capacitor's
+         SystemBars copies this attribute into the decor view with setBackgroundColor(). -->
+    <color name="sa_band">#0d5750</color>
+</resources>

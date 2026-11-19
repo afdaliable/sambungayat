@@ -1,0 +1,33 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../../lib/i18n";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["common"]);
+const links: [string, string][] = [
+  ["/tentang", "footer.about"],
+  ["/faq", "footer.faq"],
+  ["/panduan", "footer.guide"],
+  ["/privasi", "footer.privacy"],
+  ["/kontak", "footer.contact"],
+];
+---
+
+<footer class="mt-16 border-t border-line">
+  <div class="wrap flex flex-col gap-2 py-6 text-sm text-muted lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+    <p class="measure">{t(dict, "common.footer.disclaimer")}</p>
+    <ul class="-mx-2 flex shrink-0 flex-wrap">
+      {
+        links.map(([href, key]) => (
+          <li>
+            <a class="inline-flex min-h-11 items-center px-2 text-ink underline hover:text-accent" href={localePath(lang, href)}>{t(dict, `common.${key}`)}</a>
+          </li>
+        ))
+      }
+      <li>
+        <a class="inline-flex min-h-11 items-center px-2 text-ink underline hover:text-accent" href="/kontribusi">{t(dict, "common.footer.contribute")}</a>
+      </li>
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,22 @@
+{
+  "skip": "Перейти к содержимому",
+  "nav.label": "Главная навигация",
+  "nav.quiz": "Викторина",
+  "nav.daily": "Ежедневно",
+  "nav.juz": "Джуз",
+  "nav.surah": "Суры",
+  "nav.teacher": "Учителю",
+  "nav.history": "История",
+  "theme": "Тема",
+  "footer.disclaimer": "Помощник для повторения, а не замена talaqqi с учителем. Текст: Tanzil Project. Аудио: EveryAyah.",
+  "footer.about": "О проекте и источниках",
+  "footer.faq": "Вопросы и ответы",
+  "footer.guide": "Руководство по заучиванию",
+  "footer.contact": "Контакты",
+  "lang.label": "Язык",
+  "webview.title": "Обновите Android System WebView",
+  "webview.body": "Для Sambung Ayat нужен Android System WebView версии 111 или новее. Обновите его в Google Play и снова откройте приложение.",
+  "webview.link": "Открыть Google Play",
+  "footer.privacy": "Политика конфиденциальности",
+  "footer.contribute": "Участие"
+}

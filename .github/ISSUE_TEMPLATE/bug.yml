@@ -1,0 +1,18 @@
+name: Bug report
+description: Something does not work
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce (a quiz link helps)
+  - type: input
+    id: env
+    attributes:
+      label: Device, browser or Android version, language

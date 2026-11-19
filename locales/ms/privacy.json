@@ -1,0 +1,21 @@
+{
+  "title": "Dasar Privasi | Sambung Ayat",
+  "description": "Data yang disimpan dan dihantar oleh laman web dan aplikasi Android Sambung Ayat, dan cara mengawalnya.",
+  "h1": "Dasar privasi",
+  "updated": "Dikemas kini {date}",
+  "intro": "Sambung Ayat tidak mempunyai akaun dan tidak menjual data. Halaman ini menerangkan apa yang kekal pada peranti anda dan apa yang keluar, untuk sambungayat.com dan aplikasi Android.",
+  "1.h": "Data pada peranti anda",
+  "1.p": "Tetapan, sejarah kuiz, tahap penguasaan dan skor harian disimpan pada peranti anda sendiri (storan setempat pelayar atau storan aplikasi). Ia tidak dihantar ke pelayan kami. Padam semuanya pada bila-bila masa melalui Tetapan, \"Padam semua data saya\", atau dengan menyahpasang aplikasi.",
+  "2.h": "Laman web: statistik lawatan",
+  "2.p": "Laman web menggunakan Google Analytics 4 (Google LLC) untuk mengetahui halaman yang dibuka, anggaran lokasi (negara atau bandar), jenis peranti dan pelayar. Google Analytics menetapkan kuki atau pengecam dalam pelayar dan tidak menyimpan alamat IP penuh. Nama, jawapan kuiz dan kandungan hafalan anda tidak dihantar. Untuk menolak, sekat googletagmanager.com atau pasang alat tambah penolakan Google Analytics.",
+  "3.h": "Pembilang kuiz selesai",
+  "3.p": "Apabila kuiz tamat, laman boleh menambah satu kiraan tanpa nama pada pembilang awam: hanya mod kuiz dan tarikh. Untuk menghalang spam, alamat IP ditukar kepada kod rawak harian yang dipadam secara automatik pada hari berikutnya.",
+  "4.h": "Aplikasi Android",
+  "4.p": "Aplikasi tidak menggunakan Google Analytics, tiada akaun, tiada iklan dan tidak menghantar data penggunaan. Satu-satunya trafik rangkaian ialah audio dari everyayah.com (lihat bawah). Audio yang anda simpan berada dalam storan persendirian aplikasi dan dipadam apabila aplikasi dinyahpasang atau melalui butang Padam.",
+  "5.h": "Perkhidmatan pihak ketiga",
+  "5.p": "everyayah.com menyediakan audio bacaan: pelayan mereka melihat alamat IP anda dan fail yang diminta. Laman web dihoskan di Cloudflare yang menyimpan log teknikal standard. Butang kongsi membuka aplikasi pilihan anda dan hanya menghantar teks atau pautan yang anda pilih.",
+  "6.h": "Kanak-kanak",
+  "6.p": "Kami tidak meminta data peribadi daripada sesiapa, termasuk kanak-kanak. Aplikasi Android tiada akaun, iklan atau penjejakan.",
+  "7.h": "Hubungan dan perubahan",
+  "7.p": "Soalan atau permintaan berkaitan privasi: {email}. Perubahan dasar diterbitkan pada halaman ini dengan tarikh kemas kini di atas."
+}

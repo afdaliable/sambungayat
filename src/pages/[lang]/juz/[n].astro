@@ -1,0 +1,8 @@
+---
+import View from "../../../views/JuzDetail.astro";
+import { forLangs, juzPaths } from "../../../lib/staticPaths";
+
+export const getStaticPaths = () => forLangs(juzPaths(), "n");
+---
+
+<View {...Astro.props} />

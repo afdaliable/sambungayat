@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Продолжи аят",
+  "mode.sambung.desc": "Вы видите один аят и выбираете следующий.",
+  "mode.tebak-surah.title": "Угадай суру",
+  "mode.tebak-surah.desc": "Вы видите один аят и угадываете, из какой он суры.",
+  "mode.lengkapi.title": "Дополни аят",
+  "mode.lengkapi.desc": "Аят со скрытым последним словом.",
+  "mode.tebak-audio.title": "Угадай аят по аудио",
+  "mode.tebak-audio.desc": "Слушайте чтение и выбирайте подходящий текст. Нужен интернет.",
+  "mode.tebak-juz.title": "Угадай джуз",
+  "mode.tebak-juz.desc": "Вы видите один аят и угадываете, в каком он джузе.",
+  "mode.sebelum.title": "Предыдущий аят",
+  "mode.sebelum.desc": "Вы видите один аят и выбираете тот, что стоит перед ним.",
+  "site.tagline": "Тренируйте заучивание Корана в 6 видах викторин",
+  "site.description": "Бесплатные викторины для заучивания Корана: продолжи аят, угадай суру, дополни аят и угадай аят по аудио. Без регистрации, работает офлайн.",
+  "daily.share": "Ежедневный вызов Sambung Ayat {date}: {score}/{total} {check} {dash} sambungayat.com/ru/harian",
+  "recap.anonymous": "Аноним",
+  "recap.line": "Результат викторины Sambung Ayat: {score}/{total}."
+}

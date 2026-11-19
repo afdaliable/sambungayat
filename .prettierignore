@@ -1,0 +1,16 @@
+data/raw/
+public/data/
+dist/
+.astro/
+package-lock.json
+src/pages/index.astro
+src/pages/tentang.astro
+src/pages/guru.astro
+src/components/ui/Footer.astro
+src/pages/faq.astro
+src/pages/kontak.astro
+src/pages/panduan.astro
+src/components/ui/ShareBar.astro
+src/views/*.astro
+src/pages/
+.wrangler/

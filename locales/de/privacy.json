@@ -1,0 +1,21 @@
+{
+  "title": "Datenschutz | Sambung Ayat",
+  "description": "Welche Daten die Sambung-Ayat-Website und die Android-App speichern und senden und wie Sie das steuern.",
+  "h1": "Datenschutzerklärung",
+  "updated": "Aktualisiert: {date}",
+  "intro": "Sambung Ayat hat keine Konten und verkauft keine Daten. Diese Seite erklärt für sambungayat.com und die Android-App, was auf Ihrem Gerät bleibt und was es verlässt.",
+  "1.h": "Daten auf Ihrem Gerät",
+  "1.p": "Einstellungen, Quizverlauf, Lernstand und der Tageswert werden auf Ihrem eigenen Gerät gespeichert (lokaler Browser- oder App-Speicher). Sie werden nicht an unsere Server gesendet. Löschen Sie alles jederzeit unter Einstellungen, „Alle meine Daten löschen“, oder durch Deinstallieren der App.",
+  "2.h": "Website: Besuchsstatistik",
+  "2.p": "Die Website nutzt Google Analytics 4 (Google LLC), um zu erfahren, welche Seiten geöffnet werden, den ungefähren Standort (Land oder Stadt) sowie Geräte- und Browsertyp. Google Analytics setzt Cookies oder Kennungen im Browser und speichert keine vollständigen IP-Adressen. Ihr Name, Ihre Quizantworten und Lerninhalte werden nicht gesendet. Zum Widerspruch blockieren Sie googletagmanager.com oder installieren das Deaktivierungs-Add-on von Google Analytics.",
+  "3.h": "Zähler abgeschlossener Quiz",
+  "3.p": "Nach einem beendeten Quiz kann die Seite einen anonymen Zähler erhöhen: nur Quizmodus und Datum. Gegen Spam wird die IP-Adresse in einen zufälligen Tagescode umgewandelt, der am nächsten Tag automatisch gelöscht wird.",
+  "4.h": "Android-App",
+  "4.p": "Die App nutzt kein Google Analytics, hat keine Konten, zeigt keine Werbung und sendet keine Nutzungsdaten. Ihr einziger Netzwerkverkehr ist Audio von everyayah.com (siehe unten). Gespeicherte Audios liegen im privaten App-Speicher und verschwinden bei Deinstallation oder mit der Schaltfläche Löschen.",
+  "5.h": "Dienste Dritter",
+  "5.p": "everyayah.com liefert die Rezitationen: Der Server sieht Ihre IP-Adresse und die angeforderte Datei. Die Website wird bei Cloudflare gehostet, das übliche technische Protokolle führt. Die Teilen-Schaltfläche öffnet die gewählte App und sendet nur den Text oder Link, den Sie auswählen.",
+  "6.h": "Kinder",
+  "6.p": "Wir fragen niemanden nach personenbezogenen Daten, auch Kinder nicht. Die Android-App hat keine Konten, Werbung oder Tracking.",
+  "7.h": "Kontakt und Änderungen",
+  "7.p": "Fragen oder Anfragen zum Datenschutz: {email}. Änderungen dieser Erklärung werden auf dieser Seite mit dem oben genannten Datum veröffentlicht."
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Contact | Sambung Ayat",
+  "description": "Contactez Sambung Ayat pour des suggestions de fonctionnalités, des signalements d’erreurs de texte ou d’audio, et des collaborations.",
+  "h1": "Contact",
+  "intro": "Vous avez repéré un verset mal affiché, un audio qui ne correspond pas, ou vous avez une idée de fonctionnalité ? Dites-le-nous. Pour une correction de texte, indiquez la sourate et le numéro du verset.",
+  "topic": "Sujet",
+  "topic.feature": "Suggestion de fonctionnalité",
+  "topic.report": "Signalement d’erreur de texte ou d’audio",
+  "topic.tech": "Problème technique",
+  "topic.collab": "Collaboration",
+  "name": "Nom",
+  "message": "Message",
+  "submit": "Ouvrir l’application de messagerie",
+  "note": "Ce bouton ouvre votre application de messagerie avec le message déjà rempli. Aucune donnée n’est envoyée via ce site. Vous pouvez aussi écrire directement à {email}.",
+  "unset": "L’adresse de contact n’est pas encore définie. Le propriétaire du site doit renseigner {code1} dans {code2}.",
+  "repo": "Les développeurs peuvent aussi signaler un problème via le {repo}.",
+  "repo.link": "dépôt",
+  "mail.from": "De : {name}"
+}

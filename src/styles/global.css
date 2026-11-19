@@ -1,0 +1,598 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Amiri Quran";
+  src: url("/fonts/amiri-quran.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+/* UI face: Sofia Sans Semi Condensed (variable, OFL). Other scripts fall through to the system font. */
+@font-face {
+  font-family: "Sofia Sans Semi Condensed";
+  src: url("/fonts/sofia-sc-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Sofia Sans Semi Condensed";
+  src: url("/fonts/sofia-sc-latin-ext.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Sofia Sans Semi Condensed";
+  src: url("/fonts/sofia-sc-cyrillic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-soft: var(--band-soft);
+  --color-good: var(--good);
+  --color-bad: var(--bad);
+  --color-stamp: var(--stamp);
+  --font-arabic: "Amiri Quran", "Noto Naskh Arabic", "Traditional Arabic", serif;
+}
+@theme {
+  --font-sans:
+    "Sofia Sans Semi Condensed", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* A condensed face reads smaller: every step is one notch up from the Tailwind default. */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.375rem;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light: cream paper, deep teal. Teal owns the header band and the start field; red and green only
+   ever mean wrong and right; brown is the result stamp. */
+:root {
+  --paper: #f6f0de;
+  --card: #fffcf2;
+  --ink: #1f2d2a;
+  --muted: #55645f;
+  --line: #dcd2b4;
+  --rule: #8a8363;
+  --accent: #0d5750;
+  --accent-ink: #ffffff;
+  --band: #0d5750;
+  --band-ink: #ffffff;
+  --band-soft: #cfe8e0;
+  --good: #1b7048;
+  --bad: #a03a2c;
+  --stamp: #7a4a1e;
+  --lift: 0 1px 0 rgb(31 45 42 / 0.05), 0 14px 28px -16px rgb(31 45 42 / 0.4);
+  --ar-size: 1.875rem;
+  color-scheme: light;
+}
+/* Dark: carbon paper. */
+.dark {
+  --paper: #0f1a18;
+  --card: #172420;
+  --ink: #e8efe9;
+  --muted: #a3b5ad;
+  --line: #2b3b36;
+  --rule: #5f776f;
+  --accent: #5fc2b2;
+  --accent-ink: #06201c;
+  --band: #0f433d;
+  --band-ink: #ffffff;
+  --band-soft: #bfe5db;
+  --good: #66c994;
+  --bad: #ee9486;
+  --stamp: #dfae7e;
+  --lift: 0 1px 0 rgb(0 0 0 / 0.3), 0 14px 28px -16px rgb(0 0 0 / 0.7);
+  color-scheme: dark;
+}
+html[data-ar="S"] {
+  --ar-size: 1.625rem;
+}
+html[data-ar="M"] {
+  --ar-size: 1.875rem;
+}
+html[data-ar="L"] {
+  --ar-size: 2.25rem;
+}
+html[data-ar="XL"] {
+  --ar-size: 2.75rem;
+}
+
+@layer base {
+  html {
+    scrollbar-color: var(--rule) transparent;
+    accent-color: var(--accent);
+    caret-color: var(--accent);
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .band :focus-visible {
+    outline-color: var(--band-ink);
+  }
+  .band .sheet :focus-visible {
+    outline-color: var(--accent);
+  }
+  a {
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 0.08em;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+.ayah {
+  font-family: var(--font-arabic);
+  font-size: var(--ar-size);
+  line-height: 2.3;
+}
+/* The ayah being asked about: a clear step above the answer options. */
+.ayah-lead {
+  font-size: calc(var(--ar-size) * 1.3);
+}
+
+@layer components {
+  /* Page frame and headings */
+  .wrap {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 68rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 40rem) {
+    .wrap {
+      padding-inline: 1.5rem;
+    }
+  }
+  .title {
+    font-size: clamp(1.875rem, 1.4rem + 2.2vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+  .sub {
+    font-size: var(--text-xl);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* The teal field: header and the home start area. Secondary text on it is tinted green, never grey. */
+  .band {
+    background: var(--band);
+    color: var(--band-ink);
+  }
+
+  /* Surfaces */
+  .sheet {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 0.625rem;
+  }
+  .sheet-lift {
+    box-shadow: var(--lift);
+  }
+  /* Ruled rows: one list, fixed columns, hairline between entries. */
+  .rows {
+    border-block: 1px solid var(--line);
+  }
+  .rows > * + * {
+    border-top: 1px solid var(--line);
+  }
+
+  /* Controls */
+  .btn,
+  .btn-quiet,
+  .btn-band {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 0.12s,
+      border-color 0.12s,
+      transform 0.12s;
+  }
+  .btn {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn:hover {
+    background: color-mix(in srgb, var(--accent) 86%, var(--ink));
+  }
+  .btn-quiet {
+    border: 1.5px solid var(--rule);
+    background: var(--card);
+    color: var(--ink);
+  }
+  .btn-quiet:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .btn-band {
+    background: var(--band-ink);
+    color: var(--band);
+  }
+  .btn-band:hover {
+    background: var(--band-soft);
+  }
+  .btn:active,
+  .btn-quiet:active,
+  .btn-band:active {
+    transform: translateY(1px);
+  }
+  .btn:disabled,
+  .btn-quiet:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .btn-lg {
+    min-height: 3.5rem;
+    padding-inline: 1.5rem;
+    font-size: var(--text-lg);
+    font-weight: 800;
+  }
+  .field {
+    min-height: 3rem;
+    width: 100%;
+    border: 1.5px solid var(--rule);
+    border-radius: 0.375rem;
+    background: var(--card);
+    color: var(--ink);
+    padding: 0.5rem 0.75rem;
+  }
+  .field:hover {
+    border-color: var(--accent);
+  }
+  .field::placeholder {
+    color: var(--muted);
+  }
+  /* A choice tile wrapping a visually hidden radio or checkbox. */
+  .pick {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--rule);
+    border-radius: 0.375rem;
+    background: var(--card);
+    color: var(--ink);
+    padding: 0.375rem 0.625rem;
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      background-color 0.12s,
+      border-color 0.12s;
+  }
+  .pick:hover {
+    border-color: var(--accent);
+  }
+  .pick:has(:checked) {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .pick:has(:focus-visible) {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* Answer option: fixed slot, state changes colour only, never size. */
+  .opt {
+    display: flex;
+    width: 100%;
+    min-height: 3.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1.5px solid var(--rule);
+    border-radius: 0.375rem;
+    background: var(--card);
+    color: var(--ink);
+    padding: 0.375rem 0.75rem;
+    text-align: start;
+    transition:
+      background-color 0.12s,
+      border-color 0.12s;
+  }
+  .opt:enabled {
+    cursor: pointer;
+  }
+  .opt:enabled:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--card));
+  }
+  .opt-key {
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1.5px solid var(--rule);
+    border-radius: 0.25rem;
+    color: var(--muted);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .opt[data-s="ok"] {
+    border-color: var(--good);
+    background: color-mix(in srgb, var(--good) 11%, var(--card));
+    box-shadow: inset 0 0 0 1.5px var(--good);
+  }
+  .opt[data-s="no"] {
+    border-color: var(--bad);
+    background: color-mix(in srgb, var(--bad) 9%, var(--card));
+    box-shadow: inset 0 0 0 1.5px var(--bad);
+  }
+  .opt[data-s="dim"] {
+    border-color: var(--line);
+    color: var(--muted);
+  }
+  .opt[data-s="ok"] .opt-key {
+    border-color: var(--good);
+    background: var(--good);
+    color: var(--card);
+  }
+  .opt[data-s="no"] .opt-key {
+    border-color: var(--bad);
+    background: var(--bad);
+    color: var(--card);
+  }
+  .opt[data-s="dim"] .opt-key {
+    border-color: var(--line);
+  }
+  .opt-tag {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    font-weight: 800;
+  }
+  .opt[data-s="ok"] .opt-tag {
+    color: var(--good);
+  }
+  .opt[data-s="no"] .opt-tag {
+    color: var(--bad);
+  }
+  /* On the blue field the tiles go transparent; the chosen one is inverted. */
+  .band .pick {
+    border-color: var(--band-soft);
+    background: transparent;
+    color: var(--band-ink);
+  }
+  .band .pick:hover {
+    border-color: var(--band-ink);
+  }
+  .band .pick:has(:checked) {
+    border-color: var(--band-ink);
+    background: var(--band-ink);
+    color: var(--band);
+  }
+  .band .pick:has(:focus-visible) {
+    outline-color: var(--band-ink);
+  }
+  .band .field {
+    border-color: var(--band-soft);
+  }
+  .lnk {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  /* Signature: the initial strip. One cell per question, filled in as the quiz goes. */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(var(--n, 10), minmax(0, 2.25rem));
+    gap: 0.25rem;
+  }
+  .strip > span {
+    display: grid;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1.5px solid var(--rule);
+    border-radius: 0.1875rem;
+    background: var(--card);
+    color: var(--muted);
+  }
+  .strip > span[data-s="now"] {
+    border-width: 3px;
+    border-color: var(--ink);
+  }
+  .strip > span[data-s="ok"] {
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .strip > span[data-s="no"] {
+    border-color: var(--bad);
+    color: var(--bad);
+  }
+  .strip svg {
+    width: 72%;
+    height: 72%;
+  }
+
+  /* Small stamp for a score in a list: same mark, no rotation, no animation. */
+  .stamp-mini {
+    display: inline-block;
+    padding: 0.125rem 0.625rem;
+    border: 2px solid var(--stamp);
+    border-radius: 0.375rem;
+    color: var(--stamp);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Signature: the result stamp. */
+  .stamp {
+    display: inline-grid;
+    justify-items: center;
+    padding: 0.625rem 1.5rem 0.5rem;
+    border: 3px solid currentColor;
+    border-radius: 0.5rem;
+    outline: 1px solid currentColor;
+    outline-offset: 3px;
+    color: var(--stamp);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transform: rotate(-4deg);
+  }
+  .stamp-score {
+    font-size: 3.25rem;
+    line-height: 1;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Long-form text pages */
+  .prose h2 {
+    margin-top: 2.5rem;
+    font-size: var(--text-xl);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .prose p,
+  .prose ul,
+  .prose ol {
+    margin-top: 0.75rem;
+  }
+  .prose a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: fade-in 0.18s ease-out;
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  /* The one authored moment: the stamp lands on the result. */
+  .stamp {
+    animation: stamp-in 0.32s var(--ease-out-expo) 0.12s backwards;
+  }
+  @keyframes stamp-in {
+    from {
+      opacity: 0;
+      filter: blur(3px);
+      transform: rotate(-4deg) scale(1.4);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Bigger tap area for inline text links and FAQ summaries (vertical padding on inline boxes does not change line height). */
+@layer base {
+  main p a,
+  main li a {
+    padding-block: 0.6rem;
+  }
+  main summary {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding-block: 0.6rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  main summary::-webkit-details-marker {
+    display: none;
+  }
+  /* Drawn chevron instead of the browser triangle; flips for RTL, turns when open. */
+  main summary::before {
+    content: "";
+    flex-shrink: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    transition: transform 0.12s;
+  }
+  [dir="rtl"] main summary::before {
+    transform: scaleX(-1);
+  }
+  main details[open] > summary::before {
+    transform: rotate(90deg);
+  }
+}
+
+/* Urdu reads best in Nastaliq; fall back to the system Arabic-script font when no Nastaliq font is installed. */
+html[lang="ur"] body {
+  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Noto Naskh Arabic", system-ui, sans-serif;
+  line-height: 1.9;
+}
+
+/* Android app, edge-to-edge: Capacitor's SystemBars injects --safe-area-inset-*, newer WebViews also
+   support env(). Both are 0 on the web, so nothing changes in a browser. */
+:root {
+  --sat: max(env(safe-area-inset-top, 0px), var(--safe-area-inset-top, 0px));
+  --sab: max(env(safe-area-inset-bottom, 0px), var(--safe-area-inset-bottom, 0px));
+}
+header.band {
+  padding-top: var(--sat);
+}
+footer.mt-16 {
+  padding-bottom: var(--sab);
+}
+
+/* Android app: 48 dp touch targets (the web keeps 44 px). data-native is set by the head script in BaseLayout. */
+html[data-native] :is(.min-h-10, .min-h-11, .lnk, main summary, header a) {
+  min-height: 3rem;
+}
+/* Inline links inside a sentence keep their text height (WCAG 2.2 allows it); standalone links and rows do not. */

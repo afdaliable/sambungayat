@@ -1,0 +1,19 @@
+{
+  "title": "Contacto | Sambung Ayat",
+  "description": "Contacta con Sambung Ayat para sugerir funciones, informar de errores de texto o audio y proponer colaboraciones.",
+  "h1": "Contacto",
+  "intro": "¿Has encontrado una aleya que se muestra mal, un audio que no coincide o tienes una idea para una función? Cuéntanoslo. Para corregir el texto, indica la sura y el número de aleya.",
+  "topic": "Tema",
+  "topic.feature": "Sugerencia de función",
+  "topic.report": "Informe de error de texto o audio",
+  "topic.tech": "Problema técnico",
+  "topic.collab": "Colaboración",
+  "name": "Nombre",
+  "message": "Mensaje",
+  "submit": "Abrir la aplicación de correo",
+  "note": "Este botón abre tu aplicación de correo con el mensaje ya escrito. No se envía ningún dato a través de este sitio. También puedes escribir directamente a {email}.",
+  "unset": "Aún no se ha configurado la dirección de contacto. El propietario del sitio debe rellenar {code1} en {code2}.",
+  "repo": "Los desarrolladores también pueden informar a través del {repo}.",
+  "repo.link": "repositorio",
+  "mail.from": "De: {name}"
+}

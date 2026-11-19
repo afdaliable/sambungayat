@@ -1,0 +1,19 @@
+{
+  "title": "Contact | Sambung Ayat",
+  "description": "Contact Sambung Ayat for feature suggestions, text or audio error reports, and collaboration.",
+  "h1": "Contact",
+  "intro": "Found an ayah that displays wrongly, audio that does not match, or have a feature idea? Let us know. For text corrections, include the surah and ayah number.",
+  "topic": "Topic",
+  "topic.feature": "Feature suggestion",
+  "topic.report": "Text or audio error report",
+  "topic.tech": "Technical problem",
+  "topic.collab": "Collaboration",
+  "name": "Name",
+  "message": "Message",
+  "submit": "Open email app",
+  "note": "This button opens your email app with the message already filled in. No data is sent through this site. Or write directly to {email}.",
+  "unset": "The contact address has not been set. The site owner needs to fill in {code1} in {code2}.",
+  "repo": "Developers can also report through the {repo}.",
+  "repo.link": "repository",
+  "mail.from": "From: {name}"
+}

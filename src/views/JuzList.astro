@@ -1,0 +1,33 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const juz = Array.from({ length: 30 }, (_, i) => i + 1);
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(dict, "pages.list.juz.title")}
+  description={t(dict, "pages.list.juz.description")}
+>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title">{t(dict, "pages.list.juz.h1")}</h1>
+    <ul class="mt-6 grid grid-cols-5 gap-2 sm:grid-cols-6 sm:gap-3">
+      {juz.map((n) => (
+        <li>
+          <a
+            href={localePath(lang, `/juz/${n}`)}
+            class="pick num min-h-[4.5rem] text-[2.25rem] leading-none font-extrabold no-underline sm:min-h-24 sm:text-[2.75rem]"
+          >
+            {" "}
+            {n}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</BaseLayout>

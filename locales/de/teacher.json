@@ -1,0 +1,23 @@
+{
+  "load_failed": "Die Suren-Daten konnten nicht geladen werden. Prüfe deine Verbindung.",
+  "qr_failed": "Der QR-Code konnte nicht erstellt werden, der Link funktioniert aber trotzdem.",
+  "copied": "Link kopiert.",
+  "copy_failed": "Automatisches Kopieren nicht möglich. Kopiere den Link aus dem Feld oben.",
+  "title": "Quiz-Link für die Klasse erstellen",
+  "submit": "Link erstellen",
+  "ready": "Quiz-Link zum Teilen bereit",
+  "same_questions": "Alle Schüler, die diesen Link öffnen, erhalten dieselben Fragen.",
+  "link_label": "Quiz-Link",
+  "copy": "Link kopieren",
+  "wa_text": "Mach das Sambung-Ayat-Quiz: {link}",
+  "wa": "Über WhatsApp teilen",
+  "qr_alt": "QR-Code für den Quiz-Link",
+  "recap.label": "Nachrichten aus der WhatsApp-Gruppe einfügen",
+  "recap.placeholder": "Kopiere den Gruppenchat mit den Ergebnissen der Schüler und füge ihn hier ein.",
+  "recap.none": "Noch keine Ergebnisse erkannt. Die Schüler müssen auf der Ergebnisseite die Schaltfläche „An Lehrer senden“ verwenden.",
+  "recap.students.one": "{n} Schüler",
+  "recap.students.other": "{n} Schüler",
+  "recap.name": "Name",
+  "recap.score": "Ergebnis",
+  "recap.code": "Quiz-Code"
+}

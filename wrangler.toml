@@ -1,0 +1,11 @@
+name = "sambung-ayat"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-11-01"
+
+# Optional anonymous "quizzes completed" counter (functions/api/stats.ts). It needs a D1 database bound as DB
+# and a STATS_SALT secret; without them the counter is simply off. Create your own database and put its id here.
+[[d1_databases]]
+binding = "DB"
+database_name = "sambung-ayat-stats"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"

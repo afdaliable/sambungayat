@@ -1,0 +1,20 @@
+{
+  "title": "Ayarlar",
+  "translation": "Meali göster",
+  "context": "Sure adını ve ayet numarasını göster",
+  "autoplay": "Sesi otomatik oynat",
+  "sound": "Ses efektleri",
+  "reciter": "Kâri",
+  "arabic_size": "Arapça yazı boyutu",
+  "size.S": "Küçük",
+  "size.M": "Orta",
+  "size.L": "Büyük",
+  "size.XL": "Çok büyük",
+  "theme": "Tema",
+  "theme.system": "Sistemi izle",
+  "theme.light": "Açık",
+  "theme.dark": "Koyu",
+  "clear": "Tüm verilerimi sil",
+  "confirm_clear": "Emin misin? Silmek için tekrar dokun",
+  "close": "Kapat"
+}

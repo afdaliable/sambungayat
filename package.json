@@ -1,0 +1,61 @@
+{
+  "name": "sambung-ayat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=26.13.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run data:build && astro build && tsx scripts/postbuild.ts",
+    "preview": "astro preview",
+    "lint": "eslint .",
+    "typecheck": "astro check",
+    "test": "npm run data:build && npm run data:verify && vitest run",
+    "test:e2e": "playwright test",
+    "data:fetch": "tsx scripts/fetch-quran.ts",
+    "data:build": "tsx scripts/build-data.ts",
+    "data:verify": "tsx scripts/verify-data.ts",
+    "data:verify-audio": "tsx scripts/verify-audio.ts",
+    "android:sync": "npm run build && cap sync android",
+    "android:apk": "npm run android:sync && cd android && ./gradlew assembleDebug",
+    "android:aab": "npm run android:sync && cd android && ./gradlew bundleRelease assembleRelease"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.4",
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/file-transfer": "^2.0.6",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/share": "^8.0.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vite-pwa/astro": "^1.2.0",
+    "astro": "^5.18.2",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@capacitor/cli": "^8.6.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^10.14.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.0.5"
+  }
+}

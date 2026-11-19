@@ -1,0 +1,23 @@
+{
+  "load_failed": "Surah data could not be loaded. Check your connection.",
+  "qr_failed": "The QR code could not be created, but the link still works.",
+  "copied": "Link copied.",
+  "copy_failed": "Could not copy automatically. Copy it from the field above.",
+  "title": "Create a quiz link for your class",
+  "submit": "Create link",
+  "ready": "Quiz link ready to share",
+  "same_questions": "Every student who opens this link gets the same questions.",
+  "link_label": "Quiz link",
+  "copy": "Copy link",
+  "wa_text": "Take the Sambung Ayat quiz: {link}",
+  "wa": "Share on WhatsApp",
+  "qr_alt": "QR code for the quiz link",
+  "recap.label": "Paste the messages from the WhatsApp group",
+  "recap.placeholder": "Copy the group chat containing the students' score messages, then paste it here.",
+  "recap.none": "No scores recognized yet. Students must use the \"Send to teacher\" button on the result page.",
+  "recap.students.one": "{n} student",
+  "recap.students.other": "{n} students",
+  "recap.name": "Name",
+  "recap.score": "Score",
+  "recap.code": "Quiz code"
+}

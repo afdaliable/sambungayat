@@ -1,0 +1,19 @@
+{
+  "title": "Kontak | Sambung Ayat",
+  "description": "Hubungi Sambung Ayat untuk saran fitur, laporan kesalahan teks atau audio, dan kerja sama.",
+  "h1": "Kontak",
+  "intro": "Temukan ayat yang salah tampil, audio yang tidak sesuai, atau punya ide fitur? Kabari kami. Untuk koreksi teks, sebutkan surah dan nomor ayatnya.",
+  "topic": "Topik",
+  "topic.feature": "Saran fitur",
+  "topic.report": "Laporan kesalahan teks atau audio",
+  "topic.tech": "Masalah teknis",
+  "topic.collab": "Kerja sama",
+  "name": "Nama",
+  "message": "Pesan",
+  "submit": "Buka aplikasi email",
+  "note": "Tombol ini membuka aplikasi emailmu dengan pesan yang sudah terisi. Tidak ada data yang dikirim lewat situs ini. Atau tulis langsung ke {email}.",
+  "unset": "Alamat kontak belum diatur. Pemilik situs perlu mengisi {code1} di {code2}.",
+  "repo": "Pengembang juga bisa melapor lewat {repo}.",
+  "repo.link": "repositori",
+  "mail.from": "Dari: {name}"
+}

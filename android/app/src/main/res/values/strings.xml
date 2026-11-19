@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sambung Ayat</string>
+    <string name="title_activity_main">Sambung Ayat</string>
+    <string name="package_name">com.sambungayat.app</string>
+    <string name="custom_url_scheme">com.sambungayat.app</string>
+</resources>

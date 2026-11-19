@@ -1,0 +1,22 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+---
+
+<BaseLayout lang={lang} title={t(dict, "pages.offline.title")} noindex>
+  <main id="main" class="wrap py-14 lg:py-24">
+    <h1 class="title">{t(dict, "pages.offline.h1")}</h1>
+    <p class="measure mt-3 text-lg text-muted">{t(dict, "pages.offline.body")}</p>
+    <a
+      href={localePath(lang, "/kuis?mode=sambung&scope=juz:30&n=10&d=mudah")}
+      class="btn btn-lg mt-8"
+    >
+      {t(dict, "pages.offline.start")}
+    </a>
+  </main>
+</BaseLayout>

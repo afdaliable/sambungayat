@@ -1,0 +1,252 @@
+---
+import "../styles/global.css";
+import Header from "../components/ui/Header.astro";
+import Footer from "../components/ui/Footer.astro";
+import { SITE } from "../config/site";
+import { DEFAULT_LANG, LANGS, getDict, t, PREFIXED_LANGS, localePath, stripLang, type Lang } from "../lib/i18n";
+
+interface Props {
+  title?: string;
+  description?: string;
+  preloadFont?: boolean;
+  /** JSON-LD object(s) rendered in the head. */
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  /** Page language; the URL prefix decides it (Indonesian = no prefix). */
+  lang?: Lang;
+}
+const {
+  title = SITE.name,
+  description = SITE.description,
+  preloadFont = false,
+  jsonLd,
+  noindex = false,
+  lang = DEFAULT_LANG,
+} = Astro.props;
+// Static pages: pathname never includes a query string, so /kuis?... canonicalises to /kuis.
+const path = Astro.url.pathname.replace(/\.html$/, "").replace(/(.)\/$/, "$1");
+const canonical = new URL(path, SITE.url).href;
+// Same page in every language, for hreflang (x-default = Indonesian, the unprefixed original).
+const basePath = stripLang(path).path;
+const alternates = [DEFAULT_LANG as Lang, ...PREFIXED_LANGS].map((l) => ({
+  lang: l,
+  href: new URL(localePath(l, basePath), SITE.url).href,
+}));
+const dict = getDict(lang, ["common"]);
+const ogImage = new URL(SITE.ogImage, SITE.url).href;
+// The UI face covers Latin and Cyrillic only; other scripts use the system font, so do not preload it there.
+const uiFont = !["ar", "ur", "bn", "hi"].includes(lang);
+const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<!doctype html>
+<html lang={lang} dir={LANGS[lang].dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0d5750" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="canonical" href={canonical} />
+    {
+      alternates.length > 1 && (
+        <>
+          {alternates.map((a) => (
+            <link rel="alternate" hreflang={a.lang} href={a.href} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={alternates[0]!.href} />
+        </>
+      )
+    }
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={LANGS[lang].ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {import.meta.env.PUBLIC_CF_BEACON_TOKEN && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: import.meta.env.PUBLIC_CF_BEACON_TOKEN })}
+      />
+    )}
+    {import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN && (
+      <>
+        <script
+          defer
+          data-domain={import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN}
+          src={import.meta.env.PUBLIC_PLAUSIBLE_SRC || "https://plausible.io/js/script.js"}
+        />
+        <script is:inline>
+          window.plausible =
+            window.plausible ||
+            function (...args) {
+              (window.plausible.q = window.plausible.q || []).push(args);
+            };
+        </script>
+      </>
+    )}
+    <script is:inline>
+      // Google Analytics 4. Web only: the Android app bundles its own files and does not call out.
+      if (!window.Capacitor) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          // gtag.js only recognises Arguments objects here, an array would be ignored.
+          // eslint-disable-next-line prefer-rest-params
+          window.dataLayer.push(arguments);
+        };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-1RR21L8Q79");
+        const ga = document.createElement("script");
+        ga.async = true;
+        ga.src = "https://www.googletagmanager.com/gtag/js?id=G-1RR21L8Q79";
+        document.head.appendChild(ga);
+      }
+    </script>
+    {ld.map((o) => (
+      <script type="application/ld+json" set:html={JSON.stringify(o)} />
+    ))}
+    {uiFont && <link rel="preload" href="/fonts/sofia-sc-latin.woff2" as="font" type="font/woff2" crossorigin />}
+    {preloadFont && (
+      <link rel="preload" href="/fonts/amiri-quran.woff2" as="font" type="font/woff2" crossorigin />
+    )}
+    <script is:inline>
+      // Android app (Capacitor serves https://localhost and falls back to index.html for extensionless paths):
+      // send extensionless internal links to their .html file.
+      if (window.Capacitor && location.hostname === "localhost" && location.protocol === "https:") {
+        document.addEventListener(
+          "click",
+          (e) => {
+            const a = e.target instanceof Element ? e.target.closest("a[href]") : null;
+            if (!a || a.target === "_blank" || a.origin !== location.origin) return;
+            if (a.pathname === "/" || /\.[a-z0-9]+$/i.test(a.pathname)) return;
+            e.preventDefault();
+            location.href = a.pathname + ".html" + a.search + a.hash;
+          },
+          true,
+        );
+        // Same for GET forms (home start form): the browser would load the extensionless action.
+        document.addEventListener(
+          "submit",
+          (e) => {
+            const f = e.target;
+            if (!(f instanceof HTMLFormElement) || e.defaultPrevented) return;
+            if ((f.method || "get").toLowerCase() !== "get") return;
+            const u = new URL(f.action, location.href);
+            if (u.origin !== location.origin || u.pathname === "/" || /\.[a-z0-9]+$/i.test(u.pathname)) return;
+            e.preventDefault();
+            u.search = new URLSearchParams(new FormData(f)).toString();
+            location.href = u.pathname + ".html" + u.search + u.hash;
+          },
+          true,
+        );
+      }
+    </script>
+    <slot name="head" />
+    <script is:inline>
+      // Android app on a WebView older than 111 (Tailwind 4 and our JS need it; Android 7 images ship 53):
+      // the page would be unstyled and scripts fail, so show a plain notice instead.
+      /* eslint-disable no-var -- ES5 on purpose: this must parse on the old WebView it reports */
+      if (window.Capacitor) {
+        document.documentElement.setAttribute("data-native", "1");
+        var cm = /Chrome\/(\d+)/.exec(navigator.userAgent);
+        if (cm && Number(cm[1]) < 111) {
+          document.addEventListener("DOMContentLoaded", function () {
+            var kids = document.body.children;
+            for (var i = 0; i < kids.length; i++) kids[i].style.display = "none";
+            var n = document.getElementById("old-webview");
+            n.hidden = false;
+            n.style.display = "block";
+          });
+        }
+      }
+      /* eslint-enable no-var */
+    </script>
+    <script>
+      // Android app only: hardware Back button (the chunk is never fetched in a browser).
+      import { isNative } from "../lib/native/platform";
+      if (isNative()) {
+        void import("../lib/native/back").then((m) => m.initBack());
+        void import("../lib/native/chrome").then((m) => m.initChrome());
+        void import("../lib/native/links").then((m) => m.initLinks());
+      }
+    </script>
+    <script is:inline>
+      // Apply saved theme and Arabic size before first paint (mirrors applySettings in storage/settings.ts).
+      try {
+        const s = JSON.parse(localStorage.getItem("sa:v1:settings") || "{}");
+        const d =
+          s.theme === "dark" ||
+          (s.theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", d);
+        document.documentElement.dataset.ar = s.arabicSize || "M";
+      } catch {
+        /* storage unavailable: keep defaults */
+      }
+    </script>
+    <script is:inline>
+      // Offline support; skipped inside the Android app, which bundles its own files.
+      if ("serviceWorker" in navigator && !window.Capacitor) {
+        addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+        // Only Indonesian is precached. For any other language, fetch its offline files once (idle, not on
+        // data-saver): the quiz page, the offline page and that language's Juz 30 translations.
+        const L = document.documentElement.lang;
+        if (L !== "id" && !(navigator.connection && navigator.connection.saveData)) {
+          addEventListener("load", () =>
+            setTimeout(() => {
+              navigator.serviceWorker.ready
+                .then(async () => {
+                  const flag = "sa:v1:offline:" + L;
+                  try {
+                    if (localStorage.getItem(flag)) return;
+                  } catch {
+                    /* storage unavailable: just try again next visit */
+                  }
+                  const files = [];
+                  for (let n = 77; n <= 114; n++)
+                    files.push("/data/v1/tr/" + L + "/" + String(n).padStart(3, "0") + ".json");
+                  await (await caches.open("surah-data")).addAll(files);
+                  await (await caches.open("pages")).addAll(["/" + L, "/" + L + "/kuis", "/" + L + "/offline"]);
+                  try {
+                    localStorage.setItem(flag, "1");
+                  } catch {
+                    /* ignore */
+                  }
+                })
+                .catch(() => {});
+            }, 2000),
+          );
+        }
+      }
+    </script>
+  </head>
+  <body class="flex min-h-screen flex-col bg-paper text-ink antialiased">
+    <div id="old-webview" hidden style="display:none;padding:24px;font-family:sans-serif;line-height:1.5">
+      <h1 style="font-size:22px">{t(dict, "common.webview.title")}</h1>
+      <p>{t(dict, "common.webview.body")}</p>
+      <p><a href="https://play.google.com/store/apps/details?id=com.google.android.webview">{t(dict, "common.webview.link")}</a></p>
+    </div>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-50 focus:rounded-md focus:bg-card focus:px-4 focus:py-2 focus:font-semibold focus:text-accent"
+    >
+      {t(dict, "common.skip")}
+    </a>
+    <Header lang={lang} />
+    <div class="flex-1"><slot /></div>
+    <Footer lang={lang} />
+  </body>
+</html>

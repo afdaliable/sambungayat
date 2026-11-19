@@ -1,0 +1,19 @@
+{
+  "title": "Hubungi kami | Sambung Ayat",
+  "description": "Hubungi Sambung Ayat untuk cadangan ciri, laporan ralat teks atau audio, dan kerjasama.",
+  "h1": "Hubungi kami",
+  "intro": "Terjumpa ayat yang dipaparkan dengan salah, audio yang tidak sepadan, atau ada idea ciri baharu? Beritahu kami. Untuk pembetulan teks, nyatakan surah dan nombor ayatnya.",
+  "topic": "Topik",
+  "topic.feature": "Cadangan ciri",
+  "topic.report": "Laporan ralat teks atau audio",
+  "topic.tech": "Masalah teknikal",
+  "topic.collab": "Kerjasama",
+  "name": "Nama",
+  "message": "Mesej",
+  "submit": "Buka aplikasi e-mel",
+  "note": "Butang ini membuka aplikasi e-mel anda dengan mesej yang sudah diisi. Tiada data dihantar melalui tapak ini. Atau tulis terus kepada {email}.",
+  "unset": "Alamat hubungan belum ditetapkan. Pemilik tapak perlu mengisi {code1} dalam {code2}.",
+  "repo": "Pembangun juga boleh melapor melalui {repo}.",
+  "repo.link": "repositori",
+  "mail.from": "Daripada: {name}"
+}

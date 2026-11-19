@@ -1,0 +1,19 @@
+{
+  "title": "İletişim | Sambung Ayat",
+  "description": "Özellik önerileri, metin veya ses hatası bildirimleri ve iş birliği için Sambung Ayat ile iletişime geç.",
+  "h1": "İletişim",
+  "intro": "Yanlış görünen bir ayet, uyuşmayan bir ses ya da bir özellik fikri mi buldun? Bize haber ver. Metin düzeltmeleri için sure ve ayet numarasını yaz.",
+  "topic": "Konu",
+  "topic.feature": "Özellik önerisi",
+  "topic.report": "Metin veya ses hatası bildirimi",
+  "topic.tech": "Teknik sorun",
+  "topic.collab": "İş birliği",
+  "name": "Ad",
+  "message": "Mesaj",
+  "submit": "E-posta uygulamasını aç",
+  "note": "Bu düğme, mesajı hazır olarak e-posta uygulamanı açar. Bu site üzerinden hiçbir veri gönderilmez. Ya da doğrudan şu adrese yaz: {email}.",
+  "unset": "İletişim adresi henüz ayarlanmadı. Site sahibinin {code2} içindeki {code1} alanını doldurması gerekir.",
+  "repo": "Geliştiriciler şuradan da bildirebilir: {repo}.",
+  "repo.link": "depo",
+  "mail.from": "Gönderen: {name}"
+}

@@ -1,0 +1,116 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShareBar from "../components/ui/ShareBar.astro";
+import { SITE } from "../config/site";
+import type { JuzMeta, SurahMeta } from "../lib/quran/types";
+
+interface Props {
+  lang?: Lang;
+  j: JuzMeta;
+  list: SurahMeta[];
+}
+const { j, list, lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+const title = t(dict, "pages.juz.title", { n: j.juz });
+const names = list.map((s) => s.nameLatin);
+const nameText =
+  names.length > 4
+    ? t(dict, "pages.juz.moreSurahs", { names: names.slice(0, 3).join(", "), n: names.length - 3 })
+    : names.join(", ");
+const description = t(dict, "pages.juz.description", { n: j.juz, names: nameText });
+const pageUrl = `${SITE.url}${localePath(lang, `/juz/${j.juz}`)}`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: SITE.name, item: SITE.url + localePath(lang, "/") },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: t(dict, "pages.breadcrumb.juz"),
+      item: SITE.url + localePath(lang, "/juz"),
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: t(dict, "pages.juz.crumb", { n: j.juz }),
+      item: pageUrl,
+    },
+  ],
+};
+const q = (mode: string) => localePath(lang, `/kuis?mode=${mode}&scope=juz:${j.juz}&n=10&d=mudah`);
+---
+
+<BaseLayout lang={lang} title={title} description={description} jsonLd={jsonLd}>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <nav aria-label={t(dict, "pages.breadcrumb.label")} class="text-sm text-muted">
+      <a class="lnk" href={localePath(lang, "/juz")}>
+        {t(dict, "pages.breadcrumb.juz")}
+      </a>{" "}
+      / {t(dict, "pages.juz.crumb", { n: j.juz })}
+    </nav>
+    <div class="mt-4 grid gap-x-14 gap-y-10 lg:grid-cols-2 lg:items-start">
+      <div class="lg:sticky lg:top-6">
+        <h1 class="title">{t(dict, "pages.juz.h1", { n: j.juz })}</h1>
+        <p class="num mt-3 text-muted">
+          {t(dict, "pages.juz.range", {
+            first: list[0]!.nameLatin,
+            a: j.start.a,
+            last: list[list.length - 1]!.nameLatin,
+            b: j.end.a,
+          })}
+        </p>
+
+        <div class="mt-7 grid gap-2">
+          <a class="btn btn-lg" href={q("sambung")}>
+            {t(dict, "pages.juz.startSambung", { n: j.juz })}
+          </a>
+          <a class="btn-quiet" href={q("tebak-surah")}>
+            {t(dict, "pages.juz.startTebak")}
+          </a>
+          <a class="btn-quiet" href={q("lengkapi")}>
+            {t(dict, "pages.juz.startLengkapi")}
+          </a>
+        </div>
+
+        <ShareBar lang={lang} url={pageUrl} text={t(dict, "pages.juz.shareText", { n: j.juz })} />
+      </div>
+
+      <section>
+        <h2 class="sub">{t(dict, "pages.juz.surahsHeading")}</h2>
+        <ul class="rows mt-4">
+          {list.map((s) => (
+            <li>
+              <a
+                href={localePath(lang, `/surah/${s.slug}`)}
+                class="group flex min-h-14 items-center gap-3 py-1.5 no-underline"
+              >
+                <span class="num w-8 shrink-0 text-muted">{s.n}</span>
+                <span class="min-w-0 flex-1 font-semibold group-hover:text-accent group-hover:underline">{s.nameLatin}</span>
+                <span lang="ar" dir="rtl" class="font-arabic shrink-0 text-2xl">
+                  {s.nameAr}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <nav aria-label={t(dict, "pages.juz.others")} class="mt-12 flex justify-between gap-3 border-t border-line pt-3">
+      {j.juz > 1 ? (
+        <a class="lnk inline-flex min-h-11 items-center" href={localePath(lang, `/juz/${j.juz - 1}`)}>
+          <svg class="inline-block size-4 rtl:-scale-x-100" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>&nbsp;{t(dict, "pages.juz.crumb", { n: j.juz - 1 })}
+        </a>
+      ) : (
+        <span />
+      )}
+      {j.juz < 30 && (
+        <a class="lnk inline-flex min-h-11 items-center" href={localePath(lang, `/juz/${j.juz + 1}`)}>
+          {t(dict, "pages.juz.crumb", { n: j.juz + 1 })}&nbsp;<svg class="inline-block size-4 rtl:-scale-x-100" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+      )}
+    </nav>
+  </main>
+</BaseLayout>

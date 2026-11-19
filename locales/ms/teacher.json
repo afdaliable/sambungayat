@@ -1,0 +1,22 @@
+{
+  "load_failed": "Data surah tidak dapat dimuatkan. Semak sambungan anda.",
+  "qr_failed": "Kod QR gagal dijana, tetapi pautan masih boleh digunakan.",
+  "copied": "Pautan disalin.",
+  "copy_failed": "Tidak dapat menyalin secara automatik. Salin daripada medan di atas.",
+  "title": "Cipta pautan kuiz untuk kelas",
+  "submit": "Cipta pautan",
+  "ready": "Pautan kuiz sedia dikongsi",
+  "same_questions": "Semua pelajar yang membuka pautan ini mendapat soalan yang sama.",
+  "link_label": "Pautan kuiz",
+  "copy": "Salin pautan",
+  "wa_text": "Jawab kuiz Sambung Ayat: {link}",
+  "wa": "Kongsi ke WhatsApp",
+  "qr_alt": "Kod QR untuk pautan kuiz",
+  "recap.label": "Tampal mesej daripada kumpulan WhatsApp",
+  "recap.placeholder": "Salin sembang kumpulan yang mengandungi skor pelajar, kemudian tampal di sini.",
+  "recap.none": "Belum ada skor yang dikenali. Pelajar mesti menggunakan butang \"Hantar kepada guru\" pada halaman keputusan.",
+  "recap.students.other": "{n} pelajar",
+  "recap.name": "Nama",
+  "recap.score": "Skor",
+  "recap.code": "Kod kuiz"
+}

@@ -1,0 +1,8 @@
+---
+import View from "../../../views/SurahDetail.astro";
+import { forLangs, surahPaths } from "../../../lib/staticPaths";
+
+export const getStaticPaths = () => forLangs(surahPaths(), "slug");
+---
+
+<View {...Astro.props} />

@@ -1,0 +1,46 @@
+{
+  "en": {
+    "edition": "en.sahih",
+    "name": "Saheeh International"
+  },
+  "ms": {
+    "edition": "ms.basmeih",
+    "name": "Abdullah Muhammad Basmeih"
+  },
+  "tr": {
+    "edition": "tr.diyanet",
+    "name": "Diyanet Isleri"
+  },
+  "fr": {
+    "edition": "fr.hamidullah",
+    "name": "Muhammad Hamidullah"
+  },
+  "es": {
+    "edition": "es.cortes",
+    "name": "Julio Cortes"
+  },
+  "de": {
+    "edition": "de.bubenheim",
+    "name": "A. S. F. Bubenheim and N. Elyas"
+  },
+  "ru": {
+    "edition": "ru.kuliev",
+    "name": "Elmir Kuliev"
+  },
+  "bn": {
+    "edition": "bn.bengali",
+    "name": "Muhiuddin Khan"
+  },
+  "hi": {
+    "edition": "hi.hindi",
+    "name": "Suhel Farooq Khan and Saifur Rahman Nadwi"
+  },
+  "ar": {
+    "edition": "ar.muyassar",
+    "name": "Al-Tafsir al-Muyassar (King Fahd Complex)"
+  },
+  "ur": {
+    "edition": "ur.jalandhry",
+    "name": "Fateh Muhammad Jalandhry"
+  }
+}

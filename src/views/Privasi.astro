@@ -1,0 +1,33 @@
+---
+import { DEFAULT_LANG, getDict, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["privacy"]);
+const p = (key: string, vars?: Record<string, string | number>) => t(dict, `privacy.${key}`, vars);
+// Bump when the policy text changes.
+const UPDATED = "2026-11-15";
+const sections = [1, 2, 3, 4, 5, 6, 7].map((n) => [p(`${n}.h`), p(`${n}.p`, { email: SITE.email })] as const);
+---
+
+<BaseLayout lang={lang} title={p("title")} description={p("description")}>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title">{p("h1")}</h1>
+    <p class="num mt-2 text-sm text-muted">{p("updated", { date: UPDATED })}</p>
+    <p class="measure mt-4 text-lg text-muted">{p("intro")}</p>
+    <div class="rows measure mt-8">
+      {
+        sections.map(([h, body]) => (
+          <section class="py-5">
+            <h2 class="sub">{h}</h2>
+            <p class="mt-2 text-muted">{body}</p>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>

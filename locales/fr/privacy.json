@@ -1,0 +1,21 @@
+{
+  "title": "Politique de confidentialité | Sambung Ayat",
+  "description": "Ce que le site et l'application Android Sambung Ayat enregistrent et envoient, et comment le contrôler.",
+  "h1": "Politique de confidentialité",
+  "updated": "Mise à jour : {date}",
+  "intro": "Sambung Ayat n'a pas de comptes et ne vend aucune donnée. Cette page explique ce qui reste sur votre appareil et ce qui en sort, pour sambungayat.com et l'application Android.",
+  "1.h": "Données sur votre appareil",
+  "1.p": "Les réglages, l'historique des quiz, le niveau de maîtrise et le score du jour sont stockés sur votre propre appareil (stockage local du navigateur ou de l'application). Ils ne sont pas envoyés à nos serveurs. Effacez tout à tout moment depuis Réglages, « Supprimer toutes mes données », ou en désinstallant l'application.",
+  "2.h": "Site web : statistiques de visite",
+  "2.p": "Le site utilise Google Analytics 4 (Google LLC) pour savoir quelles pages sont ouvertes, la localisation approximative (pays ou ville) et le type d'appareil et de navigateur. Google Analytics dépose des cookies ou identifiants dans votre navigateur et ne conserve pas l'adresse IP complète. Votre nom, vos réponses et le contenu mémorisé ne sont pas envoyés. Pour refuser, bloquez googletagmanager.com ou installez le module de désactivation de Google Analytics.",
+  "3.h": "Compteur de quiz terminés",
+  "3.p": "À la fin d'un quiz, le site peut ajouter un comptage anonyme à un compteur public : uniquement le mode et la date. Pour limiter le spam, l'adresse IP est transformée en un code aléatoire quotidien, supprimé automatiquement le lendemain.",
+  "4.h": "Application Android",
+  "4.p": "L'application n'utilise pas Google Analytics, n'a pas de compte, n'affiche pas de publicité et n'envoie aucune donnée d'usage. Son seul trafic réseau est l'audio de everyayah.com (voir ci-dessous). L'audio enregistré reste dans le stockage privé de l'application et disparaît à la désinstallation ou avec le bouton Supprimer.",
+  "5.h": "Services tiers",
+  "5.p": "everyayah.com fournit l'audio des récitations : son serveur voit votre adresse IP et le fichier demandé. Le site est hébergé chez Cloudflare, qui conserve des journaux techniques standard. Le bouton de partage ouvre l'application de votre choix et n'envoie que le texte ou le lien choisi.",
+  "6.h": "Enfants",
+  "6.p": "Nous ne demandons de données personnelles à personne, enfants compris. L'application Android n'a ni compte, ni publicité, ni suivi.",
+  "7.h": "Contact et modifications",
+  "7.p": "Questions ou demandes sur la confidentialité : {email}. Les modifications de cette politique sont publiées sur cette page avec la date de mise à jour ci-dessus."
+}

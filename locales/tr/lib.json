@@ -1,0 +1,19 @@
+{
+  "mode.sambung.title": "Ayeti Sürdür",
+  "mode.sambung.desc": "Bir ayete bak, ardından gelen ayeti seç.",
+  "mode.tebak-surah.title": "Sureyi Tahmin Et",
+  "mode.tebak-surah.desc": "Bir ayete bak, hangi sureden olduğunu tahmin et.",
+  "mode.lengkapi.title": "Ayeti Tamamla",
+  "mode.lengkapi.desc": "Son kelimesi gizlenmiş bir ayet.",
+  "mode.tebak-audio.title": "Sesten Ayeti Bul",
+  "mode.tebak-audio.desc": "Tilaveti dinle, uygun metni seç. İnternet gerekir.",
+  "mode.tebak-juz.title": "Cüzü Tahmin Et",
+  "mode.tebak-juz.desc": "Bir ayete bak, hangi cüzde olduğunu tahmin et.",
+  "mode.sebelum.title": "Önceki Ayet",
+  "mode.sebelum.desc": "Bir ayete bak, ondan önce gelen ayeti seç.",
+  "site.tagline": "Kur'an ezberini 6 farklı sınavla çalış",
+  "site.description": "Ücretsiz Kur'an ezber sınavları: ayeti sürdür, sureyi tahmin et, ayeti tamamla ve sesten ayeti bul. Giriş yok, çevrimdışı çalışır.",
+  "daily.share": "Sambung Ayat Günlük Meydan Okuma {date}: {score}/{total} {check} {dash} sambungayat.com/tr/harian",
+  "recap.anonymous": "Anonim",
+  "recap.line": "Sambung Ayat sınav sonucu: {score}/{total}."
+}

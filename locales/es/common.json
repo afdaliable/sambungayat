@@ -1,0 +1,22 @@
+{
+  "skip": "Saltar al contenido",
+  "nav.label": "Navegación principal",
+  "nav.quiz": "Cuestionario",
+  "nav.daily": "Diario",
+  "nav.juz": "Yuz",
+  "nav.surah": "Suras",
+  "nav.teacher": "Docente",
+  "nav.history": "Historial",
+  "theme": "Tema",
+  "footer.disclaimer": "Una ayuda para el repaso, no un sustituto del talaqqi con un maestro. Texto: Tanzil Project. Audio: EveryAyah.",
+  "footer.about": "Acerca de y créditos",
+  "footer.faq": "Preguntas frecuentes",
+  "footer.guide": "Guía de memorización",
+  "footer.contact": "Contacto",
+  "lang.label": "Idioma",
+  "webview.title": "Actualiza Android System WebView",
+  "webview.body": "Sambung Ayat necesita Android System WebView 111 o superior. Actualízalo en Google Play y vuelve a abrir la aplicación.",
+  "webview.link": "Abrir Google Play",
+  "footer.privacy": "Política de privacidad",
+  "footer.contribute": "Contribuir"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Kontakt | Sambung Ayat",
+  "description": "Kontaktiere Sambung Ayat für Funktionsvorschläge, Meldungen von Text- oder Audiofehlern und Kooperationen.",
+  "h1": "Kontakt",
+  "intro": "Ein Vers wird falsch angezeigt, das Audio passt nicht oder du hast eine Idee für eine Funktion? Sag uns Bescheid. Nenne bei Textkorrekturen die Sure und die Versnummer.",
+  "topic": "Thema",
+  "topic.feature": "Funktionsvorschlag",
+  "topic.report": "Meldung eines Text- oder Audiofehlers",
+  "topic.tech": "Technisches Problem",
+  "topic.collab": "Kooperation",
+  "name": "Name",
+  "message": "Nachricht",
+  "submit": "E-Mail-App öffnen",
+  "note": "Diese Schaltfläche öffnet deine E-Mail-App mit der vorausgefüllten Nachricht. Über diese Website werden keine Daten gesendet. Oder schreibe direkt an {email}.",
+  "unset": "Die Kontaktadresse ist noch nicht eingerichtet. Die Betreiber der Website müssen {code1} in {code2} eintragen.",
+  "repo": "Entwickler können auch über das {repo} melden.",
+  "repo.link": "Repository",
+  "mail.from": "Von: {name}"
+}

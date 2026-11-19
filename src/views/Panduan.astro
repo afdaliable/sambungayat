@@ -1,0 +1,48 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShareBar from "../components/ui/ShareBar.astro";
+import { SITE } from "../config/site";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["guide"]);
+const g = (key: string) => t(dict, `guide.${key}`);
+
+const title = g("title");
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  inLanguage: lang,
+  mainEntityOfPage: `${SITE.url}${localePath(lang, "/panduan")}`,
+  publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
+};
+const steps = [1, 2, 3, 4, 5, 6].map((n) => [g(`${n}.h`), g(`${n}.p`)] as const);
+---
+
+<BaseLayout lang={lang} title={title} description={g("description")} jsonLd={jsonLd}>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title">{g("h1")}</h1>
+    <p class="measure mt-3 text-lg text-muted">{g("intro")}</p>
+    <ol class="rows measure mt-8">
+      {
+        steps.map(([h, p], i) => (
+          <li class="py-5">
+            <h2 class="sub num">{i + 1}. {h}</h2>
+            <p class="mt-2 text-muted">{p}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <a
+      href={localePath(lang, "/kuis")}
+      class="btn btn-lg mt-8"
+    >
+      {g("cta")}
+    </a>
+    <ShareBar lang={lang} url={`${SITE.url}${localePath(lang, "/panduan")}`} text={g("share")} />
+  </main>
+</BaseLayout>

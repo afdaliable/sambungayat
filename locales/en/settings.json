@@ -1,0 +1,20 @@
+{
+  "title": "Settings",
+  "translation": "Show translation",
+  "context": "Show surah name and ayah number",
+  "autoplay": "Autoplay audio",
+  "sound": "Sound effects",
+  "reciter": "Reciter",
+  "arabic_size": "Arabic font size",
+  "size.S": "Small",
+  "size.M": "Medium",
+  "size.L": "Large",
+  "size.XL": "Extra large",
+  "theme": "Theme",
+  "theme.system": "Follow system",
+  "theme.light": "Light",
+  "theme.dark": "Dark",
+  "clear": "Delete all my data",
+  "confirm_clear": "Sure? Tap again to delete",
+  "close": "Close"
+}

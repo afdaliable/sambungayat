@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+public/data/v1/
+# Quran translations are not redistributed here (terms: docs/data-licenses.md); `npm run data:fetch -- --missing-only`
+data/raw/tr.*.json
+data/raw/id.indonesian.json
+playwright-report/
+test-results/
+.env
+.DS_Store
+releases/
+.vitest/
+.wrangler/

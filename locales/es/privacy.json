@@ -1,0 +1,21 @@
+{
+  "title": "Política de privacidad | Sambung Ayat",
+  "description": "Qué guardan y envían el sitio web y la app de Android de Sambung Ayat, y cómo controlarlo.",
+  "h1": "Política de privacidad",
+  "updated": "Actualizado: {date}",
+  "intro": "Sambung Ayat no tiene cuentas ni vende datos. Esta página explica qué se queda en tu dispositivo y qué sale de él, para sambungayat.com y la app de Android.",
+  "1.h": "Datos en tu dispositivo",
+  "1.p": "Los ajustes, el historial de cuestionarios, el nivel de dominio y la puntuación diaria se guardan en tu propio dispositivo (almacenamiento local del navegador o de la app). No se envían a nuestros servidores. Bórralo todo cuando quieras desde Ajustes, «Borrar todos mis datos», o desinstalando la app.",
+  "2.h": "Sitio web: estadísticas de visitas",
+  "2.p": "El sitio usa Google Analytics 4 (Google LLC) para saber qué páginas se abren, la ubicación aproximada (país o ciudad) y el tipo de dispositivo y navegador. Google Analytics coloca cookies o identificadores en tu navegador y no guarda la dirección IP completa. No se envían tu nombre, tus respuestas ni el contenido memorizado. Para rechazarlo, bloquea googletagmanager.com o instala el complemento de inhabilitación de Google Analytics.",
+  "3.h": "Contador de cuestionarios terminados",
+  "3.p": "Al terminar un cuestionario, el sitio puede sumar un recuento anónimo a un contador público: solo el modo y la fecha. Para limitar el spam, la dirección IP se convierte en un código aleatorio diario que se elimina automáticamente al día siguiente.",
+  "4.h": "App de Android",
+  "4.p": "La app no usa Google Analytics, no tiene cuentas, no muestra anuncios y no envía datos de uso. Su único tráfico de red es el audio de everyayah.com (ver abajo). El audio que guardas queda en el almacenamiento privado de la app y se elimina al desinstalar o con el botón Borrar.",
+  "5.h": "Servicios de terceros",
+  "5.p": "everyayah.com ofrece el audio de las recitaciones: su servidor ve tu dirección IP y el archivo solicitado. El sitio está alojado en Cloudflare, que guarda registros técnicos estándar. El botón de compartir abre la app que elijas y solo envía el texto o el enlace que selecciones.",
+  "6.h": "Menores",
+  "6.p": "No pedimos datos personales a nadie, tampoco a menores. La app de Android no tiene cuentas, anuncios ni seguimiento.",
+  "7.h": "Contacto y cambios",
+  "7.p": "Preguntas o solicitudes sobre privacidad: {email}. Los cambios de esta política se publican en esta página con la fecha de actualización de arriba."
+}

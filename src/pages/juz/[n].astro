@@ -1,0 +1,8 @@
+---
+import View from "../../views/JuzDetail.astro";
+import { juzPaths } from "../../lib/staticPaths";
+
+export const getStaticPaths = () => juzPaths().map((p) => ({ params: { n: p.n }, props: p.props }));
+---
+
+<View {...Astro.props} />

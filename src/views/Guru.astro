@@ -1,0 +1,28 @@
+---
+import { DEFAULT_LANG, getDict, localePath, t, type Lang } from "../lib/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TeacherLinkBuilder from "../components/teacher/TeacherLinkBuilder";
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = getDict(lang, ["pages"]);
+const islandDict = getDict(lang, ["quiz", "settings", "teacher", "lib", "common"]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(dict, "pages.guru.title")}
+  description={t(dict, "pages.guru.description")}
+>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="sr-only">{t(dict, "pages.guru.h1")}</h1>
+    <TeacherLinkBuilder client:load lang={lang} dict={islandDict} />
+    <p class="mt-10 text-muted">
+      {t(dict, "pages.guru.done")}
+      <a class="lnk" href={localePath(lang, "/rekap")}>
+        {t(dict, "pages.guru.recapLink")}
+      </a>
+    </p>
+  </main>
+</BaseLayout>

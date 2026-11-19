@@ -1,0 +1,20 @@
+{
+  "title": "Tetapan",
+  "translation": "Papar terjemahan",
+  "context": "Papar nama surah dan nombor ayat",
+  "autoplay": "Main audio secara automatik",
+  "sound": "Kesan bunyi",
+  "reciter": "Qari",
+  "arabic_size": "Saiz fon Arab",
+  "size.S": "Kecil",
+  "size.M": "Sederhana",
+  "size.L": "Besar",
+  "size.XL": "Sangat besar",
+  "theme": "Tema",
+  "theme.system": "Ikut sistem",
+  "theme.light": "Cerah",
+  "theme.dark": "Gelap",
+  "clear": "Padam semua data saya",
+  "confirm_clear": "Pasti? Ketik sekali lagi untuk memadam",
+  "close": "Tutup"
+}
