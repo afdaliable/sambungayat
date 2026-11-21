@@ -132,5 +132,7 @@
   "reminder.denied": "নোটিফিকেশনের অনুমতি দেওয়া হয়নি। Android সেটিংসে চালু করুন।",
   "audio_dl.cancel": "বাতিল",
   "audio_dl.retry": "আবার চেষ্টা করুন",
-  "audio_dl.result": "সংরক্ষিত {saved}, ব্যর্থ {failed}।"
+  "audio_dl.result": "সংরক্ষিত {saved}, ব্যর্থ {failed}।",
+  "audio_replay": "আবার চালান",
+  "audio_progress": "অডিওর অগ্রগতি"
 }

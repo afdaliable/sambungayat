@@ -132,5 +132,7 @@
   "reminder.denied": "Bildirim izni reddedildi. Android ayarlarından açın.",
   "audio_dl.cancel": "İptal",
   "audio_dl.retry": "Yeniden dene",
-  "audio_dl.result": "Kaydedilen: {saved}, başarısız: {failed}."
+  "audio_dl.result": "Kaydedilen: {saved}, başarısız: {failed}.",
+  "audio_replay": "Yeniden oynat",
+  "audio_progress": "Ses ilerlemesi"
 }

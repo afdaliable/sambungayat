@@ -132,5 +132,7 @@
   "reminder.denied": "Benachrichtigungen wurden abgelehnt. Aktiviere sie in den Android-Einstellungen.",
   "audio_dl.cancel": "Abbrechen",
   "audio_dl.retry": "Erneut versuchen",
-  "audio_dl.result": "Gespeichert {saved}, fehlgeschlagen {failed}."
+  "audio_dl.result": "Gespeichert {saved}, fehlgeschlagen {failed}.",
+  "audio_replay": "Erneut abspielen",
+  "audio_progress": "Audiofortschritt"
 }

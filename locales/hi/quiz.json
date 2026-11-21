@@ -132,5 +132,7 @@
   "reminder.denied": "सूचना की अनुमति नहीं मिली। Android सेटिंग में चालू करें।",
   "audio_dl.cancel": "रद्द करें",
   "audio_dl.retry": "फिर से कोशिश करें",
-  "audio_dl.result": "सहेजे गए {saved}, विफल {failed}।"
+  "audio_dl.result": "सहेजे गए {saved}, विफल {failed}।",
+  "audio_replay": "फिर से चलाएँ",
+  "audio_progress": "ऑडियो प्रगति"
 }

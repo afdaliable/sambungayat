@@ -138,5 +138,7 @@
   "reminder.denied": "Разрешение на уведомления отклонено. Включите его в настройках Android.",
   "audio_dl.cancel": "Отмена",
   "audio_dl.retry": "Повторить",
-  "audio_dl.result": "Сохранено: {saved}, ошибок: {failed}."
+  "audio_dl.result": "Сохранено: {saved}, ошибок: {failed}.",
+  "audio_replay": "Воспроизвести заново",
+  "audio_progress": "Прогресс аудио"
 }

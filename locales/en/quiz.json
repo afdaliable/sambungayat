@@ -132,5 +132,7 @@
   "reminder.denied": "Notification permission was denied. Turn it on in Android settings.",
   "audio_dl.cancel": "Cancel",
   "audio_dl.retry": "Retry",
-  "audio_dl.result": "Saved {saved}, failed {failed}."
+  "audio_dl.result": "Saved {saved}, failed {failed}.",
+  "audio_replay": "Replay",
+  "audio_progress": "Audio progress"
 }

@@ -132,5 +132,7 @@
   "reminder.denied": "اطلاعات کی اجازت مسترد ہوئی۔ Android کی ترتیبات میں آن کریں۔",
   "audio_dl.cancel": "منسوخ کریں",
   "audio_dl.retry": "دوبارہ کوشش کریں",
-  "audio_dl.result": "محفوظ {saved}، ناکام {failed}۔"
+  "audio_dl.result": "محفوظ {saved}، ناکام {failed}۔",
+  "audio_replay": "دوبارہ چلائیں",
+  "audio_progress": "آڈیو کی پیش رفت"
 }
