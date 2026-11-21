@@ -129,5 +129,8 @@
   "reminder.label": "Günlük hatırlatma",
   "reminder.enable": "Aç",
   "reminder.disable": "Kapat",
-  "reminder.denied": "Bildirim izni reddedildi. Android ayarlarından açın."
+  "reminder.denied": "Bildirim izni reddedildi. Android ayarlarından açın.",
+  "audio_dl.cancel": "İptal",
+  "audio_dl.retry": "Yeniden dene",
+  "audio_dl.result": "Kaydedilen: {saved}, başarısız: {failed}."
 }

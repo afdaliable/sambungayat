@@ -132,5 +132,8 @@
   "reminder.label": "Rappel quotidien",
   "reminder.enable": "Activer",
   "reminder.disable": "Désactiver",
-  "reminder.denied": "Autorisation de notification refusée. Activez-la dans les réglages Android."
+  "reminder.denied": "Autorisation de notification refusée. Activez-la dans les réglages Android.",
+  "audio_dl.cancel": "Annuler",
+  "audio_dl.retry": "Réessayer",
+  "audio_dl.result": "Enregistrés : {saved}, échecs : {failed}."
 }

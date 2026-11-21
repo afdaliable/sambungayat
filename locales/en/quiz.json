@@ -129,5 +129,8 @@
   "reminder.label": "Daily reminder",
   "reminder.enable": "Turn on",
   "reminder.disable": "Turn off",
-  "reminder.denied": "Notification permission was denied. Turn it on in Android settings."
+  "reminder.denied": "Notification permission was denied. Turn it on in Android settings.",
+  "audio_dl.cancel": "Cancel",
+  "audio_dl.retry": "Retry",
+  "audio_dl.result": "Saved {saved}, failed {failed}."
 }

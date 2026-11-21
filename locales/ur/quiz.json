@@ -129,5 +129,8 @@
   "reminder.label": "روزانہ یاد دہانی",
   "reminder.enable": "آن کریں",
   "reminder.disable": "بند کریں",
-  "reminder.denied": "اطلاعات کی اجازت مسترد ہوئی۔ Android کی ترتیبات میں آن کریں۔"
+  "reminder.denied": "اطلاعات کی اجازت مسترد ہوئی۔ Android کی ترتیبات میں آن کریں۔",
+  "audio_dl.cancel": "منسوخ کریں",
+  "audio_dl.retry": "دوبارہ کوشش کریں",
+  "audio_dl.result": "محفوظ {saved}، ناکام {failed}۔"
 }

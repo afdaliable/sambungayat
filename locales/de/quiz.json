@@ -129,5 +129,8 @@
   "reminder.label": "Tägliche Erinnerung",
   "reminder.enable": "Einschalten",
   "reminder.disable": "Ausschalten",
-  "reminder.denied": "Benachrichtigungen wurden abgelehnt. Aktiviere sie in den Android-Einstellungen."
+  "reminder.denied": "Benachrichtigungen wurden abgelehnt. Aktiviere sie in den Android-Einstellungen.",
+  "audio_dl.cancel": "Abbrechen",
+  "audio_dl.retry": "Erneut versuchen",
+  "audio_dl.result": "Gespeichert {saved}, fehlgeschlagen {failed}."
 }

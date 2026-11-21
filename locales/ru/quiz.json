@@ -135,5 +135,8 @@
   "reminder.label": "Ежедневное напоминание",
   "reminder.enable": "Включить",
   "reminder.disable": "Выключить",
-  "reminder.denied": "Разрешение на уведомления отклонено. Включите его в настройках Android."
+  "reminder.denied": "Разрешение на уведомления отклонено. Включите его в настройках Android.",
+  "audio_dl.cancel": "Отмена",
+  "audio_dl.retry": "Повторить",
+  "audio_dl.result": "Сохранено: {saved}, ошибок: {failed}."
 }

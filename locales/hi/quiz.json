@@ -129,5 +129,8 @@
   "reminder.label": "दैनिक अनुस्मारक",
   "reminder.enable": "चालू करें",
   "reminder.disable": "बंद करें",
-  "reminder.denied": "सूचना की अनुमति नहीं मिली। Android सेटिंग में चालू करें।"
+  "reminder.denied": "सूचना की अनुमति नहीं मिली। Android सेटिंग में चालू करें।",
+  "audio_dl.cancel": "रद्द करें",
+  "audio_dl.retry": "फिर से कोशिश करें",
+  "audio_dl.result": "सहेजे गए {saved}, विफल {failed}।"
 }
