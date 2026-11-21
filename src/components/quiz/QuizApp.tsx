@@ -139,6 +139,7 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
   const [leaveOpen, setLeaveOpen] = useState(false);
   const saved = useRef<Quiz | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
+  const questionHeading = useRef<HTMLHeadingElement>(null);
 
   const [dailyRec, setDailyRec] = useState<DailyRecord>();
 
@@ -246,6 +247,15 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
 
   // Move focus to the page heading when the screen changes (keyboard and screen reader users).
   useEffect(() => heading.current?.focus(), [state.phase]);
+
+  // After "Lanjut" the Next button unmounts; move focus to the new question so it is announced.
+  const current = state.phase === "playing" ? state.current : 0;
+  useEffect(() => {
+    if (current === 0) return;
+    const h = questionHeading.current;
+    h?.closest("section")?.scrollIntoView({ block: "start" });
+    h?.focus({ preventScroll: true });
+  }, [current]);
 
   const onAnswer = useCallback(
     (key: string) => {
@@ -402,6 +412,7 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
                 <QuestionView
                   key={q.mode === "tebak-audio" ? `${q.id}:${settings.reciter}` : q.id}
                   question={q}
+                  headingRef={questionHeading}
                   index={meta.index}
                   settings={settings}
                   answer={state.answers[q.id]}

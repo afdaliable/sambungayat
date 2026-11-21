@@ -21,6 +21,16 @@ test("keyboard digit answers and reveals", async ({ page }) => {
   }).toPass({ timeout: 15_000 });
 });
 
+test("Lanjut moves focus to the new question heading", async ({ page }) => {
+  await page.goto("/kuis?mode=tebak-surah&scope=juz:30&n=5&d=mudah&seed=fokus");
+  await answerAll(page, 1);
+  const heading = page.getByRole("region", { name: "Soal" }).getByRole("heading", { level: 2 });
+  await expect(heading).toBeFocused();
+  await expect(
+    page.getByRole("group", { name: "Pilihan jawaban" }).getByRole("button").first(),
+  ).toBeEnabled();
+});
+
 test("same seed gives same first question in two contexts (teacher link)", async ({ browser }) => {
   const url = "/kuis?mode=sambung&scope=juz:30&n=10&d=mudah&seed=guru1";
   const texts: string[] = [];
