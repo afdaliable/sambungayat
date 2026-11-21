@@ -3,27 +3,30 @@ import { parseAudioUrl } from "../config/reciters";
 import { isNative } from "./native/platform";
 
 /**
- * Where to play `remote` from: a saved file inside the Android app when there is one, otherwise the remote URL.
+ * Where to play `remote` from: an Android file, the service worker cache, or the remote URL.
  * `ready` is false until the lookup finished; `local` tells that the file is on the device (plays offline).
  */
 export function useAudioSrc(remote: string) {
-  const [state, setState] = useState({ src: remote, ready: !isNative(), local: false });
+  const lookup = isNative() || (typeof navigator !== "undefined" && !navigator.onLine);
+  const [resolved, setResolved] = useState<{ remote: string; url: string | null }>();
   useEffect(() => {
+    setResolved(undefined);
+    if (!lookup) return;
     const ref = parseAudioUrl(remote);
-    if (!isNative() || !ref) {
-      setState({ src: remote, ready: true, local: false });
+    if (!ref) {
+      setResolved({ remote, url: null });
       return;
     }
     let live = true;
-    setState({ src: remote, ready: false, local: false });
     void import("./audioCache")
       .then((m) => m.getAudioStore())
       .then((st) => st.resolve(ref.reciter, ref.s, ref.a))
       .catch(() => null)
-      .then((u) => live && setState({ src: u ?? remote, ready: true, local: u !== null }));
+      .then((url) => live && setResolved({ remote, url }));
     return () => {
       live = false;
     };
-  }, [remote]);
-  return state;
+  }, [remote, lookup]);
+  const result = lookup && resolved?.remote === remote ? resolved : undefined;
+  return { src: result?.url ?? remote, ready: !lookup || result !== undefined, local: !!result?.url };
 }
