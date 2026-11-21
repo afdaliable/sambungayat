@@ -184,8 +184,13 @@ test("result offers to retry only the wrong answers", async ({ page }) => {
   // answer option 1 every time; with this seed at least one answer is wrong
   // wait for the feedback before pressing Enter, and for the next question before answering again (CI is slow)
   for (let i = 0; i < 5; i++) {
-    await page.keyboard.press("1");
-    await expect(page.getByRole("button", { name: "Putar ayat yang benar" })).toHaveCount(1);
+    // the first key can land before the island hydrates, so press again until the feedback shows
+    await expect(async () => {
+      await page.keyboard.press("1");
+      await expect(page.getByRole("button", { name: "Putar ayat yang benar" })).toHaveCount(1, {
+        timeout: 1500,
+      });
+    }).toPass({ timeout: 15_000 });
     await page.keyboard.press("Enter");
     if (i < 4) await expect(page.getByText(`Soal ${i + 2} dari`)).toBeVisible();
   }
