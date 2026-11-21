@@ -1,4 +1,6 @@
 {
+  "translation_loading": "Загрузка перевода...",
+  "translation_unavailable": "Перевод недоступен.",
   "settings": "Настройки",
   "loading": "Загрузка...",
   "tz": "(WIB, время Джакарты)",

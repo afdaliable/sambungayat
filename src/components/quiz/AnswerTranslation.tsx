@@ -7,16 +7,26 @@ import { translationOf } from "../../lib/quran/translation";
 /** Translation of the answer ayah in the page language; Indonesian comes with the question itself. */
 export default function AnswerTranslation({ q }: { q: Question }) {
   const { lang } = useI18n();
-  const [text, setText] = useState<string>();
   const { s, a } = answerAyahRef(q);
+  if (lang === "id") return <>{q.answerTranslation}</>;
+  return <TranslatedAyah key={`${lang}:${s}:${a}`} s={s} a={a} />;
+}
+
+function TranslatedAyah({ s, a }: { s: number; a: number }) {
+  const { lang, t } = useI18n();
+  const [text, setText] = useState<string | null>();
   useEffect(() => {
     let alive = true;
-    setText(undefined);
-    void translationOf(lang, s, a).then((v) => alive && setText(v));
+    void translationOf(lang, s, a).then((v) => alive && setText(v || null));
     return () => {
       alive = false;
     };
   }, [lang, s, a]);
-  // Falls back to the Indonesian text while loading or if the language has no translation file.
-  return <>{text ?? q.answerTranslation}</>;
+  return (
+    <span role="status">
+      {text === undefined
+        ? t("quiz.translation_loading")
+        : (text ?? t("quiz.translation_unavailable"))}
+    </span>
+  );
 }

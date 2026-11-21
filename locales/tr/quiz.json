@@ -1,4 +1,6 @@
 {
+  "translation_loading": "Meal yükleniyor...",
+  "translation_unavailable": "Meal kullanılamıyor.",
   "settings": "Ayarlar",
   "loading": "Yükleniyor...",
   "tz": "(WIB, Cakarta saati)",

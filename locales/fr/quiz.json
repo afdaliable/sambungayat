@@ -1,4 +1,6 @@
 {
+  "translation_loading": "Chargement de la traduction...",
+  "translation_unavailable": "Traduction indisponible.",
   "settings": "Paramètres",
   "loading": "Chargement…",
   "tz": "(WIB, heure de Jakarta)",
