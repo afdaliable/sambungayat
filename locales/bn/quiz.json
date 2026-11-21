@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "বাতিল",
+  "audio_dl.retry": "আবার চেষ্টা করুন",
+  "audio_dl.result": "সংরক্ষিত {saved}, ব্যর্থ {failed}।",
   "settings": "সেটিংস",
   "loading": "লোড হচ্ছে...",
   "tz": "(WIB, জাকার্তা সময়)",

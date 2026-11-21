@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "إلغاء",
+  "audio_dl.retry": "إعادة المحاولة",
+  "audio_dl.result": "تم حفظ {saved}، فشل {failed}.",
   "settings": "الإعدادات",
   "loading": "جارٍ التحميل...",
   "tz": "(WIB، توقيت جاكرتا)",

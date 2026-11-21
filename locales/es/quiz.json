@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Cancelar",
+  "audio_dl.retry": "Reintentar",
+  "audio_dl.result": "Guardados: {saved}, fallidos: {failed}.",
   "settings": "Ajustes",
   "loading": "Cargando…",
   "tz": "(WIB, hora de Yakarta)",

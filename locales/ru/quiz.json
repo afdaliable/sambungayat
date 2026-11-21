@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Отмена",
+  "audio_dl.retry": "Повторить",
+  "audio_dl.result": "Сохранено: {saved}, ошибок: {failed}.",
   "settings": "Настройки",
   "loading": "Загрузка...",
   "tz": "(WIB, время Джакарты)",

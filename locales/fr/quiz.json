@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Annuler",
+  "audio_dl.retry": "Réessayer",
+  "audio_dl.result": "Enregistrés : {saved}, échecs : {failed}.",
   "settings": "Paramètres",
   "loading": "Chargement…",
   "tz": "(WIB, heure de Jakarta)",

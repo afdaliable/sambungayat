@@ -1,6 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { audioUrl, parseAudioUrl } from "../../src/config/reciters";
-import { AUDIO_CACHE, createWebAudioStore } from "../../src/lib/audioCache";
+import {
+  AUDIO_CACHE,
+  createWebAudioStore,
+  downloadAudio,
+  downloadRefs,
+} from "../../src/lib/audioCache";
 
 // Minimal in-memory CacheStorage: enough for match/put/delete.
 function fakeCaches() {
@@ -40,10 +45,16 @@ describe("web AudioStore", () => {
     );
     const prog: number[] = [];
     expect(await store.count("Alafasy_128kbps", refs)).toBe(0);
-    expect(await store.download("Alafasy_128kbps", refs, (d) => prog.push(d))).toBe(3);
+    expect(await store.download("Alafasy_128kbps", refs, (d) => prog.push(d))).toEqual({
+      saved: 3,
+      failed: [],
+    });
     expect(prog.sort()).toEqual([1, 2, 3]);
     expect(await store.count("Alafasy_128kbps", refs)).toBe(3);
-    expect(await store.download("Alafasy_128kbps", refs, () => {})).toBe(0);
+    expect(await store.download("Alafasy_128kbps", refs, () => {})).toEqual({
+      saved: 3,
+      failed: [],
+    });
     expect(calls).toBe(3);
     await store.clear();
     expect(stores.has(AUDIO_CACHE)).toBe(false);
@@ -58,8 +69,16 @@ describe("web AudioStore", () => {
       return { ok: n !== 2 };
     }) as unknown as typeof fetch;
     const store = createWebAudioStore(() => cs, flaky);
-    expect(await store.download("Alafasy_128kbps", refs, () => {})).toBe(1);
+    const progress = vi.fn();
+    const result = await store.download("Alafasy_128kbps", refs, progress);
+    expect(result).toEqual({ saved: 1, failed: [refs[0], refs[1]] });
+    expect(progress.mock.calls.every(([saved]) => saved <= 1)).toBe(true);
     expect(await store.count("Alafasy_128kbps", refs)).toBe(1);
+    const retry = createWebAudioStore(() => cs, ok);
+    expect(await retry.download("Alafasy_128kbps", result.failed, () => {})).toEqual({
+      saved: 2,
+      failed: [],
+    });
   });
 
   it("stops when aborted", async () => {
@@ -67,7 +86,56 @@ describe("web AudioStore", () => {
     const ac = new AbortController();
     ac.abort();
     const store = createWebAudioStore(() => cs, ok);
-    expect(await store.download("Alafasy_128kbps", refs, () => {}, ac.signal)).toBe(0);
+    expect(await store.download("Alafasy_128kbps", refs, () => {}, ac.signal)).toEqual({
+      saved: 0,
+      failed: [],
+    });
+  });
+
+  it("aborts in-flight fetches and does not start queued files", async () => {
+    const { cs } = fakeCaches();
+    const ac = new AbortController();
+    const fetcher = vi.fn(
+      (_url, options) =>
+        new Promise<Response>((_resolve, reject) => {
+          options?.signal?.addEventListener("abort", () =>
+            reject(new DOMException("Aborted", "AbortError")),
+          );
+        }),
+    );
+    const store = createWebAudioStore(() => cs, fetcher);
+    const pending = store.download(
+      "Alafasy_128kbps",
+      [...refs, { s: 2, a: 2 }],
+      () => {},
+      ac.signal,
+    );
+    await vi.waitFor(() => expect(fetcher).toHaveBeenCalledTimes(3));
+    ac.abort();
+    expect(await pending).toEqual({ saved: 0, failed: [] });
+    expect(fetcher).toHaveBeenCalledTimes(3);
+    expect(await store.count("Alafasy_128kbps", refs)).toBe(0);
+  });
+
+  it("handles an empty selection", async () => {
+    const save = vi.fn();
+    expect(await downloadRefs([], save, () => {})).toEqual({ saved: 0, failed: [] });
+    expect(save).not.toHaveBeenCalled();
+  });
+
+  it.each([false, true])("cleans up on storage errors (aborted=%s)", async (aborted) => {
+    const ac = new AbortController();
+    if (aborted) ac.abort();
+    vi.stubGlobal("caches", {
+      open: async () => {
+        throw new Error("storage unavailable");
+      },
+    });
+    const result = vi.fn();
+    const cleanup = vi.fn();
+    await downloadAudio("Alafasy_128kbps", refs, () => {}, ac.signal, result, cleanup);
+    expect(result).toHaveBeenCalledWith({ saved: 0, failed: aborted ? [] : refs });
+    expect(cleanup).toHaveBeenCalledOnce();
   });
 
   it("is unsupported without CacheStorage", () => {

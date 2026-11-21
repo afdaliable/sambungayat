@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Batal",
+  "audio_dl.retry": "Cuba lagi",
+  "audio_dl.result": "Disimpan {saved}, gagal {failed}.",
   "settings": "Tetapan",
   "loading": "Memuatkan...",
   "tz": "(WIB, waktu Jakarta)",

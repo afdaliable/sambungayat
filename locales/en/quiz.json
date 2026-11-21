@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Cancel",
+  "audio_dl.retry": "Retry",
+  "audio_dl.result": "Saved {saved}, failed {failed}.",
   "settings": "Settings",
   "loading": "Loading...",
   "tz": "(WIB, Jakarta time)",

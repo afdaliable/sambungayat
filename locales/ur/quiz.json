@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "منسوخ کریں",
+  "audio_dl.retry": "دوبارہ کوشش کریں",
+  "audio_dl.result": "محفوظ {saved}، ناکام {failed}۔",
   "settings": "ترتیبات",
   "loading": "لوڈ ہو رہا ہے...",
   "tz": "(WIB، جکارتہ کا وقت)",

@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Batal",
+  "audio_dl.retry": "Coba lagi",
+  "audio_dl.result": "Tersimpan {saved}, gagal {failed}.",
   "settings": "Pengaturan",
   "loading": "Memuat...",
   "tz": "(WIB)",

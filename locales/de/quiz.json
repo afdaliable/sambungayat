@@ -1,4 +1,7 @@
 {
+  "audio_dl.cancel": "Abbrechen",
+  "audio_dl.retry": "Erneut versuchen",
+  "audio_dl.result": "Gespeichert {saved}, fehlgeschlagen {failed}.",
   "settings": "Einstellungen",
   "loading": "Wird geladen ...",
   "tz": "(WIB, Jakarta-Zeit)",
