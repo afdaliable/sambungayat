@@ -1,5 +1,6 @@
 import { Capacitor } from "@capacitor/core";
 import { Directory, Filesystem } from "@capacitor/filesystem";
+import { FileTransfer } from "@capacitor/file-transfer";
 import { audioUrl, type ReciterId } from "../../config/reciters";
 import type { AudioStore, Ref } from "../audioCache";
 import { downloadRefs } from "../audioCache";
@@ -40,17 +41,8 @@ export const nativeAudioStore: AudioStore = {
               directory: dir,
               recursive: true,
             }).catch(() => {});
-            const response = await fetch(audioUrl(reciter, r.s, r.a), { signal });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const blob = await response.blob();
-            const data = await new Promise<string>((resolve, reject) => {
-              const reader = new FileReader();
-              reader.onload = () => resolve((reader.result as string).split(",")[1]!);
-              reader.onerror = () => reject(reader.error);
-              reader.readAsDataURL(blob);
-            });
-            signal?.throwIfAborted();
-            await Filesystem.writeFile({ path: p, directory: dir, data });
+            const { uri } = await Filesystem.getUri({ path: p, directory: dir });
+            await FileTransfer.downloadFile({ url: audioUrl(reciter, r.s, r.a), path: uri });
           } catch (error) {
             // a failed download may leave a partial file that would count as stored
             await Filesystem.deleteFile({ path: p, directory: dir }).catch(() => {});
