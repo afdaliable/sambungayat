@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useI18n } from "../../lib/i18n/react";
 import { audioUrl } from "../../config/reciters";
 import type { SurahMeta } from "../../lib/quran/types";
@@ -52,7 +52,7 @@ export default function QuestionView({
   const correct = answer === q.correctKey;
 
   // Keyboard: 1-4 choose, Enter continues (the Next button is focused, so Enter works natively).
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       if (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
