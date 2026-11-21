@@ -13,10 +13,12 @@ test("home -> Juz 30 quiz -> 10 answers -> result", async ({ page }) => {
 test("keyboard digit answers and reveals", async ({ page }) => {
   await page.goto("/kuis?mode=tebak-surah&scope=juz:30&n=5&d=mudah&seed=abc");
   await expect(page.getByRole("region", { name: "Soal" })).toBeVisible();
-  await page.keyboard.press("2");
-  await expect(
-    page.getByRole("group", { name: "Pilihan jawaban" }).getByRole("button").nth(1),
-  ).toBeDisabled();
+  await expect(async () => {
+    await page.keyboard.press("2");
+    await expect(
+      page.getByRole("group", { name: "Pilihan jawaban" }).getByRole("button").nth(1),
+    ).toBeDisabled({ timeout: 1500 });
+  }).toPass({ timeout: 15_000 });
 });
 
 test("same seed gives same first question in two contexts (teacher link)", async ({ browser }) => {

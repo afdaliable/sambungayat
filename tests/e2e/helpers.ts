@@ -4,10 +4,13 @@ import { expect, type Page } from "@playwright/test";
 export async function answerAll(page: Page, count = 10) {
   for (let i = 0; i < count; i++) {
     await expect(page.getByRole("group", { name: "Pilihan jawaban" })).toBeVisible();
-    await page.keyboard.press("1");
-    await expect(
-      page.getByRole("group", { name: "Pilihan jawaban" }).getByRole("button").first(),
-    ).toBeDisabled();
+    // the key can land before the island hydrates, so press again until the answer registers
+    await expect(async () => {
+      await page.keyboard.press("1");
+      await expect(
+        page.getByRole("group", { name: "Pilihan jawaban" }).getByRole("button").first(),
+      ).toBeDisabled({ timeout: 1500 });
+    }).toPass({ timeout: 15_000 });
     await page.keyboard.press("Enter");
   }
 }
