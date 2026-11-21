@@ -1,4 +1,6 @@
 {
+  "translation_loading": "Loading translation...",
+  "translation_unavailable": "Translation unavailable.",
   "settings": "Settings",
   "loading": "Loading...",
   "tz": "(WIB, Jakarta time)",
