@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { audioUrl, parseAudioUrl } from "../../src/config/reciters";
 import { AUDIO_CACHE, createWebAudioStore } from "../../src/lib/audioCache";
 
@@ -14,6 +14,8 @@ function fakeCaches() {
         put: async (u: string, r: unknown) => void m.set(u, r),
       };
     },
+    match: async (url: string, { cacheName }: CacheQueryOptions & { cacheName: string }) =>
+      stores.get(cacheName)?.get(url),
     delete: async (name: string) => stores.delete(name),
   };
   return { cs: cs as unknown as CacheStorage, stores };
@@ -27,6 +29,8 @@ const refs = [
 const ok = (async () => ({ ok: true })) as unknown as typeof fetch;
 
 describe("web AudioStore", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
   it("downloads, counts, skips stored, clears", async () => {
     const { cs, stores } = fakeCaches();
     let calls = 0;
@@ -68,6 +72,21 @@ describe("web AudioStore", () => {
 
   it("is unsupported without CacheStorage", () => {
     expect(createWebAudioStore(() => undefined).supported()).toBe(false);
+  });
+
+  it("resolves only a saved URL the current service worker can serve", async () => {
+    const { cs } = fakeCaches();
+    const store = createWebAudioStore(() => cs, ok);
+    const reciter = "Alafasy_128kbps";
+    const url = audioUrl(reciter, 1, 1);
+    vi.stubGlobal("navigator", { serviceWorker: { controller: {} } });
+    await (await cs.open("other-cache")).put(url, new Response());
+    expect(await store.resolve(reciter, 1, 1)).toBeNull();
+    await store.download(reciter, [refs[0]!], () => {});
+    expect(await store.resolve(reciter, 1, 1)).toBe(url);
+    expect(await store.resolve("Husary_128kbps", 1, 1)).toBeNull();
+    vi.stubGlobal("navigator", { serviceWorker: { controller: null } });
+    expect(await store.resolve(reciter, 1, 1)).toBeNull();
   });
 });
 
