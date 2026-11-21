@@ -4,15 +4,17 @@ import names from "../../../locales/names.json";
 import { DEFAULT_LANG, LANG_CODES, getDict, localePath, stripLang, t, type Lang } from "../../lib/i18n";
 interface Props {
   lang?: Lang;
+  /** Page exists in one language only: the switcher sends to each language's home instead. */
+  singleLang?: boolean;
 }
-const { lang = DEFAULT_LANG } = Astro.props;
+const { lang = DEFAULT_LANG, singleLang = false } = Astro.props;
 const dict = getDict(lang, ["common"]);
 // Same page in every language. Query string and hash are appended on click (static HTML cannot know them).
 const here = stripLang(Astro.url.pathname.replace(/\.html$/, "")).path;
 const switchLinks = LANG_CODES.map((code) => ({
   code,
   name: (names as Record<string, string>)[code] ?? code,
-  href: localePath(code, here),
+  href: localePath(code, singleLang ? "/" : here),
 }));
 const currentName = (names as Record<string, string>)[lang] ?? lang;
 const links = [

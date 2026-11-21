@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShareBar from "../components/ui/ShareBar.astro";
+import { SITE } from "../config/site";
+import { render, type CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const url = `${SITE.url}/blog/${post.id}`;
+const fmt = (x: Date) => x.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: d.title,
+  description: d.description,
+  inLanguage: "id",
+  datePublished: d.date.toISOString(),
+  dateModified: (d.updated ?? d.date).toISOString(),
+  mainEntityOfPage: url,
+  image: new URL(SITE.ogImage, SITE.url).href,
+  author: { "@type": "Organization", name: SITE.name, url: SITE.url },
+  publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
+};
+---
+
+<BaseLayout title={`${d.title} | Sambung Ayat`} description={d.description} jsonLd={jsonLd} noAlternates>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <article class="measure">
+      <p class="text-sm"><a class="lnk" href="/blog">Blog</a></p>
+      <h1 class="title mt-2">{d.title}</h1>
+      <p class="mt-2 text-sm text-muted">
+        {fmt(d.date)}
+        {d.updated && ` (diperbarui ${fmt(d.updated)})`}
+      </p>
+      <div class="prose-sa mt-6">
+        <Content />
+      </div>
+      <a href={d.ctaHref} class="btn btn-lg mt-8">{d.ctaLabel}</a>
+      <p class="mt-6 text-sm text-muted">
+        Tulisan ini panduan belajar umum, bukan fatwa dan bukan pengganti belajar langsung (talaqqi) dengan guru.
+      </p>
+    </article>
+    <ShareBar url={url} text={d.title} />
+  </main>
+</BaseLayout>

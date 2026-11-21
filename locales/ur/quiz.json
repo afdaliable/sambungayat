@@ -117,5 +117,14 @@
   "leave.title": "کیا کوئز سے باہر نکلنا ہے؟",
   "leave.body": "اس کوئز میں آپ کی پیش رفت ختم ہو جائے گی۔",
   "leave.stay": "جاری رکھیں",
-  "leave.confirm": "باہر نکلیں"
+  "leave.confirm": "باہر نکلیں",
+  "daily.streak": "مسلسل دن: {n} (بہترین {best})",
+  "share.image": "تصویر شیئر کریں",
+  "share.image_saved": "تصویر محفوظ ہو گئی۔",
+  "daily.title": "روزانہ چیلنج",
+  "reminder.body": "10 نئے سوالات آپ کے منتظر ہیں۔ اپنا سلسلہ جاری رکھیں۔",
+  "reminder.label": "روزانہ یاد دہانی",
+  "reminder.enable": "آن کریں",
+  "reminder.disable": "بند کریں",
+  "reminder.denied": "اطلاعات کی اجازت مسترد ہوئی۔ Android کی ترتیبات میں آن کریں۔"
 }

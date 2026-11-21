@@ -117,5 +117,14 @@
   "leave.title": "Quiz verlassen?",
   "leave.body": "Dein Fortschritt in diesem Quiz geht verloren.",
   "leave.stay": "Weitermachen",
-  "leave.confirm": "Verlassen"
+  "leave.confirm": "Verlassen",
+  "daily.streak": "Tage in Folge: {n} (Bestwert {best})",
+  "share.image": "Bild teilen",
+  "share.image_saved": "Bild gespeichert.",
+  "daily.title": "Tagesaufgabe",
+  "reminder.body": "10 neue Fragen warten auf dich. Halte deine Serie am Laufen.",
+  "reminder.label": "Tägliche Erinnerung",
+  "reminder.enable": "Einschalten",
+  "reminder.disable": "Ausschalten",
+  "reminder.denied": "Benachrichtigungen wurden abgelehnt. Aktiviere sie in den Android-Einstellungen."
 }

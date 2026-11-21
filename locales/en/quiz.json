@@ -117,5 +117,14 @@
   "leave.title": "Leave the quiz?",
   "leave.body": "Your progress in this quiz will be lost.",
   "leave.stay": "Keep going",
-  "leave.confirm": "Leave"
+  "leave.confirm": "Leave",
+  "daily.streak": "Day streak: {n} (best {best})",
+  "share.image": "Share image",
+  "share.image_saved": "Image saved.",
+  "daily.title": "Daily Challenge",
+  "reminder.body": "10 new questions are waiting. Keep your streak going.",
+  "reminder.label": "Daily reminder",
+  "reminder.enable": "Turn on",
+  "reminder.disable": "Turn off",
+  "reminder.denied": "Notification permission was denied. Turn it on in Android settings."
 }

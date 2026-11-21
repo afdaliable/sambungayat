@@ -123,5 +123,14 @@
   "leave.title": "Выйти из викторины?",
   "leave.body": "Прогресс в этой викторине будет потерян.",
   "leave.stay": "Продолжить",
-  "leave.confirm": "Выйти"
+  "leave.confirm": "Выйти",
+  "daily.streak": "Дней подряд: {n} (рекорд {best})",
+  "share.image": "Поделиться картинкой",
+  "share.image_saved": "Картинка сохранена.",
+  "daily.title": "Задание дня",
+  "reminder.body": "Вас ждут 10 новых вопросов. Не прерывайте серию.",
+  "reminder.label": "Ежедневное напоминание",
+  "reminder.enable": "Включить",
+  "reminder.disable": "Выключить",
+  "reminder.denied": "Разрешение на уведомления отклонено. Включите его в настройках Android."
 }

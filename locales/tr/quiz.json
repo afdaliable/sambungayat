@@ -117,5 +117,14 @@
   "leave.title": "Sınavdan çıkılsın mı?",
   "leave.body": "Bu sınavdaki ilerlemen kaybolacak.",
   "leave.stay": "Devam et",
-  "leave.confirm": "Çık"
+  "leave.confirm": "Çık",
+  "daily.streak": "Seri: {n} gün (en iyi {best})",
+  "share.image": "Görseli paylaş",
+  "share.image_saved": "Görsel kaydedildi.",
+  "daily.title": "Günlük Meydan Okuma",
+  "reminder.body": "10 yeni soru seni bekliyor. Serini sürdür.",
+  "reminder.label": "Günlük hatırlatma",
+  "reminder.enable": "Aç",
+  "reminder.disable": "Kapat",
+  "reminder.denied": "Bildirim izni reddedildi. Android ayarlarından açın."
 }

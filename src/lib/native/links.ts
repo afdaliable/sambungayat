@@ -4,7 +4,7 @@ import { LANG_CODES } from "../i18n/core";
 const HOSTS = new Set(["sambungayat.com", "www.sambungayat.com"]);
 const LANG = `(?:/(?:${LANG_CODES.join("|")}))?`;
 const PAGES = new RegExp(
-  `^${LANG}/(?:kuis|harian|guru|rekap|riwayat|panduan|faq|tentang|privasi|kontak|juz|surah|juz/\\d{1,2}|surah/[a-z0-9-]{1,40})$`,
+  `^${LANG}/(?:kuis|harian|guru|rekap|riwayat|panduan|faq|tentang|privasi|blog|blog/[a-z0-9-]{1,80}|kontak|juz|surah|juz/\\d{1,2}|surah/[a-z0-9-]{1,40})$`,
 );
 const LANG_HOME = new RegExp(`^/(?:${LANG_CODES.join("|")})$`);
 

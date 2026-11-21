@@ -120,5 +120,14 @@
   "leave.title": "¿Salir del cuestionario?",
   "leave.body": "Perderás tu progreso en este cuestionario.",
   "leave.stay": "Seguir",
-  "leave.confirm": "Salir"
+  "leave.confirm": "Salir",
+  "daily.streak": "Días seguidos: {n} (mejor {best})",
+  "share.image": "Compartir imagen",
+  "share.image_saved": "Imagen guardada.",
+  "daily.title": "Reto diario",
+  "reminder.body": "10 preguntas nuevas te esperan. Mantén tu racha.",
+  "reminder.label": "Recordatorio diario",
+  "reminder.enable": "Activar",
+  "reminder.disable": "Desactivar",
+  "reminder.denied": "Se denegó el permiso de notificaciones. Actívalo en los ajustes de Android."
 }

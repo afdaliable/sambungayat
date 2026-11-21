@@ -117,5 +117,14 @@
   "leave.title": "কুইজ থেকে বের হবেন?",
   "leave.body": "এই কুইজে আপনার অগ্রগতি হারিয়ে যাবে।",
   "leave.stay": "চালিয়ে যান",
-  "leave.confirm": "বের হন"
+  "leave.confirm": "বের হন",
+  "daily.streak": "টানা দিন: {n} (সেরা {best})",
+  "share.image": "ছবি শেয়ার করুন",
+  "share.image_saved": "ছবি সংরক্ষিত হয়েছে।",
+  "daily.title": "দৈনিক চ্যালেঞ্জ",
+  "reminder.body": "১০টি নতুন প্রশ্ন অপেক্ষা করছে। ধারাবাহিকতা ধরে রাখুন।",
+  "reminder.label": "দৈনিক অনুস্মারক",
+  "reminder.enable": "চালু করুন",
+  "reminder.disable": "বন্ধ করুন",
+  "reminder.denied": "নোটিফিকেশনের অনুমতি দেওয়া হয়নি। Android সেটিংসে চালু করুন।"
 }

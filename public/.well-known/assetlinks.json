@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sambungayat.app",
+      "sha256_cert_fingerprints": [
+        "A4:45:F9:4C:75:EB:8E:7B:EB:37:5D:16:B3:B6:7F:F5:19:96:4A:D8:7D:B4:B5:4E:38:2E:48:C0:13:BF:E9:94"
+      ]
+    }
+  }
+]

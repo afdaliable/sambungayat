@@ -117,5 +117,14 @@
   "leave.title": "Keluar dari kuis?",
   "leave.body": "Kemajuan kuis ini akan hilang.",
   "leave.stay": "Lanjutkan kuis",
-  "leave.confirm": "Keluar"
+  "leave.confirm": "Keluar",
+  "daily.streak": "Hari beruntun: {n} (terbaik {best})",
+  "share.image": "Bagikan gambar",
+  "share.image_saved": "Gambar disimpan.",
+  "daily.title": "Tantangan Harian",
+  "reminder.body": "10 soal baru menunggumu. Jaga hari beruntunmu.",
+  "reminder.label": "Pengingat harian",
+  "reminder.enable": "Aktifkan",
+  "reminder.disable": "Matikan",
+  "reminder.denied": "Izin notifikasi ditolak. Aktifkan lewat pengaturan Android."
 }

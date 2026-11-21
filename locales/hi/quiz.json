@@ -117,5 +117,14 @@
   "leave.title": "क्विज़ से बाहर निकलें?",
   "leave.body": "इस क्विज़ में आपकी प्रगति खो जाएगी।",
   "leave.stay": "जारी रखें",
-  "leave.confirm": "बाहर निकलें"
+  "leave.confirm": "बाहर निकलें",
+  "daily.streak": "लगातार दिन: {n} (सर्वश्रेष्ठ {best})",
+  "share.image": "चित्र साझा करें",
+  "share.image_saved": "चित्र सहेजा गया।",
+  "daily.title": "दैनिक चुनौती",
+  "reminder.body": "10 नए प्रश्न आपका इंतज़ार कर रहे हैं। अपनी लय बनाए रखें।",
+  "reminder.label": "दैनिक अनुस्मारक",
+  "reminder.enable": "चालू करें",
+  "reminder.disable": "बंद करें",
+  "reminder.denied": "सूचना की अनुमति नहीं मिली। Android सेटिंग में चालू करें।"
 }

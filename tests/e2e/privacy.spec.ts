@@ -32,3 +32,12 @@ test("contribute page is linked from the footer and points to the repository gui
     /github\.com\/afdaliable\/sambungayat\/blob\/main\/docs\/developer-guide\.md$/,
   );
 });
+
+test("blog: index lists published articles and an article renders", async ({ page }) => {
+  await page.goto("/blog");
+  await expect(page.getByRole("heading", { level: 1, name: "Blog" })).toBeVisible();
+  await page.getByRole("link", { name: /kuis hafalan Al-Qur'an untuk murid/i }).click();
+  await expect(page).toHaveURL(/\/blog\/cara-membuat-kuis-hafalan-untuk-murid$/);
+  await expect(page.locator("article h2").first()).toBeVisible();
+  await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(0);
+});

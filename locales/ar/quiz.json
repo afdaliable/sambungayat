@@ -129,5 +129,14 @@
   "leave.title": "هل تريد مغادرة الاختبار؟",
   "leave.body": "سيضيع تقدمك في هذا الاختبار.",
   "leave.stay": "تابع الاختبار",
-  "leave.confirm": "غادر"
+  "leave.confirm": "غادر",
+  "daily.streak": "أيام متتالية: {n} (الأفضل {best})",
+  "share.image": "مشاركة الصورة",
+  "share.image_saved": "تم حفظ الصورة.",
+  "daily.title": "تحدي اليوم",
+  "reminder.body": "10 أسئلة جديدة بانتظارك. حافظ على سلسلة أيامك.",
+  "reminder.label": "تذكير يومي",
+  "reminder.enable": "تشغيل",
+  "reminder.disable": "إيقاف",
+  "reminder.denied": "تم رفض إذن الإشعارات. فعّله من إعدادات أندرويد."
 }

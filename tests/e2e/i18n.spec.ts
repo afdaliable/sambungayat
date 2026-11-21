@@ -50,7 +50,7 @@ test("English pages keep every internal link under /en", async ({ page }) => {
       );
     // /kontribusi is the one English-only page without a language prefix (developer guide).
     const bad = hrefs.filter(
-      (h) => h !== "/kontribusi" && !/^\/(en)(\/|\?|#|$)/.test(h) && !h.startsWith("/_"),
+      (h) => h !== "/kontribusi" && h !== "/blog" && !/^\/(en)(\/|\?|#|$)/.test(h) && !h.startsWith("/_"),
     );
     expect(bad, `${path}: ${bad.join(", ")}`).toEqual([]);
   }
@@ -117,7 +117,7 @@ for (const lang of ["ms", "tr", "fr", "es", "de", "ru", "bn", "hi", "ar", "ur"])
       );
     // /kontribusi is the one English-only page without a language prefix (developer guide).
     const bad = hrefs.filter(
-      (h) => h !== "/kontribusi" && !new RegExp(`^/${lang}(/|\\?|#|$)`).test(h),
+      (h) => h !== "/kontribusi" && h !== "/blog" && !new RegExp(`^/${lang}(/|\\?|#|$)`).test(h),
     );
     expect(bad, bad.join(", ")).toEqual([]);
   });

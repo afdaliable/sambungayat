@@ -114,5 +114,14 @@
   "leave.title": "Keluar daripada kuiz?",
   "leave.body": "Kemajuan kuiz ini akan hilang.",
   "leave.stay": "Teruskan kuiz",
-  "leave.confirm": "Keluar"
+  "leave.confirm": "Keluar",
+  "daily.streak": "Hari berturut-turut: {n} (terbaik {best})",
+  "share.image": "Kongsi gambar",
+  "share.image_saved": "Gambar disimpan.",
+  "daily.title": "Cabaran Harian",
+  "reminder.body": "10 soalan baharu menanti. Kekalkan hari berturut-turut anda.",
+  "reminder.label": "Peringatan harian",
+  "reminder.enable": "Hidupkan",
+  "reminder.disable": "Matikan",
+  "reminder.denied": "Kebenaran pemberitahuan ditolak. Hidupkan dalam tetapan Android."
 }

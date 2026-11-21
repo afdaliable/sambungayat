@@ -18,5 +18,6 @@
   "webview.body": "Sambung Ayat benötigt Android System WebView 111 oder neuer. Aktualisiere es in Google Play und öffne die App danach erneut.",
   "webview.link": "Google Play öffnen",
   "footer.privacy": "Datenschutz",
-  "footer.contribute": "Mitwirken"
+  "footer.contribute": "Mitwirken",
+  "footer.blog": "Blog"
 }

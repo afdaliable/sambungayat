@@ -194,3 +194,13 @@ test("result offers to retry only the wrong answers", async ({ page }) => {
   await retry.click();
   await expect(page.getByText(/Soal 1 dari/)).toBeVisible();
 });
+
+test("daily result shows the day streak and exports a result image", async ({ page }) => {
+  await page.goto("/harian");
+  await expect(page.getByRole("region", { name: "Soal" })).toBeVisible();
+  await answerAll(page, 10);
+  await expect(page.getByText("Hari beruntun: 1 (terbaik 1)").first()).toBeVisible();
+  const dl = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Bagikan gambar" }).click();
+  expect((await dl).suggestedFilename()).toBe("sambungayat-hasil.png");
+});

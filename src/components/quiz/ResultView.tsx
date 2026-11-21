@@ -9,6 +9,10 @@ import type { Question, Quiz } from "../../lib/quiz/types";
 import { shareLinks } from "../../lib/shareLinks";
 import { recapTag } from "../../lib/recap";
 import { shareText } from "../../lib/share";
+import { shareCard } from "../../lib/shareCard";
+import { computeStreak } from "../../lib/streak";
+import { getDaily } from "../../lib/storage/daily";
+import { jakartaDate } from "../../lib/quiz/daily";
 import { readJson, writeJson } from "../../lib/storage";
 import type { Settings } from "../../lib/storage/settings";
 import ParafStrip from "./ParafStrip";
@@ -30,6 +34,7 @@ type Props = {
     date: string;
     official: { score: number; total: number } | undefined;
     countdown: ReactNode;
+    streak?: ReactNode;
   };
 };
 
@@ -84,6 +89,32 @@ export default function ResultView({
     );
   };
 
+  const shareImage = async () => {
+    track("share_click", { where: "result_image" });
+    const st = daily ? computeStreak(Object.keys(getDaily()), jakartaDate()) : undefined;
+    const r = await shareCard(
+      {
+        site: SITE.name,
+        title: daily ? t("quiz.daily.title") : modeTitle,
+        score,
+        total,
+        date: stampDate,
+        extra:
+          st && st.current > 0
+            ? t("quiz.daily.streak", { n: st.current, best: st.best })
+            : undefined,
+        footer: "sambungayat.com",
+        dir: LANGS[lang].dir,
+      },
+      daily
+        ? dailyShareText(daily.date, score, total)
+        : t("quiz.share_text", { mode: modeTitle, score, total }),
+    );
+    setShareMsg(
+      r === "saved" ? t("quiz.share.image_saved") : r === "failed" ? "" : t("quiz.share.done"),
+    );
+  };
+
   const sendToTeacher = async () => {
     writeJson("student", student);
     const line = `${t("quiz.recap_line", { score, total })} ${recapTag(student, score, total, quiz.config.seed.slice(0, 12))}`;
@@ -134,6 +165,7 @@ export default function ResultView({
               <p className="mt-1 text-sm text-muted">
                 {t("quiz.daily.next")} {daily.countdown} {t("quiz.tz")}
               </p>
+              {daily.streak && <p className="mt-1 text-sm">{daily.streak}</p>}
             </div>
           )}
         </section>
@@ -161,6 +193,9 @@ export default function ResultView({
             </button>
             <button type="button" onClick={share} className="btn-quiet">
               {t("quiz.share")}
+            </button>
+            <button type="button" onClick={shareImage} className="btn-quiet col-span-2">
+              {t("quiz.share.image")}
             </button>
             <button type="button" onClick={onSetup} className="btn-quiet">
               {t("quiz.change_settings")}

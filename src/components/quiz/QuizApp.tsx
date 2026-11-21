@@ -15,6 +15,8 @@ import {
 } from "../../lib/quiz/daily";
 import { DEFAULT_CONFIG, decodeConfig, encodeConfig } from "../../lib/quiz/url";
 import { playTone } from "../../lib/sound";
+import ReminderToggle from "./ReminderToggle";
+import { computeStreak } from "../../lib/streak";
 import { getDaily, recordDaily, type DailyRecord } from "../../lib/storage/daily";
 import { countQuiz, scoreBucket, track } from "../../lib/analytics";
 import { LEAVE_EVENT } from "../../lib/native/platform";
@@ -75,7 +77,21 @@ function Countdown() {
     const t = setInterval(tick, 1000);
     return () => clearInterval(t);
   }, []);
-  return <span className="num font-semibold">{ms === null ? "--:--:--" : formatCountdown(ms)}</span>;
+  return (
+    <span className="num font-semibold">{ms === null ? "--:--:--" : formatCountdown(ms)}</span>
+  );
+}
+
+function StreakLine({ dep }: { dep?: unknown }) {
+  const { t } = useI18n();
+  const [s, setS] = useState({ current: 0, best: 0 });
+  useEffect(() => setS(computeStreak(Object.keys(getDaily()), jakartaDate())), [dep]);
+  if (s.current < 1) return null;
+  return (
+    <span className="num font-semibold">
+      {t("quiz.daily.streak", { n: s.current, best: s.best })}
+    </span>
+  );
 }
 
 function DailyBanner() {
@@ -83,10 +99,15 @@ function DailyBanner() {
   const [rec, setRec] = useState<DailyRecord>();
   useEffect(() => setRec(getDaily()[jakartaDate()]), []);
   return (
-    <p className="mb-5 border-y border-line py-3 text-sm text-muted">
-      {rec ? `${t("quiz.daily.official", { score: rec.score, total: rec.total })} ` : ""}
-      {t("quiz.daily.next")} <Countdown /> {t("quiz.tz")}
-    </p>
+    <>
+      <p className="mb-5 border-y border-line py-3 text-sm text-muted">
+        {rec ? `${t("quiz.daily.official", { score: rec.score, total: rec.total })} ` : ""}
+        {t("quiz.daily.next")} <Countdown /> {t("quiz.tz")}
+        <br />
+        <StreakLine />
+      </p>
+      <ReminderToggle />
+    </>
   );
 }
 
@@ -352,11 +373,7 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
             {t("quiz.empty.title")}
           </h1>
           <p className="mt-2">{t("quiz.empty.body")}</p>
-          <button
-            type="button"
-            className="btn mt-5"
-            onClick={() => dispatch({ type: "setup" })}
-          >
+          <button type="button" className="btn mt-5" onClick={() => dispatch({ type: "setup" })}>
             {t("quiz.change_settings")}
           </button>
         </div>
@@ -414,6 +431,7 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
                     date: state.quiz.config.seed.slice(0, 10),
                     official: dailyRec,
                     countdown: <Countdown />,
+                    streak: <StreakLine dep={dailyRec} />,
                   }
                 : undefined
             }

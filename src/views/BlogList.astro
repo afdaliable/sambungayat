@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const fmt = (d: Date) => d.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+---
+
+<BaseLayout
+  title="Blog Hafalan Al-Qur'an | Sambung Ayat"
+  description="Panduan praktis menghafal dan murojaah Al-Qur'an, serta cara memakai kuis Sambung Ayat untuk belajar sendiri dan di kelas."
+  noAlternates
+>
+  <main id="main" class="wrap py-6 lg:py-10">
+    <h1 class="title">Blog</h1>
+    <p class="measure mt-3 text-lg text-muted">
+      Panduan praktis untuk latihan hafalan dan murojaah, dan cara memakai Sambung Ayat di rumah atau di kelas.
+    </p>
+    <ul class="rows measure mt-8">
+      {
+        posts.map((p) => (
+          <li class="py-5">
+            <h2 class="sub">
+              <a class="lnk" href={`/blog/${p.id}`}>{p.data.title}</a>
+            </h2>
+            <p class="mt-1 text-sm text-muted">{fmt(p.data.date)}</p>
+            <p class="mt-2 text-muted">{p.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</BaseLayout>

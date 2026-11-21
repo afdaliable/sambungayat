@@ -120,5 +120,14 @@
   "leave.title": "Quitter le quiz ?",
   "leave.body": "Ta progression dans ce quiz sera perdue.",
   "leave.stay": "Continuer",
-  "leave.confirm": "Quitter"
+  "leave.confirm": "Quitter",
+  "daily.streak": "Jours d'affilée : {n} (record {best})",
+  "share.image": "Partager l'image",
+  "share.image_saved": "Image enregistrée.",
+  "daily.title": "Défi du jour",
+  "reminder.body": "10 nouvelles questions vous attendent. Gardez votre série.",
+  "reminder.label": "Rappel quotidien",
+  "reminder.enable": "Activer",
+  "reminder.disable": "Désactiver",
+  "reminder.denied": "Autorisation de notification refusée. Activez-la dans les réglages Android."
 }
