@@ -102,7 +102,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
         <button
           type="button"
           disabled={!ready}
-          className="btn btn-quiet"
+          className="btn-quiet"
           onClick={() => {
             const a = ref.current;
             if (!a) return;
