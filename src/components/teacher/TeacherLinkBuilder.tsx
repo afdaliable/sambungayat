@@ -1,5 +1,5 @@
 import { track } from "../../lib/analytics";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { I18nProvider, useI18n } from "../../lib/i18n/react";
 import type { Dict, Lang } from "../../lib/i18n/core";
 import { SITE } from "../../config/site";
@@ -19,17 +19,25 @@ export default function TeacherLinkBuilder({ lang, dict }: { lang: Lang; dict: D
 
 function TeacherInner() {
   const { t, path } = useI18n();
-  const [meta, setMeta] = useState<Awaited<ReturnType<typeof browserLoader.loadMeta>> | null>(null);
+  const [meta, setMeta] = useState<
+    Awaited<ReturnType<typeof browserLoader.loadMeta>> | "loading" | "error"
+  >("loading");
   const [link, setLink] = useState("");
   const [qr, setQr] = useState("");
   const [note, setNote] = useState("");
 
-  useEffect(() => {
-    browserLoader
-      .loadMeta()
-      .then(setMeta)
-      .catch(() => setNote(t("teacher.load_failed")));
+  const loadMeta = useCallback(async () => {
+    setMeta("loading");
+    try {
+      setMeta(await browserLoader.loadMeta());
+    } catch {
+      setMeta("error");
+    }
   }, []);
+
+  useEffect(() => {
+    void loadMeta();
+  }, [loadMeta]);
 
   const build = async (c: Omit<QuizConfig, "seed">) => {
     track("teacher_link_created", { mode: c.mode, count: c.count });
@@ -54,11 +62,23 @@ function TeacherInner() {
     }
   };
 
-  if (!meta)
+  if (meta === "loading")
     return (
       <p role="status" className="py-10 text-center text-muted">
-        {note || t("quiz.loading")}
+        {t("quiz.loading")}
       </p>
+    );
+
+  if (meta === "error")
+    return (
+      <div className="flex flex-col items-center gap-4 py-10 text-center">
+        <p role="alert" className="text-muted">
+          {t("teacher.load_failed")}
+        </p>
+        <button type="button" className="btn" onClick={loadMeta}>
+          {t("quiz.error.retry")}
+        </button>
+      </div>
     );
 
   return (

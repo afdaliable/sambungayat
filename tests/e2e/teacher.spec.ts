@@ -32,3 +32,32 @@ test("teacher juz filter narrows the surah list without changing the link's sele
   await expect(naba).toBeChecked();
   await expect(naziat).toBeChecked();
 });
+
+test.describe("teacher metadata retry", () => {
+  test.use({ serviceWorkers: "block" });
+
+  test("retries failed metadata requests and restores the link builder", async ({ page }) => {
+    let fail = true;
+    await page.route("**/data/v1/index.json", (route) => (fail ? route.abort() : route.continue()));
+    await page.goto("/guru");
+
+    const retry = page.getByRole("button", { name: "Coba lagi", exact: true });
+    const build = page.getByRole("button", { name: "Buat link", exact: true });
+    const error = page.getByRole("alert").filter({ hasText: "Data surah belum bisa dimuat" });
+    await expect(error).toBeVisible();
+    await expect(build).toHaveCount(0);
+
+    await Promise.all([
+      page.waitForEvent("requestfailed", (request) =>
+        request.url().endsWith("/data/v1/index.json"),
+      ),
+      retry.click(),
+    ]);
+    await expect(error).toBeVisible();
+
+    fail = false;
+    await retry.click();
+    await expect(build).toBeVisible();
+    await expect(error).toHaveCount(0);
+  });
+});

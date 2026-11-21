@@ -31,7 +31,7 @@ export function OptionLabelView({
   return (
     <span className={`flex flex-col gap-0 ${className}`}>
       <span className="num font-semibold">
-        {label.n}. {label.nameLatin}
+        <bdi dir="ltr">{label.n}. {label.nameLatin}</bdi>
       </span>
       <span lang="ar" dir="rtl" className="ayah ltr:self-end rtl:self-start !text-2xl !leading-normal">
         {label.nameAr}
