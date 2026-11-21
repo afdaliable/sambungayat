@@ -399,7 +399,7 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
             return (
               <div className="mt-6 lg:mt-8">
                 <QuestionView
-                  key={q.id}
+                  key={q.mode === "tebak-audio" ? `${q.id}:${settings.reciter}` : q.id}
                   question={q}
                   index={meta.index}
                   settings={settings}

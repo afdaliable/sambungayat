@@ -17,33 +17,17 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
   const { src, ready, local } = useAudioSrc(remote);
   const ref = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [failed, setFailed] = useState(false);
-
-  const fail = () => {
-    setFailed(true);
-    onUnavailable();
-  };
 
   useEffect(() => {
     setPlaying(false);
-    setFailed(false);
     if (!ready) return;
     if (!navigator.onLine && !local) {
-      setFailed(true);
       onUnavailable();
       return;
     }
     // Browsers only allow autoplay after a user gesture; a rejected play() is fine.
     if (autoplay) ref.current?.play().catch(() => {});
   }, [src, ready]);
-
-  if (failed) {
-    return (
-      <p role="status" className="text-muted">
-        {t("quiz.audio_failed")}
-      </p>
-    );
-  }
 
   return (
     <div className="flex items-center justify-center py-6">
@@ -55,7 +39,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
-        onError={fail}
+        onError={onUnavailable}
       />
       <button
         type="button"
@@ -65,7 +49,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
           if (a.paused)
             a.play().catch((err: DOMException) => {
               // AbortError (quick pause) and NotAllowedError are not load failures
-              if (err.name === "NotSupportedError") fail();
+              if (err.name === "NotSupportedError" && ref.current === a) onUnavailable();
             });
           else a.pause();
         }}
