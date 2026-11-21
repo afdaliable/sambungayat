@@ -1,6 +1,6 @@
 {
-  "audio_replay": "আবার চালান",
-  "audio_progress": "অডিওর অগ্রগতি",
+  "translation_loading": "অনুবাদ লোড হচ্ছে...",
+  "translation_unavailable": "অনুবাদ পাওয়া যাচ্ছে না।",
   "settings": "সেটিংস",
   "loading": "লোড হচ্ছে...",
   "tz": "(WIB, জাকার্তা সময়)",
@@ -108,12 +108,13 @@
   "review.read": "এই সূরা পড়ুন",
   "history.empty": "এখনও কোনো ইতিহাস নেই। প্রথম কুইজ দিন, ফল এখানে দেখা যাবে। তথ্য শুধু এই ডিভাইসে সংরক্ষিত।",
   "history.start": "কুইজ শুরু করুন",
-  "history.weakest": "সবচেয়ে বেশি পুনরাবৃত্তি দরকার এমনটি অনুশীলন করুন: {name}",
+  "history.weakest": "সবচেয়ে বেশি পুনরাবৃত্তি দরকার এমনটি অনুশীলন করুন: {name} ({mode})",
   "history.mastery": "সূরা অনুযায়ী দক্ষতা",
   "history.sorted": "যেটি সবচেয়ে বেশি পুনরাবৃত্তি চায় সেটি আগে (কম স্কোর ও দীর্ঘদিন অনুশীলন না করা)।",
   "history.low_data": "(মাত্র {n}টি প্রশ্ন)",
   "history.practice": "অনুশীলন",
   "history.correct_of": "{total}টি প্রশ্নের মধ্যে {correct}টি সঠিক",
+  "history.weak_mode": "সবচেয়ে দুর্বল: {mode}",
   "history.recent": "সাম্প্রতিক কুইজ",
   "question_label": "প্রশ্ন",
   "leave.title": "কুইজ থেকে বের হবেন?",
@@ -128,5 +129,10 @@
   "reminder.label": "দৈনিক অনুস্মারক",
   "reminder.enable": "চালু করুন",
   "reminder.disable": "বন্ধ করুন",
-  "reminder.denied": "নোটিফিকেশনের অনুমতি দেওয়া হয়নি। Android সেটিংসে চালু করুন।"
+  "reminder.denied": "নোটিফিকেশনের অনুমতি দেওয়া হয়নি। Android সেটিংসে চালু করুন।",
+  "audio_dl.cancel": "বাতিল",
+  "audio_dl.retry": "আবার চেষ্টা করুন",
+  "audio_dl.result": "সংরক্ষিত {saved}, ব্যর্থ {failed}।",
+  "audio_replay": "আবার চালান",
+  "audio_progress": "অডিওর অগ্রগতি"
 }

@@ -4,41 +4,8 @@ import { I18nProvider, useI18n } from "../../lib/i18n/react";
 import { browserLoader } from "../../lib/quran/loader";
 import type { SurahMeta } from "../../lib/quran/types";
 import { getHistory, type HistoryEntry } from "../../lib/storage/history";
-import { getMastery } from "../../lib/storage/mastery";
+import { getMastery, weakestSurahs, type WeakRow } from "../../lib/storage/mastery";
 import { modeText } from "./QuizSetup";
-
-type Row = {
-  s: number;
-  attempts: number;
-  correct: number;
-  pct: number;
-  last: string;
-  priority: number;
-};
-
-function weakestRows(): Row[] {
-  const bySurah = new Map<number, { attempts: number; correct: number; last: string }>();
-  for (const cells of Object.values(getMastery())) {
-    for (const [s, c] of Object.entries(cells)) {
-      const acc = bySurah.get(Number(s)) ?? { attempts: 0, correct: 0, last: "" };
-      acc.attempts += c.attempts;
-      acc.correct += c.correct;
-      if (c.lastPlayed > acc.last) acc.last = c.lastPlayed;
-      bySurah.set(Number(s), acc);
-    }
-  }
-  // Priority = weakness + staleness (1 point per idle day, capped at 30), so old weak spots resurface.
-  const now = Date.now();
-  return [...bySurah.entries()]
-    .map(([s, v]) => {
-      const pct = Math.round((v.correct / v.attempts) * 100);
-      const idleDays = v.last
-        ? Math.min(30, Math.max(0, (now - Date.parse(v.last)) / 86_400_000))
-        : 0;
-      return { s, ...v, pct, priority: 100 - pct + idleDays };
-    })
-    .sort((a, b) => b.priority - a.priority || b.attempts - a.attempts);
-}
 
 export default function HistoryView({ lang, dict }: { lang: Lang; dict: Dict }) {
   return (
@@ -52,12 +19,12 @@ function HistoryInner() {
   const { t, lang, path } = useI18n();
   const [index, setIndex] = useState<SurahMeta[]>([]);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [rows, setRows] = useState<Row[]>([]);
+  const [rows, setRows] = useState<WeakRow[]>([]);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     setHistory(getHistory());
-    setRows(weakestRows());
+    setRows(weakestSurahs(getMastery()));
     setReady(true);
     browserLoader
       .loadMeta()
@@ -73,6 +40,8 @@ function HistoryInner() {
     );
   const name = (s: number) => index[s - 1]?.nameLatin ?? t("quiz.surah_n", { n: s });
   const weakest = rows[0];
+  const practiceHref = (r: WeakRow) =>
+    `${path("/kuis")}?mode=${r.mode}&scope=surah:${r.s}&n=10&d=mudah`;
 
   if (history.length === 0) {
     return (
@@ -88,11 +57,11 @@ function HistoryInner() {
   return (
     <div className="grid gap-x-14 gap-y-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start">
       {weakest && (
-        <a
-          href={`${path("/kuis")}?mode=sambung&scope=surah:${weakest.s}&n=10&d=mudah`}
-          className="btn btn-lg justify-self-start lg:col-span-2"
-        >
-          {t("quiz.history.weakest", { name: name(weakest.s) })}
+        <a href={practiceHref(weakest)} className="btn btn-lg justify-self-start lg:col-span-2">
+          {t("quiz.history.weakest", {
+            name: name(weakest.s),
+            mode: modeText(t, weakest.mode, "title"),
+          })}
         </a>
       )}
 
@@ -108,10 +77,7 @@ function HistoryInner() {
                 <span className="font-semibold">{name(r.s)}</span>
                 <span className="flex items-center gap-4">
                   <span className="num text-lg font-extrabold">{r.pct}%</span>
-                  <a
-                    className="lnk inline-flex min-h-11 items-center"
-                    href={`${path("/kuis")}?mode=sambung&scope=surah:${r.s}&n=10&d=mudah`}
-                  >
+                  <a className="lnk inline-flex min-h-11 items-center" href={practiceHref(r)}>
                     {t("quiz.history.practice")}
                   </a>
                 </span>
@@ -122,6 +88,8 @@ function HistoryInner() {
               <p className="num mt-2 text-sm text-muted">
                 {t("quiz.history.correct_of", { correct: r.correct, total: r.attempts })}
                 {r.attempts < 5 && <> {t("quiz.history.low_data", { n: r.attempts })}</>}
+                {" \u00b7 "}
+                {t("quiz.history.weak_mode", { mode: modeText(t, r.mode, "title") })}
               </p>
             </li>
           ))}

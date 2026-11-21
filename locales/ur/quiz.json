@@ -1,6 +1,6 @@
 {
-  "audio_replay": "دوبارہ چلائیں",
-  "audio_progress": "آڈیو کی پیش رفت",
+  "translation_loading": "ترجمہ لوڈ ہو رہا ہے...",
+  "translation_unavailable": "ترجمہ دستیاب نہیں ہے۔",
   "settings": "ترتیبات",
   "loading": "لوڈ ہو رہا ہے...",
   "tz": "(WIB، جکارتہ کا وقت)",
@@ -108,12 +108,13 @@
   "review.read": "یہ سورہ پڑھیں",
   "history.empty": "ابھی کوئی تاریخ نہیں۔ پہلا کوئز کھیلیں تو نتیجہ یہاں نظر آئے گا۔ ڈیٹا صرف اسی ڈیوائس میں محفوظ ہوتا ہے۔",
   "history.start": "کوئز شروع کریں",
-  "history.weakest": "جس کی سب سے زیادہ دہرائی درکار ہے اس کی مشق کریں: {name}",
+  "history.weakest": "جس کی سب سے زیادہ دہرائی درکار ہے اس کی مشق کریں: {name} ({mode})",
   "history.mastery": "سورہ کے لحاظ سے مہارت",
   "history.sorted": "سب سے زیادہ دہرائی کی ضرورت کے لحاظ سے ترتیب (کم نمبر اور مشق کو عرصہ گزرنا)۔",
   "history.low_data": "(صرف {n} سوالات)",
   "history.practice": "مشق",
   "history.correct_of": "{total} سوالات میں سے {correct} درست",
+  "history.weak_mode": "سب سے کمزور: {mode}",
   "history.recent": "حالیہ کوئز",
   "question_label": "سوال",
   "leave.title": "کیا کوئز سے باہر نکلنا ہے؟",
@@ -128,5 +129,10 @@
   "reminder.label": "روزانہ یاد دہانی",
   "reminder.enable": "آن کریں",
   "reminder.disable": "بند کریں",
-  "reminder.denied": "اطلاعات کی اجازت مسترد ہوئی۔ Android کی ترتیبات میں آن کریں۔"
+  "reminder.denied": "اطلاعات کی اجازت مسترد ہوئی۔ Android کی ترتیبات میں آن کریں۔",
+  "audio_dl.cancel": "منسوخ کریں",
+  "audio_dl.retry": "دوبارہ کوشش کریں",
+  "audio_dl.result": "محفوظ {saved}، ناکام {failed}۔",
+  "audio_replay": "دوبارہ چلائیں",
+  "audio_progress": "آڈیو کی پیش رفت"
 }

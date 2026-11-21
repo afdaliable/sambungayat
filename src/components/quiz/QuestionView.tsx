@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useState, type Ref } from "react";
 import { useI18n } from "../../lib/i18n/react";
 import { audioUrl } from "../../config/reciters";
 import type { SurahMeta } from "../../lib/quran/types";
@@ -13,6 +13,7 @@ import OptionButton, { type OptionState } from "./OptionButton";
 
 type Props = {
   question: Question;
+  headingRef?: Ref<HTMLHeadingElement>;
   index: SurahMeta[];
   settings: Settings;
   /** Chosen option key, or "skip"; undefined while unanswered. */
@@ -25,6 +26,7 @@ type Props = {
 
 export default function QuestionView({
   question: q,
+  headingRef,
   index,
   settings,
   answer,
@@ -36,17 +38,6 @@ export default function QuestionView({
   const { t } = useI18n();
   const [audioState, setAudioState] = useState<"initial" | "failed" | "retry">("initial");
   const audioFailed = audioState === "failed";
-
-  // Bring the new question into view (the page is scrolled down after answering the previous one).
-  const sectionRef = useRef<HTMLElement>(null);
-  const firstRender = useRef(true);
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    sectionRef.current?.scrollIntoView({ block: "start" });
-  }, [q.id]);
 
   const revealed = answer !== undefined;
   const correct = answer === q.correctKey;
@@ -82,11 +73,10 @@ export default function QuestionView({
 
   return (
     <section
-      ref={sectionRef}
       aria-label={t("quiz.question_label")}
       className="fade-in grid scroll-mt-32 gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-start"
     >
-      <h2 className="sub lg:col-span-2">{t(`quiz.prompt.${q.mode}`)}</h2>
+      <h2 ref={headingRef} tabIndex={-1} className="sub lg:col-span-2">{t(`quiz.prompt.${q.mode}`)}</h2>
 
       <div className="sheet p-4 sm:p-6 lg:sticky lg:top-4">
         {showContext && q.prompt.ayahRef && (

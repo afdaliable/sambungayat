@@ -1,6 +1,6 @@
 {
-  "audio_replay": "Volver a reproducir",
-  "audio_progress": "Progreso del audio",
+  "translation_loading": "Cargando traducción...",
+  "translation_unavailable": "Traducción no disponible.",
   "settings": "Ajustes",
   "loading": "Cargando…",
   "tz": "(WIB, hora de Yakarta)",
@@ -111,12 +111,13 @@
   "review.read": "Leer esta sura",
   "history.empty": "Aún no hay historial. Haz tu primer cuestionario y el resultado aparecerá aquí. Los datos se guardan solo en este dispositivo.",
   "history.start": "Empezar un cuestionario",
-  "history.weakest": "Practica lo que más repaso necesita: {name}",
+  "history.weakest": "Practica lo que más repaso necesita: {name} ({mode})",
   "history.mastery": "Dominio por sura",
   "history.sorted": "Ordenado por lo que más repaso necesita (puntuación baja y mucho tiempo sin practicar).",
   "history.low_data": "(solo {n} preguntas)",
   "history.practice": "Practicar",
   "history.correct_of": "{correct} correctas de {total} preguntas",
+  "history.weak_mode": "más débil en {mode}",
   "history.recent": "Cuestionarios recientes",
   "question_label": "Pregunta",
   "leave.title": "¿Salir del cuestionario?",
@@ -131,5 +132,10 @@
   "reminder.label": "Recordatorio diario",
   "reminder.enable": "Activar",
   "reminder.disable": "Desactivar",
-  "reminder.denied": "Se denegó el permiso de notificaciones. Actívalo en los ajustes de Android."
+  "reminder.denied": "Se denegó el permiso de notificaciones. Actívalo en los ajustes de Android.",
+  "audio_dl.cancel": "Cancelar",
+  "audio_dl.retry": "Reintentar",
+  "audio_dl.result": "Guardados: {saved}, fallidos: {failed}.",
+  "audio_replay": "Volver a reproducir",
+  "audio_progress": "Progreso del audio"
 }

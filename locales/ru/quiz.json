@@ -1,6 +1,6 @@
 {
-  "audio_replay": "Воспроизвести заново",
-  "audio_progress": "Прогресс аудио",
+  "translation_loading": "Загрузка перевода...",
+  "translation_unavailable": "Перевод недоступен.",
   "settings": "Настройки",
   "loading": "Загрузка...",
   "tz": "(WIB, время Джакарты)",
@@ -114,12 +114,13 @@
   "review.read": "Читать эту суру",
   "history.empty": "Истории пока нет. Пройдите первую викторину, и результат появится здесь. Данные хранятся только на этом устройстве.",
   "history.start": "Начать викторину",
-  "history.weakest": "Потренируйте то, что больше всего нуждается в повторении: {name}",
+  "history.weakest": "Потренируйте то, что больше всего нуждается в повторении: {name} ({mode})",
   "history.mastery": "Усвоение по сурам",
   "history.sorted": "Отсортировано по необходимости повторения (низкий результат и давно не тренировались).",
   "history.low_data": "(мало данных: {n})",
   "history.practice": "Тренировать",
   "history.correct_of": "Верно {correct} из {total} вопросов",
+  "history.weak_mode": "слабее всего: {mode}",
   "history.recent": "Последние викторины",
   "question_label": "Вопрос",
   "leave.title": "Выйти из викторины?",
@@ -134,5 +135,10 @@
   "reminder.label": "Ежедневное напоминание",
   "reminder.enable": "Включить",
   "reminder.disable": "Выключить",
-  "reminder.denied": "Разрешение на уведомления отклонено. Включите его в настройках Android."
+  "reminder.denied": "Разрешение на уведомления отклонено. Включите его в настройках Android.",
+  "audio_dl.cancel": "Отмена",
+  "audio_dl.retry": "Повторить",
+  "audio_dl.result": "Сохранено: {saved}, ошибок: {failed}.",
+  "audio_replay": "Воспроизвести заново",
+  "audio_progress": "Прогресс аудио"
 }
