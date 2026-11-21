@@ -16,13 +16,17 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
   const { t } = useI18n();
   const { src, ready, local } = useAudioSrc(remote);
   const ref = useRef<HTMLAudioElement>(null);
+  const playbackRequested = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [buffering, setBuffering] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
   function play(a: HTMLAudioElement) {
+    playbackRequested.current = true;
+    setBuffering(a.readyState < HTMLMediaElement.HAVE_FUTURE_DATA);
     a.play().catch((err: DOMException) => {
+      playbackRequested.current = false;
       setBuffering(false);
       // AbortError and NotAllowedError are not load failures.
       if (err.name === "NotSupportedError" && ref.current === a) onUnavailable();
@@ -35,6 +39,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
   }
 
   useEffect(() => {
+    playbackRequested.current = false;
     setPlaying(false);
     setBuffering(false);
     setCurrentTime(0);
@@ -45,7 +50,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
       return;
     }
     // Browsers only allow autoplay after a user gesture; a rejected play() is fine.
-    if (autoplay) ref.current?.play().catch(() => {});
+    if (autoplay && ref.current) play(ref.current);
   }, [src, ready]);
 
   return (
@@ -56,19 +61,25 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
         src={ready ? src : undefined}
         preload="none"
         onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => {
+        onPause={() => {
+          playbackRequested.current = false;
           setPlaying(false);
           setBuffering(false);
         }}
-        onLoadStart={() => setBuffering(true)}
-        onWaiting={() => setBuffering(true)}
+        onEnded={() => {
+          playbackRequested.current = false;
+          setPlaying(false);
+          setBuffering(false);
+        }}
+        onLoadStart={() => setBuffering(playbackRequested.current)}
+        onWaiting={() => setBuffering(playbackRequested.current)}
         onCanPlay={() => setBuffering(false)}
         onPlaying={() => setBuffering(false)}
         onLoadedMetadata={(e) => updateProgress(e.currentTarget)}
         onDurationChange={(e) => updateProgress(e.currentTarget)}
         onTimeUpdate={(e) => updateProgress(e.currentTarget)}
         onError={() => {
+          playbackRequested.current = false;
           setBuffering(false);
           onUnavailable();
         }}
