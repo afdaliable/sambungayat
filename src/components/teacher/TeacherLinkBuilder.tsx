@@ -4,7 +4,6 @@ import { I18nProvider, useI18n } from "../../lib/i18n/react";
 import type { Dict, Lang } from "../../lib/i18n/core";
 import { SITE } from "../../config/site";
 import { browserLoader } from "../../lib/quran/loader";
-import type { SurahMeta } from "../../lib/quran/types";
 import { newSeed } from "../../lib/quiz/rng";
 import type { QuizConfig } from "../../lib/quiz/types";
 import { DEFAULT_CONFIG, encodeConfig } from "../../lib/quiz/url";
@@ -20,7 +19,7 @@ export default function TeacherLinkBuilder({ lang, dict }: { lang: Lang; dict: D
 
 function TeacherInner() {
   const { t, path } = useI18n();
-  const [index, setIndex] = useState<SurahMeta[] | null>(null);
+  const [meta, setMeta] = useState<Awaited<ReturnType<typeof browserLoader.loadMeta>> | null>(null);
   const [link, setLink] = useState("");
   const [qr, setQr] = useState("");
   const [note, setNote] = useState("");
@@ -28,7 +27,7 @@ function TeacherInner() {
   useEffect(() => {
     browserLoader
       .loadMeta()
-      .then((m) => setIndex(m.index))
+      .then(setMeta)
       .catch(() => setNote(t("teacher.load_failed")));
   }, []);
 
@@ -55,7 +54,7 @@ function TeacherInner() {
     }
   };
 
-  if (!index)
+  if (!meta)
     return (
       <p role="status" className="py-10 text-center text-muted">
         {note || t("quiz.loading")}
@@ -66,8 +65,8 @@ function TeacherInner() {
     <div className="flex flex-col gap-10">
       <QuizSetup
         initial={DEFAULT_CONFIG}
-        index={index}
-        juz={[]}
+        index={meta.index}
+        juz={meta.juz}
         onStart={build}
         title={t("teacher.title")}
         submitLabel={t("teacher.submit")}
