@@ -1,7 +1,6 @@
 {
-  "audio_dl.cancel": "İptal",
-  "audio_dl.retry": "Yeniden dene",
-  "audio_dl.result": "Kaydedilen: {saved}, başarısız: {failed}.",
+  "translation_loading": "Meal yükleniyor...",
+  "translation_unavailable": "Meal kullanılamıyor.",
   "settings": "Ayarlar",
   "loading": "Yükleniyor...",
   "tz": "(WIB, Cakarta saati)",
@@ -109,12 +108,13 @@
   "review.read": "Bu sureyi oku",
   "history.empty": "Henüz geçmiş yok. İlk sınavını çöz, sonuç burada görünsün. Veriler yalnızca bu cihazda saklanır.",
   "history.start": "Sınava başla",
-  "history.weakest": "En çok tekrar gerekeni çalış: {name}",
+  "history.weakest": "En çok tekrar gerekeni çalış: {name} ({mode})",
   "history.mastery": "Sureye göre ustalık",
   "history.sorted": "En çok tekrar gerekenden başlayarak sıralanır (düşük skor ve uzun süredir çalışılmayanlar).",
   "history.low_data": "(yalnızca {n} soru)",
   "history.practice": "Çalış",
   "history.correct_of": "{total} sorudan {correct} doğru",
+  "history.weak_mode": "en zayıf: {mode}",
   "history.recent": "Son sınavlar",
   "question_label": "Soru",
   "leave.title": "Sınavdan çıkılsın mı?",
@@ -129,5 +129,8 @@
   "reminder.label": "Günlük hatırlatma",
   "reminder.enable": "Aç",
   "reminder.disable": "Kapat",
-  "reminder.denied": "Bildirim izni reddedildi. Android ayarlarından açın."
+  "reminder.denied": "Bildirim izni reddedildi. Android ayarlarından açın.",
+  "audio_dl.cancel": "İptal",
+  "audio_dl.retry": "Yeniden dene",
+  "audio_dl.result": "Kaydedilen: {saved}, başarısız: {failed}."
 }

@@ -1,7 +1,6 @@
 {
-  "audio_dl.cancel": "إلغاء",
-  "audio_dl.retry": "إعادة المحاولة",
-  "audio_dl.result": "تم حفظ {saved}، فشل {failed}.",
+  "translation_loading": "جارٍ تحميل الترجمة...",
+  "translation_unavailable": "الترجمة غير متاحة.",
   "settings": "الإعدادات",
   "loading": "جارٍ التحميل...",
   "tz": "(WIB، توقيت جاكرتا)",
@@ -121,12 +120,13 @@
   "review.read": "اقرأ هذه السورة",
   "history.empty": "لا يوجد سجل بعد. حلّ أول اختبار لك وستظهر النتيجة هنا. تُحفظ البيانات على هذا الجهاز فقط.",
   "history.start": "ابدأ اختبارًا",
-  "history.weakest": "درّب الأكثر حاجة إلى المراجعة: {name}",
+  "history.weakest": "درّب الأكثر حاجة إلى المراجعة: {name} ({mode})",
   "history.mastery": "مستوى الإتقان حسب السورة",
   "history.sorted": "مرتبة من الأكثر حاجة إلى المراجعة (درجة منخفضة وطول انقطاع عن التدريب).",
   "history.low_data": "(بيانات قليلة: {n})",
   "history.practice": "تدرّب",
   "history.correct_of": "{correct} إجابة صحيحة من {total} سؤالًا",
+  "history.weak_mode": "الأضعف في {mode}",
   "history.recent": "آخر الاختبارات",
   "question_label": "السؤال",
   "leave.title": "هل تريد مغادرة الاختبار؟",
@@ -141,5 +141,8 @@
   "reminder.label": "تذكير يومي",
   "reminder.enable": "تشغيل",
   "reminder.disable": "إيقاف",
-  "reminder.denied": "تم رفض إذن الإشعارات. فعّله من إعدادات أندرويد."
+  "reminder.denied": "تم رفض إذن الإشعارات. فعّله من إعدادات أندرويد.",
+  "audio_dl.cancel": "إلغاء",
+  "audio_dl.retry": "إعادة المحاولة",
+  "audio_dl.result": "تم حفظ {saved}، فشل {failed}."
 }

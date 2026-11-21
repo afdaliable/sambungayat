@@ -85,9 +85,12 @@ const links = [
 </header>
 
 <script>
+  import { writeJson } from "../../lib/storage";
+
   // Language links keep the current query string and hash (e.g. a quiz link keeps its seed).
   document.querySelectorAll<HTMLAnchorElement>("#lang-switch a").forEach((a) =>
     a.addEventListener("click", () => {
+      writeJson("lang", a.hreflang);
       a.href = a.getAttribute("href")! + location.search + location.hash;
     }),
   );

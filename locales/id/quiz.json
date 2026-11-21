@@ -1,7 +1,6 @@
 {
-  "audio_dl.cancel": "Batal",
-  "audio_dl.retry": "Coba lagi",
-  "audio_dl.result": "Tersimpan {saved}, gagal {failed}.",
+  "translation_loading": "Memuat terjemahan...",
+  "translation_unavailable": "Terjemahan tidak tersedia.",
   "settings": "Pengaturan",
   "loading": "Memuat...",
   "tz": "(WIB)",
@@ -109,12 +108,13 @@
   "review.read": "Baca surah ini",
   "history.empty": "Belum ada riwayat. Kerjakan kuis pertamamu, lalu hasilnya muncul di sini. Data hanya disimpan di perangkat ini.",
   "history.start": "Mulai kuis",
-  "history.weakest": "Latih yang paling perlu diulang: {name}",
+  "history.weakest": "Latih yang paling perlu diulang: {name} ({mode})",
   "history.mastery": "Penguasaan per surah",
   "history.sorted": "Diurutkan dari yang paling perlu diulang (nilai rendah dan lama tidak dilatih).",
   "history.low_data": "(baru {n} soal)",
   "history.practice": "Latih",
   "history.correct_of": "{correct} benar dari {total} soal",
+  "history.weak_mode": "terlemah di {mode}",
   "history.recent": "Kuis terakhir",
   "question_label": "Soal",
   "leave.title": "Keluar dari kuis?",
@@ -129,5 +129,8 @@
   "reminder.label": "Pengingat harian",
   "reminder.enable": "Aktifkan",
   "reminder.disable": "Matikan",
-  "reminder.denied": "Izin notifikasi ditolak. Aktifkan lewat pengaturan Android."
+  "reminder.denied": "Izin notifikasi ditolak. Aktifkan lewat pengaturan Android.",
+  "audio_dl.cancel": "Batal",
+  "audio_dl.retry": "Coba lagi",
+  "audio_dl.result": "Tersimpan {saved}, gagal {failed}."
 }
