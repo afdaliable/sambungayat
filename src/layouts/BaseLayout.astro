@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/ui/Header.astro";
 import Footer from "../components/ui/Footer.astro";
+import StorageNotice from "../components/quiz/StorageNotice";
 import { SITE } from "../config/site";
 import { DEFAULT_LANG, LANGS, getDict, t, PREFIXED_LANGS, localePath, stripLang, type Lang } from "../lib/i18n";
 
@@ -249,6 +250,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       {t(dict, "common.skip")}
     </a>
     <Header lang={lang} singleLang={noAlternates} />
+    <StorageNotice client:load dict={dict} />
     <div class="flex-1"><slot /></div>
     <Footer lang={lang} />
   </body>

@@ -19,5 +19,14 @@
   "webview.link": "Google Play खोलें",
   "footer.privacy": "गोपनीयता नीति",
   "footer.contribute": "योगदान दें",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "स्टोरेज उपलब्ध नहीं है। यह टैब बंद करने पर प्रगति खो जाएगी। जाने से पहले नीचे बैकअप निर्यात करें।",
+  "backup.title": "प्रगति का बैकअप",
+  "backup.export": "JSON निर्यात करें",
+  "backup.import": "JSON आयात करें",
+  "backup.description": "इतिहास, दक्षता और दैनिक प्रगति सहेजें। आयात मौजूदा प्रगति को बदलता है; सेटिंग्स नहीं बदलतीं।",
+  "backup.confirm": "मौजूदा प्रगति को इस बैकअप से बदलें?",
+  "backup.exported": "बैकअप डाउनलोड शुरू हुआ।",
+  "backup.imported": "प्रगति बहाल हुई। स्टोरेज उपलब्ध न हो तो बंद करने से पहले फिर निर्यात करें।",
+  "backup.error": "बैकअप पढ़ा या सहेजा नहीं जा सका। मान्य Sambung Ayat JSON बैकअप चुनें।"
 }

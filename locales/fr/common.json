@@ -19,5 +19,14 @@
   "webview.link": "Ouvrir Google Play",
   "footer.privacy": "Politique de confidentialité",
   "footer.contribute": "Contribuer",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "Stockage indisponible. La progression sera perdue à la fermeture de cet onglet. Exportez une sauvegarde ci-dessous avant de partir.",
+  "backup.title": "Sauvegarde de progression",
+  "backup.export": "Exporter JSON",
+  "backup.import": "Importer JSON",
+  "backup.description": "Sauvegardez historique, maîtrise et progression quotidienne. L’import remplace la progression ; les réglages sont conservés.",
+  "backup.confirm": "Remplacer la progression actuelle par cette sauvegarde ?",
+  "backup.exported": "Téléchargement lancé.",
+  "backup.imported": "Progression restaurée. Sans stockage, exportez à nouveau avant de fermer.",
+  "backup.error": "Impossible de lire ou d’enregistrer la sauvegarde. Choisissez une sauvegarde JSON Sambung Ayat valide."
 }

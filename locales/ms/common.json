@@ -19,5 +19,14 @@
   "webview.link": "Buka Google Play",
   "footer.privacy": "Dasar privasi",
   "footer.contribute": "Sumbangan",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "Storan tidak tersedia. Kemajuan akan hilang apabila tab ditutup. Eksport sandaran di bawah sebelum keluar.",
+  "backup.title": "Sandaran kemajuan",
+  "backup.export": "Eksport JSON",
+  "backup.import": "Import JSON",
+  "backup.description": "Sandarkan sejarah, penguasaan dan kemajuan harian. Import menggantikan kemajuan semasa; tetapan kekal.",
+  "backup.confirm": "Gantikan kemajuan semasa dengan sandaran ini?",
+  "backup.exported": "Muat turun sandaran bermula.",
+  "backup.imported": "Kemajuan dipulihkan. Eksport lagi sebelum menutup jika storan tidak tersedia.",
+  "backup.error": "Sandaran tidak dapat dibaca atau disimpan. Pilih sandaran JSON Sambung Ayat yang sah."
 }

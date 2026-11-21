@@ -19,5 +19,14 @@
   "webview.link": "Buka Google Play",
   "footer.privacy": "Kebijakan privasi",
   "footer.contribute": "Berkontribusi",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "Penyimpanan tidak tersedia. Progres akan hilang saat tab ditutup. Ekspor cadangan di bawah sebelum keluar.",
+  "backup.title": "Cadangan progres",
+  "backup.export": "Ekspor JSON",
+  "backup.import": "Impor JSON",
+  "backup.description": "Cadangkan riwayat, penguasaan, dan progres harian. Impor mengganti progres saat ini; pengaturan tidak berubah.",
+  "backup.confirm": "Ganti progres saat ini dengan cadangan ini?",
+  "backup.exported": "Unduhan cadangan dimulai.",
+  "backup.imported": "Progres dipulihkan. Ekspor lagi sebelum menutup jika penyimpanan tidak tersedia.",
+  "backup.error": "Cadangan tidak dapat dibaca atau disimpan. Pilih cadangan JSON Sambung Ayat yang valid."
 }

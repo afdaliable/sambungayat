@@ -19,5 +19,14 @@
   "webview.link": "Google Play کھولیں",
   "footer.privacy": "رازداری کی پالیسی",
   "footer.contribute": "حصہ ڈالیں",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "اسٹوریج دستیاب نہیں۔ یہ ٹیب بند کرنے پر پیش رفت ضائع ہو جائے گی۔ جانے سے پہلے نیچے بیک اپ برآمد کریں۔",
+  "backup.title": "پیش رفت کا بیک اپ",
+  "backup.export": "JSON برآمد کریں",
+  "backup.import": "JSON درآمد کریں",
+  "backup.description": "تاریخ، مہارت اور روزانہ پیش رفت محفوظ کریں۔ درآمد موجودہ پیش رفت بدل دے گی؛ ترتیبات برقرار رہیں گی۔",
+  "backup.confirm": "موجودہ پیش رفت کو اس بیک اپ سے بدلیں؟",
+  "backup.exported": "بیک اپ ڈاؤن لوڈ شروع ہو گیا۔",
+  "backup.imported": "پیش رفت بحال ہو گئی۔ اسٹوریج دستیاب نہ ہو تو بند کرنے سے پہلے دوبارہ برآمد کریں۔",
+  "backup.error": "بیک اپ پڑھا یا محفوظ نہیں کیا جا سکا۔ درست Sambung Ayat JSON بیک اپ منتخب کریں۔"
 }
