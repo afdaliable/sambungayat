@@ -1,6 +1,6 @@
 # Sambung Ayat (sambungayat.com)
 
-Static Quran-memorization quiz (web, PWA and Android). No backend for the quiz itself. See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/developer-guide.md](docs/developer-guide.md) first; this file is a denser technical reference for people and tools working in the code.
+Static Quran-memorization quiz (web, PWA and Android). No backend for the quiz itself. See [CONTRIBUTING.md](CONTRIBUTING.md) and the technical guide ([Bahasa Indonesia](docs/developer-guide.id.md) / [English](docs/developer-guide.md)) first; this file is a denser technical reference for people and tools working in the code.
 
 ## Stack
 Astro 5 (static) + React islands + Tailwind 4 (`@tailwindcss/vite`) + TypeScript strict. Vitest, Playwright, ESLint, Prettier. Node version in `.nvmrc` (`source ~/.nvm/nvm.sh && nvm use`).
@@ -19,10 +19,10 @@ Astro 5.x (`@vite-pwa/astro` peer range), `@astrojs/react` 4.x, TypeScript ~6.0 
 
 ## Data pipeline
 `data/raw/*.json` (from api.alquran.cloud) -> `scripts/build-data.ts` -> `public/data/v1/` (gitignored, rebuilt on every `build`). Translations are not committed: `npm run data:fetch -- --missing-only` downloads them (terms: `docs/data-licenses.md`, `NOTICE.md`).
-- API quirks: surah 1:1 has a BOM (U+FEFF), stripped. The Basmalah prefix is stripped by matching the first 4 normalized words (surahs 95 and 97 spell it with a different mark order, so an exact match fails). The meta endpoint has no Latin names or Indonesian meanings: `nameLatin` = `englishName` ("An-Naba"), `meaningId` is empty. `id.indonesian` has no translator metadata.
+- API quirks: surah 1:1 has a BOM (U+FEFF), stripped. The Basmalah prefix is stripped by matching the first 4 normalized words (surahs 95 and 97 spell it with a different mark order, so an exact match fails). `nameLatin` comes from `data/surah-names-id.json`; `meaningId` is not populated. `id.indonesian` has no translator metadata.
 - Slug = lowercase name minus apostrophes, kebab-case (`an-naba`). Slugs are public URLs: do not change. Names come from `data/surah-names-id.json`.
 - `hasBasmalah` = render the Basmalah header above ayah 1: false for surah 1 (it is ayah 1) and surah 9.
-- DATA VERSIONING: `/data/v1/*` is served `immutable` for a year. Any change to the build-data output after launch needs a bump to v2 in `OUT` (build-data), `DATA_ROOT` (loader), the warm-up scripts in kuis/harian, `_headers` and the SW glob patterns.
+- DATA VERSIONING: `/data/v1/*` is served `immutable` for a year. Bump the data path when shipping changed data at an existing URL; search all `data/v1` references (see the technical guide).
 
 ## Quiz engine
 - `src/lib/quiz/engine.ts` `generateQuiz(config, data)`: pure and deterministic. RNG key = `mode|scope|difficulty|seed` (count excluded, so a smaller quiz is a prefix of a larger one).
@@ -53,12 +53,12 @@ Astro 5.x (`@vite-pwa/astro` peer range), `@astrojs/react` 4.x, TypeScript ~6.0 
 - Routing: Indonesian is the root with NO prefix, so older shared links stay valid; other languages live under `/<code>/`. Pages are thin: `src/pages/*.astro` and `src/pages/[lang]/*.astro` render `src/views/*.astro` with a `lang` prop. `/kontribusi` is the one English-only page without a prefix.
 - Islands: wrap the root in `I18nProvider lang dict` and use `useI18n()`. Pass only the namespaces an island needs. Client code imports from `src/lib/i18n/core`, never from `src/lib/i18n`.
 - NEVER translate or change: mode ids, scope keys, seeds, `dailySeed`, the recap tag format, data paths and slugs.
-- Add a language: register it in `LANGS` (`src/lib/i18n/index.ts`), add `locales/<lang>/<ns>.json` for every namespace and its Quran edition in `data/translations.json`. `tests/unit/i18n.test.ts` checks keys, placeholders and plural families against Indonesian. ar and ur are `dir: "rtl"`: use logical classes (`start/end`, `ps/pe`, `rtl:`).
+- Add a language: register it in `LANGS` (`src/lib/i18n/core.ts`), add `locales/<lang>/<ns>.json` for every namespace and its Quran edition in `data/translations.json`. `tests/unit/i18n.test.ts` checks keys, placeholders and plural families against Indonesian. ar and ur are `dir: "rtl"`: use logical classes (`start/end`, `ps/pe`, `rtl:`).
 - Offline for non-Indonesian languages: an idle script in `BaseLayout` downloads that language's files once (flag `sa:v1:offline:<lang>`).
 
 ## Share, offline audio, recap
 - Share links use `SITE.url`, never `location.origin` (it is `https://localhost` in the Android app). `src/lib/share.ts` uses the native share sheet, then Web Share, then the clipboard.
-- Offline audio: `AudioStore` interface in `src/lib/audioCache.ts`; the web store uses the Cache API, the Android store (`src/lib/native/audioStore.ts`) saves files in app storage. The players resolve a saved file first (`useAudioSrc`).
+- Offline audio: `AudioStore` interface in `src/lib/audioCache.ts`; on web, the service worker serves audio saved in the Cache API. On Android, the store (`src/lib/native/audioStore.ts`) saves files in app storage and `useAudioSrc` resolves them before trying the remote URL.
 
 ## Android (Capacitor 8)
 - App id `com.sambungayat.app`, bundles `dist` (offline, no server), `https://localhost` scheme. `npm run android:apk` builds a debug APK (JDK 21, Android SDK). Release signing keys are not in the repository.

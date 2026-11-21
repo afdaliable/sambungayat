@@ -1,6 +1,8 @@
 # Sambung Ayat
 
-Kuis hafalan Al-Qur'an gratis, tanpa login dan tanpa backend: enam mode: Sambung Ayat, Ayat Sebelumnya, Lengkapi Ayat, Tebak Surah, Tebak Juz, dan Tebak Ayat dari Audio. Situs: <https://sambungayat.com>
+Kuis hafalan Al-Qur'an gratis tanpa login: Sambung Ayat, Ayat Sebelumnya, Lengkapi Ayat, Tebak Surah, Tebak Juz, dan Tebak Ayat dari Audio. Situs: <https://sambungayat.com>
+
+Dokumentasi teknis: [Bahasa Indonesia](docs/developer-guide.id.md) · [English](docs/developer-guide.md).
 
 <!-- TODO: tambahkan 3-4 screenshot (beranda, soal, hasil, mode guru) di docs/screenshots -->
 
@@ -17,18 +19,20 @@ Kuis hafalan Al-Qur'an gratis, tanpa login dan tanpa backend: enam mode: Sambung
 ```mermaid
 flowchart LR
   A[data/raw<br/>api.alquran.cloud] --> B[scripts/build-data.ts]
-  B --> C[public/data/v1<br/>JSON per surah]
-  C --> D[CDN Cloudflare Pages]
-  D --> E[Browser: engine kuis deterministik]
+  B --> C[Build Astro dan JSON per surah]
+  C --> D[Cloudflare Pages / PWA]
+  C --> G[Aplikasi Android / Capacitor]
+  D --> E[Engine kuis deterministik]
+  G --> E
   E --> F[(localStorage)]
 ```
 
-Tidak ada backend: teks Al-Qur'an tidak berubah, jadi semuanya JSON statis di CDN dan seluruh logika kuis berjalan di browser. Hasilnya murah, cepat, bisa offline, dan tidak ada data pengguna yang meninggalkan perangkat.
+Data Al-Qur'an disajikan sebagai JSON statis, dan logika serta riwayat kuis tetap di perangkat. API Cloudflare hanya dipakai untuk penghitung penyelesaian kuis yang opsional di web, bukan untuk menjalankan kuis.
 
 ## Keputusan utama
 
 - **Kuis deterministik berbasis seed.** Kunci RNG = `mode|cakupan|kesulitan|seed`; jumlah soal tidak ikut, jadi kuis 5 soal adalah awalan kuis 10 soal. Ini yang membuat tautan harian dan tautan guru identik di semua perangkat. Mengubah generator, urutan tier, `neededSurahs`, format kunci, atau `dailySeed` memutus tautan lama (lihat `CLAUDE.md`).
-- **Ayat berulang.** Soal Sambung dibuang jika teks ayat diikuti ayat berbeda di tempat lain; Tebak Surah/Audio membuang 276 ayat ambigu (`ambiguous.json`).
+- **Ayat berulang.** Soal Sambung dibuang jika teks ayat diikuti ayat berbeda dalam data yang dipakai generator; Tebak Surah/Audio mengecualikan ayat berulang yang tercantum di `ambiguous.json`.
 - **Basmalah** dipisahkan dari ayat 1 dengan mencocokkan 4 kata pertama yang dinormalisasi.
 - **Normalisasi hanya untuk perbandingan.** Teks yang ditampilkan tidak pernah diubah.
 - **Jalur data berversi** (`/data/v1/`, immutable 1 tahun). Perubahan keluaran data wajib naik ke `v2` (daftar tempat di `CLAUDE.md`).
@@ -63,15 +67,15 @@ npm run preview    # http://localhost:4321
 | `npm run data:verify-audio`  | Cek URL audio tiap qari                     |
 | `npm run android:apk`        | APK debug (butuh JDK 21 dan Android SDK)    |
 
-Untuk Playwright, pasang browser sekali: `npx playwright install chromium`. Panduan lengkap untuk developer: [docs/developer-guide.md](docs/developer-guide.md).
+Untuk Playwright, pasang browser sekali: `npx playwright install chromium`.
 
 ## Pengujian dan CI
 
-Unit test (Vitest) memakai data hasil build sungguhan, termasuk uji properti 300 seed per cakupan dan mode. E2E (Playwright) mencakup alur beranda ke hasil, tautan guru dan harian di dua konteks, offline, dan halaman surah. GitHub Actions (`.github/workflows/ci.yml`) menjalankan semuanya pada tiap push dan PR.
+Unit test (Vitest) memakai data hasil build sungguhan, termasuk uji properti generator dengan banyak seed. E2E (Playwright) mencakup alur beranda ke hasil, tautan guru dan harian di dua konteks, offline, dan halaman surah. GitHub Actions (`.github/workflows/ci.yml`) menjalankan semuanya pada PR dan push ke `main`.
 
 ## Statistik
 
-Tidak ada akun dan tidak ada pelacakan di dalam kuis. Situs menghitung secara anonim berapa kuis yang selesai (hanya mode dan tanggal) untuk angka di beranda. Rinciannya ada di [kebijakan privasi](https://sambungayat.com/privasi).
+Tidak ada akun. Penghitung opsional menerima ID mode, menyimpan total per tanggal UTC, dan memakai hash IP harian untuk mencegah penyalahgunaan. Analitik web juga opsional. Rinciannya ada di [kebijakan privasi](https://sambungayat.com/privasi).
 
 ## Roadmap
 

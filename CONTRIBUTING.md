@@ -4,6 +4,8 @@ Thank you for helping. Sambung Ayat is a free Quran-memorization quiz (web, PWA 
 
 Please read the [code of conduct](CODE_OF_CONDUCT.md). By contributing you agree that your contribution is licensed under the project's [MIT licence](LICENSE).
 
+Technical guide: [Bahasa Indonesia](docs/developer-guide.id.md) · [English](docs/developer-guide.md).
+
 ## Rules that protect users
 
 1. **Never type or edit Quran text by hand.** Quran text and translations come only from the data pipeline (`data/raw` through `scripts/build-data.ts`; translations are downloaded by `npm run data:fetch`). A pull request that edits `data/raw/*` or `public/data/*` will be closed.
