@@ -50,7 +50,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
       <audio
         ref={ref}
         crossOrigin="anonymous"
-        src={src}
+        src={ready ? src : undefined}
         preload="none"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
@@ -59,6 +59,7 @@ export default function AudioPlayer({ src: remote, autoplay, onUnavailable }: Pr
       />
       <button
         type="button"
+        disabled={!ready}
         onClick={() => {
           const a = ref.current;
           if (!a) return;

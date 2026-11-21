@@ -96,8 +96,11 @@ export function createWebAudioStore(
     async clear() {
       await getCaches()!.delete(AUDIO_CACHE);
     },
-    // The service worker already serves stored files for the remote URL.
-    resolve: async () => null,
+    async resolve(reciter, s, a) {
+      if (!navigator.serviceWorker?.controller) return null;
+      const url = audioUrl(reciter, s, a);
+      return (await getCaches()?.match(url, { cacheName: AUDIO_CACHE })) ? url : null;
+    },
   };
 }
 
