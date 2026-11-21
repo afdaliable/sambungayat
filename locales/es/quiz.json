@@ -1,4 +1,6 @@
 {
+  "audio_replay": "Volver a reproducir",
+  "audio_progress": "Progreso del audio",
   "settings": "Ajustes",
   "loading": "Cargando…",
   "tz": "(WIB, hora de Yakarta)",
