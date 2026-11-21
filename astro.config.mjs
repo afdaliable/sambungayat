@@ -28,8 +28,8 @@ export default defineConfig({
         lang: "id",
         categories: ["education"],
         shortcuts: [
-          { name: "Tantangan Harian", url: "/harian" },
-          { name: "Mulai Juz 30", url: "/kuis?mode=sambung&scope=juz:30&n=10&d=mudah" },
+          { name: "Tantangan Harian", url: "/harian?launch=pwa" },
+          { name: "Mulai Juz 30", url: "/kuis?mode=sambung&scope=juz:30&n=10&d=mudah&launch=pwa" },
         ],
         start_url: "/",
         scope: "/",

@@ -4,6 +4,7 @@ import Header from "../components/ui/Header.astro";
 import Footer from "../components/ui/Footer.astro";
 import { SITE } from "../config/site";
 import { DEFAULT_LANG, LANGS, getDict, t, PREFIXED_LANGS, localePath, stripLang, type Lang } from "../lib/i18n";
+import { PREFIX } from "../lib/storage";
 
 interface Props {
   title?: string;
@@ -47,6 +48,30 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    {(path === "/" || path === "/harian" || path === "/kuis") && (
+      <script define:vars={{ languages: PREFIXED_LANGS, langKey: PREFIX + "lang" }}>
+        // The installed app starts at /. Only manifest shortcuts carry the launch marker.
+        if (!window.Capacitor && (matchMedia("(display-mode: standalone)").matches || navigator.standalone)) {
+          const url = new URL(location.href);
+          const shortcut = url.searchParams.get("launch") === "pwa";
+          if (shortcut || (url.pathname === "/" && !url.search && !url.hash)) {
+            let lang;
+            try {
+              lang = JSON.parse(localStorage.getItem(langKey));
+            } catch {
+              /* storage unavailable or invalid: keep Indonesian */
+            }
+            url.searchParams.delete("launch");
+            const path = url.pathname + url.search + url.hash;
+            if (languages.includes(lang)) {
+              location.replace("/" + lang + (path === "/" ? "" : path));
+            } else if (shortcut) {
+              history.replaceState(history.state, "", path);
+            }
+          }
+        }
+      </script>
+    )}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0d5750" />
