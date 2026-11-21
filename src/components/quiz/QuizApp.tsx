@@ -156,6 +156,7 @@ function QuizAppInner({ daily = false }: { daily?: boolean }) {
       else if (mode === "replace") history.replaceState(null, "", url);
       try {
         const data = await browserLoader.load(config.scope);
+        setMeta({ index: data.index, juz: data.juz });
         dispatch({ type: "ready", quiz: generateQuiz(config, data) });
       } catch {
         dispatch({ type: "error", config });
