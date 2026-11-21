@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useI18n } from "../../lib/i18n/react";
 import { audioUrl } from "../../config/reciters";
 import type { SurahMeta } from "../../lib/quran/types";
@@ -34,8 +34,8 @@ export default function QuestionView({
   onNext,
 }: Props) {
   const { t } = useI18n();
-  const [audioFailed, setAudioFailed] = useState(false);
-  useEffect(() => setAudioFailed(false), [q.id]);
+  const [audioState, setAudioState] = useState<"initial" | "failed" | "retry">("initial");
+  const audioFailed = audioState === "failed";
 
   // Bring the new question into view (the page is scrolled down after answering the previous one).
   const sectionRef = useRef<HTMLElement>(null);
@@ -52,7 +52,7 @@ export default function QuestionView({
   const correct = answer === q.correctKey;
 
   // Keyboard: 1-4 choose, Enter continues (the Next button is focused, so Enter works natively).
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       if (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
@@ -94,11 +94,29 @@ export default function QuestionView({
             {t("quiz.context", { surah: surahName ?? "", ayah: q.prompt.ayahRef.a })}
           </p>
         )}
-        {q.mode === "tebak-audio" ? (
+        {audioFailed ? (
+          <div className="grid gap-3">
+            <p role="status" className="text-muted">
+              {t("quiz.audio_failed")}
+            </p>
+            {answer !== "skip" && (
+              <div className="flex flex-wrap gap-2">
+                <button type="button" onClick={() => setAudioState("retry")} className="btn-quiet">
+                  {t("quiz.error.retry")}
+                </button>
+                {!revealed && (
+                  <button type="button" onClick={onSkip} className="btn">
+                    {t("quiz.skip")}
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        ) : q.mode === "tebak-audio" ? (
           <AudioPlayer
             src={audioUrl(settings.reciter, q.source.s, q.source.a)}
-            autoplay={settings.autoplay}
-            onUnavailable={() => setAudioFailed(true)}
+            autoplay={settings.autoplay || audioState === "retry"}
+            onUnavailable={() => setAudioState("failed")}
           />
         ) : (
           <AyahText
@@ -112,11 +130,7 @@ export default function QuestionView({
       </div>
 
       <div>
-      {audioFailed && !revealed ? (
-        <button type="button" onClick={onSkip} className="btn-quiet">
-          {t("quiz.skip")}
-        </button>
-      ) : (
+      {(!audioFailed || revealed) && (
         <div className="flex flex-col gap-2.5" role="group" aria-label={t("quiz.options_label")}>
           {q.options.map((o, i) => (
             <div key={o.key}>
