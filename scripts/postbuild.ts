@@ -1,4 +1,4 @@
-// After `astro build`: (1) fill the CSP script hashes into dist/_headers, (2) enforce the JS budget for /kuis.
+// After `astro build`: fill CSP hashes, enforce the quiz JS budget and keep static pages framework-free.
 import { PREFIXED_LANGS } from "../src/lib/i18n/core";
 import { createHash } from "node:crypto";
 import { readdir, readFile, writeFile } from "node:fs/promises";
@@ -22,7 +22,8 @@ async function htmlFiles(dir: string): Promise<string[]> {
 // 1. CSP hashes for every executable inline script (JSON-LD data blocks are not executed).
 const hashes = new Set<string>();
 const SCRIPT = /<script\b([^>]*)>([\s\S]*?)<\/script>/g;
-for (const f of await htmlFiles(DIST)) {
+const pages = await htmlFiles(DIST);
+for (const f of pages) {
   const html = await readFile(f, "utf8");
   for (const m of html.matchAll(SCRIPT)) {
     const attrs = m[1] ?? "";
@@ -31,6 +32,22 @@ for (const f of await htmlFiles(DIST)) {
     hashes.add(`'sha256-${createHash("sha256").update(body).digest("base64")}'`);
   }
 }
+
+const staticPages = pages.filter((f) => {
+  const path = f.slice(DIST.length + 1);
+  const prefix = PREFIXED_LANGS.find((lang) => path.startsWith(`${lang}/`));
+  const route = prefix ? path.slice(prefix.length + 1) : path;
+  return /^(?:index\.html|(?:surah|juz|blog)(?:\/.*)?\.html)$/.test(route);
+});
+for (const f of staticPages) {
+  const html = await readFile(f, "utf8");
+  if (/<astro-island\b|renderer-url=|\/_astro\/(?:react|client)\.[^"\s]+\.js/.test(html)) {
+    throw new Error(`Static page loads framework JS: ${f}`);
+  }
+}
+console.log(
+  `postbuild: ${staticPages.length} home/surah/juz/blog pages have no framework islands or React/client chunks`,
+);
 // Optional product analytics (Plausible-compatible): allow its origin in the CSP only when configured.
 const analyticsSrc = process.env.PUBLIC_PLAUSIBLE_DOMAIN
   ? process.env.PUBLIC_PLAUSIBLE_SRC || "https://plausible.io/js/script.js"

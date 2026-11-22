@@ -4,11 +4,41 @@ export const PREFIX = "sa:v1:";
 export const SCHEMA_VERSION = 1;
 
 const memory = new Map<string, string>();
+let temporary = false;
+const listeners = new Set<() => void>();
+
+function fallBack(): void {
+  if (typeof window === "undefined" || temporary) return;
+  temporary = true;
+  for (const listener of listeners) listener();
+}
+
+export const isTemporaryStorage = (): boolean => temporary;
+export function subscribeStorage(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+export function checkStorage(): void {
+  try {
+    const s = backend();
+    if (!s) return fallBack();
+    s.setItem(PREFIX + "probe", "1");
+    s.removeItem(PREFIX + "probe");
+  } catch {
+    fallBack();
+  }
+}
 
 function backend(): Storage | null {
   try {
-    return typeof localStorage === "undefined" ? null : localStorage;
+    if (typeof localStorage !== "undefined") return localStorage;
+    if (typeof window !== "undefined") fallBack();
+    return null;
   } catch {
+    if (typeof window !== "undefined") fallBack();
     return null;
   }
 }
@@ -16,8 +46,13 @@ function backend(): Storage | null {
 export function readJson<T>(key: string, fallback: T): T {
   let raw: string | null | undefined;
   try {
-    raw = backend()?.getItem(PREFIX + key) ?? memory.get(key);
+    raw =
+      temporary && memory.has(key)
+        ? memory.get(key)
+        : (backend()?.getItem(PREFIX + key) ?? memory.get(key));
+    if (temporary && raw != null) memory.set(key, raw);
   } catch {
+    fallBack();
     raw = memory.get(key);
   }
   if (raw == null) return fallback;
@@ -34,7 +69,7 @@ export function writeJson(key: string, value: unknown): void {
   try {
     backend()?.setItem(PREFIX + key, raw);
   } catch {
-    /* quota or privacy mode: keep the in-memory copy only */
+    fallBack();
   }
 }
 

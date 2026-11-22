@@ -19,5 +19,14 @@
   "webview.link": "Google Play öffnen",
   "footer.privacy": "Datenschutz",
   "footer.contribute": "Mitwirken",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "Speicher nicht verfügbar. Beim Schließen dieses Tabs geht der Fortschritt verloren. Exportiere vorher unten eine Sicherung.",
+  "backup.title": "Fortschritt sichern",
+  "backup.export": "JSON exportieren",
+  "backup.import": "JSON importieren",
+  "backup.description": "Sichere Verlauf, Lernstand und Tagesfortschritt. Ein Import ersetzt den Fortschritt; Einstellungen bleiben erhalten.",
+  "backup.confirm": "Aktuellen Fortschritt durch diese Sicherung ersetzen?",
+  "backup.exported": "Sicherungsdownload gestartet. Einstellungen sind nicht in der Sicherung enthalten.",
+  "backup.imported": "Fortschritt wiederhergestellt. Ohne Speicher vor dem Schließen erneut exportieren. Einstellungen sind nicht in der Sicherung enthalten.",
+  "backup.error": "Sicherung konnte nicht gelesen oder gespeichert werden. Wähle eine gültige Sambung-Ayat-JSON-Sicherung."
 }

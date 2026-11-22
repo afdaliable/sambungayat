@@ -19,5 +19,14 @@
   "webview.link": "Open Google Play",
   "footer.privacy": "Privacy policy",
   "footer.contribute": "Contribute",
-  "footer.blog": "Blog"
+  "footer.blog": "Blog",
+  "storage.notice": "Storage is unavailable. Progress will be lost when you close this tab. Export a backup below before leaving.",
+  "backup.title": "Progress backup",
+  "backup.export": "Export JSON",
+  "backup.import": "Import JSON",
+  "backup.description": "Back up history, mastery and daily progress. Import replaces current progress; settings stay unchanged.",
+  "backup.confirm": "Replace current progress with this backup?",
+  "backup.exported": "Backup download started. Settings are not included in the backup.",
+  "backup.imported": "Progress restored. Export again before closing if storage is unavailable. Settings are not included in the backup.",
+  "backup.error": "Could not read or save the backup. Choose a valid Sambung Ayat JSON backup."
 }
