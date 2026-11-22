@@ -26,7 +26,7 @@
   "backup.import": "Import JSON",
   "backup.description": "Back up history, mastery and daily progress. Import replaces current progress; settings stay unchanged.",
   "backup.confirm": "Replace current progress with this backup?",
-  "backup.exported": "Backup download started.",
-  "backup.imported": "Progress restored. Export again before closing if storage is unavailable.",
+  "backup.exported": "Backup download started. Settings are not included in the backup.",
+  "backup.imported": "Progress restored. Export again before closing if storage is unavailable. Settings are not included in the backup.",
   "backup.error": "Could not read or save the backup. Choose a valid Sambung Ayat JSON backup."
 }

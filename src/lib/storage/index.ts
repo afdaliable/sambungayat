@@ -8,7 +8,7 @@ let temporary = false;
 const listeners = new Set<() => void>();
 
 function fallBack(): void {
-  if (temporary) return;
+  if (typeof window === "undefined" || temporary) return;
   temporary = true;
   for (const listener of listeners) listener();
 }
@@ -35,10 +35,10 @@ export function checkStorage(): void {
 function backend(): Storage | null {
   try {
     if (typeof localStorage !== "undefined") return localStorage;
-    fallBack();
+    if (typeof window !== "undefined") fallBack();
     return null;
   } catch {
-    fallBack();
+    if (typeof window !== "undefined") fallBack();
     return null;
   }
 }
@@ -50,7 +50,7 @@ export function readJson<T>(key: string, fallback: T): T {
       temporary && memory.has(key)
         ? memory.get(key)
         : (backend()?.getItem(PREFIX + key) ?? memory.get(key));
-    if (raw != null) memory.set(key, raw);
+    if (temporary && raw != null) memory.set(key, raw);
   } catch {
     fallBack();
     raw = memory.get(key);

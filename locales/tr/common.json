@@ -26,7 +26,7 @@
   "backup.import": "JSON içe aktar",
   "backup.description": "Geçmişi, hâkimiyeti ve günlük ilerlemeyi yedekleyin. İçe aktarma ilerlemeyi değiştirir; ayarlar korunur.",
   "backup.confirm": "Mevcut ilerleme bu yedekle değiştirilsin mi?",
-  "backup.exported": "Yedek indirme başlatıldı.",
-  "backup.imported": "İlerleme geri yüklendi. Depolama yoksa kapatmadan önce tekrar dışa aktarın.",
+  "backup.exported": "Yedek indirme başlatıldı. Ayarlar yedeğe dahil değildir.",
+  "backup.imported": "İlerleme geri yüklendi. Depolama yoksa kapatmadan önce tekrar dışa aktarın. Ayarlar yedeğe dahil değildir.",
   "backup.error": "Yedek okunamadı veya kaydedilemedi. Geçerli bir Sambung Ayat JSON yedeği seçin."
 }

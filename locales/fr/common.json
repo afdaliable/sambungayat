@@ -26,7 +26,7 @@
   "backup.import": "Importer JSON",
   "backup.description": "Sauvegardez historique, maîtrise et progression quotidienne. L’import remplace la progression ; les réglages sont conservés.",
   "backup.confirm": "Remplacer la progression actuelle par cette sauvegarde ?",
-  "backup.exported": "Téléchargement lancé.",
-  "backup.imported": "Progression restaurée. Sans stockage, exportez à nouveau avant de fermer.",
+  "backup.exported": "Téléchargement lancé. Les réglages ne sont pas inclus dans la sauvegarde.",
+  "backup.imported": "Progression restaurée. Sans stockage, exportez à nouveau avant de fermer. Les réglages ne sont pas inclus dans la sauvegarde.",
   "backup.error": "Impossible de lire ou d’enregistrer la sauvegarde. Choisissez une sauvegarde JSON Sambung Ayat valide."
 }

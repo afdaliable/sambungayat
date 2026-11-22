@@ -26,7 +26,7 @@
   "backup.import": "Impor JSON",
   "backup.description": "Cadangkan riwayat, penguasaan, dan progres harian. Impor mengganti progres saat ini; pengaturan tidak berubah.",
   "backup.confirm": "Ganti progres saat ini dengan cadangan ini?",
-  "backup.exported": "Unduhan cadangan dimulai.",
-  "backup.imported": "Progres dipulihkan. Ekspor lagi sebelum menutup jika penyimpanan tidak tersedia.",
+  "backup.exported": "Unduhan cadangan dimulai. Pengaturan tidak termasuk dalam cadangan.",
+  "backup.imported": "Progres dipulihkan. Ekspor lagi sebelum menutup jika penyimpanan tidak tersedia. Pengaturan tidak termasuk dalam cadangan.",
   "backup.error": "Cadangan tidak dapat dibaca atau disimpan. Pilih cadangan JSON Sambung Ayat yang valid."
 }

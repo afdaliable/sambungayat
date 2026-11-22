@@ -26,7 +26,7 @@
   "backup.import": "JSON importieren",
   "backup.description": "Sichere Verlauf, Lernstand und Tagesfortschritt. Ein Import ersetzt den Fortschritt; Einstellungen bleiben erhalten.",
   "backup.confirm": "Aktuellen Fortschritt durch diese Sicherung ersetzen?",
-  "backup.exported": "Sicherungsdownload gestartet.",
-  "backup.imported": "Fortschritt wiederhergestellt. Ohne Speicher vor dem Schließen erneut exportieren.",
+  "backup.exported": "Sicherungsdownload gestartet. Einstellungen sind nicht in der Sicherung enthalten.",
+  "backup.imported": "Fortschritt wiederhergestellt. Ohne Speicher vor dem Schließen erneut exportieren. Einstellungen sind nicht in der Sicherung enthalten.",
   "backup.error": "Sicherung konnte nicht gelesen oder gespeichert werden. Wähle eine gültige Sambung-Ayat-JSON-Sicherung."
 }

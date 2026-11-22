@@ -3,6 +3,29 @@ import { beforeEach, expect, it, vi } from "vitest";
 beforeEach(() => {
   vi.resetModules();
   vi.unstubAllGlobals();
+  vi.stubGlobal("window", {});
+});
+
+it("does not mark SSR or Node reads as temporary storage", async () => {
+  vi.stubGlobal("window", undefined);
+  vi.stubGlobal("localStorage", undefined);
+  const s = await import("../../src/lib/storage");
+  expect(s.readJson("history", [])).toEqual([]);
+  s.checkStorage();
+  expect(s.isTemporaryStorage()).toBe(false);
+});
+
+it("does not retain reads from healthy storage after it becomes unavailable", async () => {
+  vi.stubGlobal("localStorage", { getItem: () => "[1]" });
+  const s = await import("../../src/lib/storage");
+  expect(s.readJson("history", [])).toEqual([1]);
+  vi.stubGlobal("localStorage", {
+    getItem: () => {
+      throw new Error("unavailable");
+    },
+  });
+  expect(s.readJson("history", [])).toEqual([]);
+  expect(s.isTemporaryStorage()).toBe(true);
 });
 
 it("detects unavailable storage and notifies subscribers", async () => {
@@ -24,8 +47,12 @@ it("keeps the latest write after quota errors instead of reading stale persisted
     },
   });
   const s = await import("../../src/lib/storage");
+  const listener = vi.fn();
+  s.subscribeStorage(listener);
+  expect(s.isTemporaryStorage()).toBe(false);
   s.writeJson("history", [1]);
   expect(s.isTemporaryStorage()).toBe(true);
+  expect(listener).toHaveBeenCalledOnce();
   expect(s.readJson("history", [])).toEqual([1]);
 });
 

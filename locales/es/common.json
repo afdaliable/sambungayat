@@ -26,7 +26,7 @@
   "backup.import": "Importar JSON",
   "backup.description": "Guarda historial, dominio y progreso diario. Importar reemplaza el progreso; los ajustes no cambian.",
   "backup.confirm": "¿Reemplazar el progreso actual con esta copia?",
-  "backup.exported": "Descarga iniciada.",
-  "backup.imported": "Progreso restaurado. Si no hay almacenamiento, exporta de nuevo antes de cerrar.",
+  "backup.exported": "Descarga iniciada. Los ajustes no se incluyen en la copia.",
+  "backup.imported": "Progreso restaurado. Si no hay almacenamiento, exporta de nuevo antes de cerrar. Los ajustes no se incluyen en la copia.",
   "backup.error": "No se pudo leer o guardar la copia. Elige una copia JSON válida de Sambung Ayat."
 }

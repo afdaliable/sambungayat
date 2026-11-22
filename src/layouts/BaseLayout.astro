@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Header from "../components/ui/Header.astro";
 import Footer from "../components/ui/Footer.astro";
-import StorageNotice from "../components/quiz/StorageNotice";
 import { SITE } from "../config/site";
 import { DEFAULT_LANG, LANGS, getDict, t, PREFIXED_LANGS, localePath, stripLang, type Lang } from "../lib/i18n";
 import { PREFIX } from "../lib/storage";
@@ -275,7 +274,32 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       {t(dict, "common.skip")}
     </a>
     <Header lang={lang} singleLang={noAlternates} />
-    <StorageNotice client:load dict={dict} />
+    <aside hidden id="storage-notice" class="wrap mt-4" aria-label={t(dict, "common.backup.title")}>
+      <div class="sheet p-4">
+        <p role="status">{t(dict, "common.storage.notice")}</p>
+        <button id="storage-export" class="btn btn-quiet mt-3">{t(dict, "common.backup.export")}</button>
+        <p hidden id="storage-export-error" role="status">{t(dict, "common.backup.error")}</p>
+      </div>
+    </aside>
+    <script>
+      import { checkStorage, isTemporaryStorage, subscribeStorage } from "../lib/storage";
+
+      const notice = document.getElementById("storage-notice")!;
+      const updateNotice = () => { notice.hidden = !isTemporaryStorage(); };
+      subscribeStorage(updateNotice);
+      checkStorage();
+      updateNotice();
+      document.getElementById("storage-export")!.addEventListener("click", async () => {
+        const error = document.getElementById("storage-export-error")!;
+        try {
+          const { downloadBackup } = await import("../lib/storage/backup");
+          downloadBackup();
+          error.hidden = true;
+        } catch {
+          error.hidden = false;
+        }
+      });
+    </script>
     <div class="flex-1"><slot /></div>
     <Footer lang={lang} />
   </body>

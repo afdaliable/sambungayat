@@ -26,7 +26,7 @@
   "backup.import": "Import JSON",
   "backup.description": "Sandarkan sejarah, penguasaan dan kemajuan harian. Import menggantikan kemajuan semasa; tetapan kekal.",
   "backup.confirm": "Gantikan kemajuan semasa dengan sandaran ini?",
-  "backup.exported": "Muat turun sandaran bermula.",
-  "backup.imported": "Kemajuan dipulihkan. Eksport lagi sebelum menutup jika storan tidak tersedia.",
+  "backup.exported": "Muat turun sandaran bermula. Tetapan tidak termasuk dalam sandaran.",
+  "backup.imported": "Kemajuan dipulihkan. Eksport lagi sebelum menutup jika storan tidak tersedia. Tetapan tidak termasuk dalam sandaran.",
   "backup.error": "Sandaran tidak dapat dibaca atau disimpan. Pilih sandaran JSON Sambung Ayat yang sah."
 }
