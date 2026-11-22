@@ -19,6 +19,22 @@ Files are in `locales/<code>/` (for example `locales/fr/`). Each file is a flat 
 - Quran text, translations of the Quran and surah names: these come from the data pipeline, not from `locales/`.
 - Mode ids and link formats.
 
+## Newer texts that need a second look
+
+These keys were added recently and are machine-drafted in every language, so check them first:
+
+- `quiz.daily.streak`, `quiz.share.image`, `quiz.share.image_saved`, `quiz.daily.title` (day streak and the result image card)
+- `quiz.reminder.*` (Android daily reminder: the notification text is shown on the lock screen)
+- `quiz.audio_*` (audio player, offline audio download, retry and skip)
+- `quiz.translation_loading`, `quiz.translation_unavailable`
+- `common.backup.*`, `common.storage.notice` (progress backup, "storage unavailable" notice)
+
+In the files, search for these key names and edit the text on the right.
+
+## Translate in the browser
+
+A web translation tool (Weblate) is being set up so that you can translate without Git. Until it is live, use a pull request or an issue as described below. Maintainers: see [weblate-setup.md](weblate-setup.md).
+
 ## How to send it
 
 1. Fork the repository, edit the files in `locales/<your language>/`.

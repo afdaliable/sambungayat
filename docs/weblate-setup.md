@@ -1,0 +1,31 @@
+# Setting up Weblate for the interface texts (maintainers)
+
+Goal: let native speakers review and translate `locales/` in the browser, without Git. Hosted Weblate offers free hosting for open source projects (apply at hosted.weblate.org; check their current terms).
+
+## Component layout
+
+The files are flat JSON, one file per namespace and language. Create **one component per namespace**:
+
+| Setting | Value |
+| --- | --- |
+| Repository | `https://github.com/afdaliable/sambungayat` (branch `main`) |
+| File mask | `locales/*/<namespace>.json` |
+| Monolingual base language file | `locales/id/<namespace>.json` |
+| File format | JSON file (flat key/value) |
+| Source language | Indonesian (`id`) |
+| New translations | off (the 12 languages are fixed; adding one needs code, see `CLAUDE.md`) |
+
+Namespaces: `about`, `common`, `contact`, `faq`, `guide`, `home`, `lib`, `pages`, `privacy`, `quiz`, `settings`, `teacher`.
+
+## Rules to enforce in Weblate
+
+- Keep keys and `{placeholders}` unchanged. Add a "placeholders" check as a mandatory (blocking) check.
+- Plural keys use suffixes (`x.one`, `x.other`, and `few`/`many` where the language needs them). Weblate shows them as separate strings; leave the suffix as is.
+- Languages with right-to-left text (`ar`, `ur`) need a visual check on the site after merging.
+- Do not add Quran translations here: those come from the data pipeline.
+
+## Flow
+
+1. Weblate pushes translations as pull requests to the repository (set "Push on commit" off and use the pull request integration), so CI (`tests/unit/i18n.test.ts`) runs before anything reaches `main`.
+2. A maintainer merges after CI is green. Credit the translator (Weblate keeps the author).
+3. Mention the translation tool in `CONTRIBUTING.md` and `docs/translation-review-guide.md` once it is live.
