@@ -3,6 +3,7 @@ import { Directory, Filesystem } from "@capacitor/filesystem";
 import { FileTransfer } from "@capacitor/file-transfer";
 import { audioUrl, type ReciterId } from "../../config/reciters";
 import type { AudioStore, Ref } from "../audioCache";
+import { downloadRefs } from "../audioCache";
 
 const ROOT = "audio";
 const dir = Directory.Data;
@@ -28,11 +29,10 @@ export const nativeAudioStore: AudioStore = {
   },
   async download(reciter, refs, onProgress, signal) {
     const have = await stored(reciter);
-    let done = 0;
-    let n = 0;
-    const queue = [...refs];
-    const worker = async () => {
-      for (let r = queue.shift(); r && !signal?.aborted; r = queue.shift()) {
+    return downloadRefs(
+      refs,
+      async (r) => {
+        signal?.throwIfAborted();
         if (!have.has(name(r.s, r.a))) {
           const p = path(reciter, r.s, r.a);
           try {
@@ -43,17 +43,16 @@ export const nativeAudioStore: AudioStore = {
             }).catch(() => {});
             const { uri } = await Filesystem.getUri({ path: p, directory: dir });
             await FileTransfer.downloadFile({ url: audioUrl(reciter, r.s, r.a), path: uri });
-            n++;
-          } catch {
+          } catch (error) {
             // a failed download may leave a partial file that would count as stored
             await Filesystem.deleteFile({ path: p, directory: dir }).catch(() => {});
+            throw error;
           }
         }
-        onProgress(++done, refs.length);
-      }
-    };
-    await Promise.all([worker(), worker(), worker()]);
-    return n;
+      },
+      onProgress,
+      signal,
+    );
   },
   async clear() {
     await Filesystem.rmdir({ path: ROOT, directory: dir, recursive: true }).catch(() => {});

@@ -1,7 +1,13 @@
 import { useI18n } from "../../lib/i18n/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { RECITERS } from "../../config/reciters";
-import { getAudioStore, scopeAyahRefs } from "../../lib/audioCache";
+import {
+  downloadAudio,
+  getAudioStore,
+  scopeAyahRefs,
+  type DownloadResult,
+  type Ref,
+} from "../../lib/audioCache";
 import type { JuzMeta, SurahMeta } from "../../lib/quran/types";
 import type { Scope } from "../../lib/quiz/types";
 import { isNative } from "../../lib/native/platform";
@@ -17,17 +23,30 @@ export default function AudioDownload({ scope, juz, index }: Props) {
   const [have, setHave] = useState(0);
   const [progress, setProgress] = useState<[number, number] | null>(null);
   const [warn, setWarn] = useState(false);
+  const [result, setResult] = useState<DownloadResult | null>(null);
+  const controller = useRef<AbortController | null>(null);
 
   useEffect(() => {
     let live = true;
-    void getAudioStore().then(async (st) => {
-      if (!live) return;
-      const ok = st.supported();
-      setSupported(ok);
-      if (ok) setHave(await st.count(reciter, refs));
-    });
+    setResult(null);
+    setProgress(null);
+    setWarn(false);
+    setHave(0);
+    void getAudioStore()
+      .then(async (st) => {
+        if (!live) return;
+        const ok = st.supported();
+        setSupported(ok);
+        if (ok) {
+          const count = await st.count(reciter, refs);
+          if (live) setHave(count);
+        }
+      })
+      .catch(() => {});
     return () => {
       live = false;
+      controller.current?.abort();
+      controller.current = null;
     };
   }, [reciter, refs]);
 
@@ -36,17 +55,37 @@ export default function AudioDownload({ scope, juz, index }: Props) {
 
   const mb = Math.round((refs.length * 0.1) / 5) * 5 || 1;
 
-  const run = async () => {
+  const run = async (targets: Ref[] = refs) => {
+    if (controller.current) return;
     if (!warn && isNative() && (await (await import("../../lib/native/network")).onCellular())) {
       setWarn(true);
       return;
     }
     setWarn(false);
-    setProgress([0, refs.length]);
-    const st = await getAudioStore();
-    await st.download(reciter, refs, (d, n) => setProgress([d, n]));
-    setHave(await st.count(reciter, refs));
-    setProgress(null);
+    const ac = new AbortController();
+    controller.current = ac;
+    setResult(null);
+    setProgress([0, targets.length]);
+    await downloadAudio(
+      reciter,
+      targets,
+      (d, n) => {
+        if (controller.current === ac) setProgress([d, n]);
+      },
+      ac.signal,
+      (value) => {
+        if (controller.current === ac) setResult(value);
+      },
+      () => {
+        if (controller.current !== ac) return;
+        controller.current = null;
+        setProgress(null);
+        void getAudioStore()
+          .then((st) => st.count(reciter, refs))
+          .then(setHave)
+          .catch(() => {});
+      },
+    );
   };
 
   return (
@@ -67,11 +106,14 @@ export default function AudioDownload({ scope, juz, index }: Props) {
           {t("quiz.audio_dl.cellular", { mb })}
         </p>
       )}
+      <p aria-live="polite" aria-atomic="true" className="mt-2 text-sm">
+        {result && t("quiz.audio_dl.result", { saved: result.saved, failed: result.failed.length })}
+      </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <button
           type="button"
           disabled={progress !== null || have === refs.length}
-          onClick={run}
+          onClick={() => void run()}
           className="btn num flex-1"
         >
           {progress
@@ -80,6 +122,16 @@ export default function AudioDownload({ scope, juz, index }: Props) {
               ? t("quiz.audio_dl.cellular_go")
               : t("quiz.audio_dl.save")}
         </button>
+        {progress && (
+          <button type="button" className="btn-quiet" onClick={() => controller.current?.abort()}>
+            {t("quiz.audio_dl.cancel")}
+          </button>
+        )}
+        {!progress && result && result.failed.length > 0 && (
+          <button type="button" className="btn" onClick={() => void run(result.failed)}>
+            {t("quiz.audio_dl.retry")}
+          </button>
+        )}
         <button
           type="button"
           disabled={progress !== null || have === 0}

@@ -132,5 +132,10 @@
   "reminder.label": "Recordatorio diario",
   "reminder.enable": "Activar",
   "reminder.disable": "Desactivar",
-  "reminder.denied": "Se denegó el permiso de notificaciones. Actívalo en los ajustes de Android."
+  "reminder.denied": "Se denegó el permiso de notificaciones. Actívalo en los ajustes de Android.",
+  "audio_dl.cancel": "Cancelar",
+  "audio_dl.retry": "Reintentar",
+  "audio_dl.result": "Guardados: {saved}, fallidos: {failed}.",
+  "audio_replay": "Volver a reproducir",
+  "audio_progress": "Progreso del audio"
 }

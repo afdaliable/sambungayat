@@ -126,5 +126,10 @@
   "reminder.label": "Peringatan harian",
   "reminder.enable": "Hidupkan",
   "reminder.disable": "Matikan",
-  "reminder.denied": "Kebenaran pemberitahuan ditolak. Hidupkan dalam tetapan Android."
+  "reminder.denied": "Kebenaran pemberitahuan ditolak. Hidupkan dalam tetapan Android.",
+  "audio_dl.cancel": "Batal",
+  "audio_dl.retry": "Cuba lagi",
+  "audio_dl.result": "Disimpan {saved}, gagal {failed}.",
+  "audio_replay": "Main semula",
+  "audio_progress": "Kemajuan audio"
 }

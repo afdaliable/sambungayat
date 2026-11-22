@@ -129,5 +129,10 @@
   "reminder.label": "Pengingat harian",
   "reminder.enable": "Aktifkan",
   "reminder.disable": "Matikan",
-  "reminder.denied": "Izin notifikasi ditolak. Aktifkan lewat pengaturan Android."
+  "reminder.denied": "Izin notifikasi ditolak. Aktifkan lewat pengaturan Android.",
+  "audio_dl.cancel": "Batal",
+  "audio_dl.retry": "Coba lagi",
+  "audio_dl.result": "Tersimpan {saved}, gagal {failed}.",
+  "audio_replay": "Putar ulang",
+  "audio_progress": "Progres audio"
 }

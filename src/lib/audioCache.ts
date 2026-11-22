@@ -35,19 +35,62 @@ export function scopeAyahRefs(
 }
 
 export type Ref = { s: number; a: number };
+export type DownloadResult = { saved: number; failed: Ref[] };
+
+export async function downloadRefs(
+  refs: Ref[],
+  save: (ref: Ref) => Promise<void>,
+  onProgress: (saved: number, total: number) => void,
+  signal?: AbortSignal,
+): Promise<DownloadResult> {
+  const result: DownloadResult = { saved: 0, failed: [] };
+  const queue = [...refs];
+  const worker = async () => {
+    while (!signal?.aborted && queue.length) {
+      const ref = queue.shift()!;
+      try {
+        await save(ref);
+        result.saved++;
+      } catch {
+        if (!signal?.aborted) result.failed.push(ref);
+      }
+      onProgress(result.saved, refs.length);
+    }
+  };
+  await Promise.all([worker(), worker(), worker()]);
+  return result;
+}
+
+export async function downloadAudio(
+  reciter: ReciterId,
+  refs: Ref[],
+  onProgress: (saved: number, total: number) => void,
+  signal: AbortSignal,
+  onResult: (result: DownloadResult) => void,
+  onFinally: () => void,
+) {
+  try {
+    const store = await getAudioStore();
+    onResult(await store.download(reciter, refs, onProgress, signal));
+  } catch {
+    onResult({ saved: 0, failed: signal.aborted ? [] : refs });
+  } finally {
+    onFinally();
+  }
+}
 
 /** Offline audio storage. Web = Cache API (needs the service worker); a native store can implement the same. */
 export interface AudioStore {
   supported(): boolean;
   /** How many of `refs` are stored for this reciter. */
   count(reciter: ReciterId, refs: Ref[]): Promise<number>;
-  /** Stores full (non-Range) files, skipping ones already stored. Returns count newly stored. */
+  /** Stores full files, skipping cached ones. Saved includes files already available. */
   download(
     reciter: ReciterId,
     refs: Ref[],
     onProgress: (done: number, total: number) => void,
     signal?: AbortSignal,
-  ): Promise<number>;
+  ): Promise<DownloadResult>;
   clear(): Promise<void>;
   /** Playable URL of a stored file, or null when it is not stored (play the remote URL then). */
   resolve(reciter: ReciterId, s: number, a: number): Promise<string | null>;
@@ -70,28 +113,21 @@ export function createWebAudioStore(
     },
     async download(reciter, refs, onProgress, signal) {
       const cache = await open();
-      let done = 0;
-      let stored = 0;
-      const queue = [...refs];
-      const worker = async () => {
-        for (let r = queue.shift(); r && !signal?.aborted; r = queue.shift()) {
+      return downloadRefs(
+        refs,
+        async (r) => {
           const url = audioUrl(reciter, r.s, r.a);
-          try {
-            if (!(await cache.match(url))) {
-              const res = await doFetch(url, { mode: "cors", signal });
-              if (res.ok) {
-                await cache.put(url, res);
-                stored++;
-              }
-            }
-          } catch {
-            /* network error or abort: leave it out, counted as not stored */
+          signal?.throwIfAborted();
+          if (!(await cache.match(url))) {
+            const res = await doFetch(url, { mode: "cors", signal });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            signal?.throwIfAborted();
+            await cache.put(url, res);
           }
-          onProgress(++done, refs.length);
-        }
-      };
-      await Promise.all([worker(), worker(), worker()]);
-      return stored;
+        },
+        onProgress,
+        signal,
+      );
     },
     async clear() {
       await getCaches()!.delete(AUDIO_CACHE);
