@@ -41,4 +41,16 @@ A web translation tool (Weblate) is being set up so that you can translate witho
 2. Run `npx vitest run tests/unit/i18n.test.ts` (needs `npm ci` once). It must pass.
 3. Open a pull request titled `i18n(<code>): review`, listing what you changed and anything you were unsure about.
 
-Not comfortable with Git? Open an issue with the key and your proposed text, and a maintainer will apply it with credit to you.
+### Without Git: edit in the GitHub web editor
+
+You only need a free GitHub account and a browser.
+
+1. Open the folder for your language on GitHub, for example `locales/fr/`, and click the file you want to review.
+2. Click the pencil icon (**Edit this file**). GitHub makes your own copy (a fork) automatically.
+3. Change the text on the **right** of each line. Do not touch the key on the left or any `{placeholder}`.
+4. Click **Commit changes...**, choose **Create a new branch for this commit and start a pull request**, and give it the title `i18n(fr): review`.
+5. On the pull request page, wait for the automatic check. A green tick means the keys and placeholders are intact. A red cross means a key or `{placeholder}` was changed: open **Details** to see which, and fix it by editing the same file again.
+
+Several files? Repeat steps 1 to 3 for each file on the same branch (choose the branch you created in step 4 instead of creating a new one).
+
+Not comfortable even with that? Open an issue with the key and your proposed text, and a maintainer will apply it with credit to you.

@@ -1,6 +1,6 @@
 # Contributing to Sambung Ayat
 
-Thank you for helping. Sambung Ayat is a free Quran-memorization quiz (web, PWA and Android). Contributions of any size are welcome, and the easiest start is a **translation review** in your own language (see [docs/translation-review-guide.md](docs/translation-review-guide.md)) or an issue labelled `good first issue` (ideas: [docs/good-first-issues.md](docs/good-first-issues.md)).
+Thank you for helping. Sambung Ayat is a free Quran-memorization quiz (web, PWA and Android). Contributions of any size are welcome, and the easiest start is a **translation review** in your own language, which you can do entirely in the GitHub web editor, with no Git or coding (see [docs/translation-review-guide.md](docs/translation-review-guide.md)) or an issue labelled `good first issue` (ideas: [docs/good-first-issues.md](docs/good-first-issues.md)).
 
 Please read the [code of conduct](CODE_OF_CONDUCT.md). By contributing you agree that your contribution is licensed under the project's [MIT licence](LICENSE).
 

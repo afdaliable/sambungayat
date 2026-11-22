@@ -1,0 +1,12 @@
+# Crowdin (optional alternative to Weblate, see docs/weblate-setup.md).
+# Credentials come from the environment, never from this file:
+#   CROWDIN_PROJECT_ID and CROWDIN_PERSONAL_TOKEN.
+# In the Crowdin project, set the source language to Indonesian (id) and enable the 11 target languages.
+project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
+base_path: .
+preserve_hierarchy: true
+files:
+  - source: /locales/id/*.json
+    translation: /locales/%two_letters_code%/%original_file_name%
+    type: json

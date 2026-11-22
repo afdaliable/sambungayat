@@ -6,14 +6,14 @@ Goal: let native speakers review and translate `locales/` in the browser, withou
 
 The files are flat JSON, one file per namespace and language. Create **one component per namespace**:
 
-| Setting | Value |
-| --- | --- |
-| Repository | `https://github.com/afdaliable/sambungayat` (branch `main`) |
-| File mask | `locales/*/<namespace>.json` |
-| Monolingual base language file | `locales/id/<namespace>.json` |
-| File format | JSON file (flat key/value) |
-| Source language | Indonesian (`id`) |
-| New translations | off (the 12 languages are fixed; adding one needs code, see `CLAUDE.md`) |
+| Setting                        | Value                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------ |
+| Repository                     | `https://github.com/afdaliable/sambungayat` (branch `main`)              |
+| File mask                      | `locales/*/<namespace>.json`                                             |
+| Monolingual base language file | `locales/id/<namespace>.json`                                            |
+| File format                    | JSON file (flat key/value)                                               |
+| Source language                | Indonesian (`id`)                                                        |
+| New translations               | off (the 12 languages are fixed; adding one needs code, see `CLAUDE.md`) |
 
 Namespaces: `about`, `common`, `contact`, `faq`, `guide`, `home`, `lib`, `pages`, `privacy`, `quiz`, `settings`, `teacher`.
 
@@ -29,3 +29,7 @@ Namespaces: `about`, `common`, `contact`, `faq`, `guide`, `home`, `lib`, `pages`
 1. Weblate pushes translations as pull requests to the repository (set "Push on commit" off and use the pull request integration), so CI (`tests/unit/i18n.test.ts`) runs before anything reaches `main`.
 2. A maintainer merges after CI is green. Credit the translator (Weblate keeps the author).
 3. Mention the translation tool in `CONTRIBUTING.md` and `docs/translation-review-guide.md` once it is live.
+
+## Alternative: Crowdin
+
+`crowdin.yml` at the repository root maps `locales/id/*.json` to `locales/<code>/<same file>`. Create a Crowdin project (free for open source on request), set the source language to Indonesian, connect the GitHub integration so that it opens pull requests, and keep CI (`tests/unit/i18n.test.ts`) as the gate. Do not enable both tools on the same files.
