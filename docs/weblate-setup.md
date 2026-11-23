@@ -33,3 +33,10 @@ Namespaces: `about`, `common`, `contact`, `faq`, `guide`, `home`, `lib`, `pages`
 ## Alternative: Crowdin
 
 `crowdin.yml` at the repository root maps `locales/id/*.json` to `locales/<code>/<same file>`. Create a Crowdin project (free for open source on request), set the source language to Indonesian, connect the GitHub integration so that it opens pull requests, and keep CI (`tests/unit/i18n.test.ts`) as the gate. Do not enable both tools on the same files.
+
+## Current setup (hosted.weblate.org, project `sambung-ayat`)
+
+- Project: `https://hosted.weblate.org/projects/sambung-ayat/` (trial started 2026-11-23, 14 days; Libre approval has to be requested before it ends).
+- Component `about` was created by hand (repository `https://github.com/afdaliable/sambungayat.git`, branch `main`, JSON file, mask `locales/*/about.json`, base `locales/id/about.json`, indentation 2, "Edit base file" off). The other eleven came from the **Component discovery** add-on (regex `locales/(?P<language>[^/.]*)/(?P<component>[^/]*)\.json`, base `locales/id/{{ component }}.json`); they share the `about` clone through `weblate://sambung-ayat/about`.
+- Project workflow: flag `python-brace-format` and the enforced check "Python brace format", so a changed `{placeholder}` cannot be dismissed. Adding new translations: disabled.
+- Still manual: switch the VCS of `about` to "GitHub pull request" (Weblate GitHub App) so translations arrive as pull requests, then "Request approval" for Libre hosting.
