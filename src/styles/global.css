@@ -418,6 +418,15 @@ html[data-ar="XL"] {
   .band .field {
     border-color: var(--band-soft);
   }
+  /* Hints and secondary text from shared components (the full setup opens inside the home band). */
+  .band .text-muted {
+    color: var(--band-soft);
+  }
+  .band .btn:not(.btn-band) {
+    background: var(--band-ink);
+    border-color: var(--band-ink);
+    color: var(--band);
+  }
   .lnk {
     color: var(--accent);
     font-weight: 600;
@@ -560,8 +569,10 @@ html[data-ar="XL"] {
     width: 0.75rem;
     height: 0.75rem;
     background: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
     transition: transform 0.12s;
   }
   [dir="rtl"] main summary::before {
@@ -574,7 +585,8 @@ html[data-ar="XL"] {
 
 /* Urdu reads best in Nastaliq; fall back to the system Arabic-script font when no Nastaliq font is installed. */
 html[lang="ur"] body {
-  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Noto Naskh Arabic", system-ui, sans-serif;
+  font-family:
+    "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Noto Naskh Arabic", system-ui, sans-serif;
   line-height: 1.9;
 }
 

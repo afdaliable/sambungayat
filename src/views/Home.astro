@@ -72,6 +72,10 @@ const jsonLd = [
     })),
   },
 ];
+// Strings the on-demand full setup needs (quiz.* and mode texts); read by the script below.
+const setupDict = Object.fromEntries(
+  Object.entries(dict).filter(([k]) => k.startsWith("quiz.") || k.startsWith("lib.mode.")),
+);
 const moreHtml = rich(h("form.more", { settings: "{settings}", juzPages: "{juzPages}" }), {
   settings: link(localePath(lang, "/kuis"), h("form.moreSettings")),
   juzPages: link(localePath(lang, "/juz"), h("form.moreJuz")),
@@ -119,8 +123,9 @@ const faqMoreHtml = rich(h("faq.more"), {
             </div>
 
             <button type="submit" class="btn-band btn-lg w-full">{h("form.submit")}</button>
-            <p class="-mt-2 text-sm text-band-soft [&_a]:text-band-ink [&_a]:underline" set:html={moreHtml} />
+            <p id="home-more" class="-mt-2 text-sm text-band-soft [&_a]:text-band-ink [&_a]:underline" set:html={moreHtml} />
           </form>
+          <div id="home-setup" hidden></div>
         </div>
 
         <HomeSample lang={lang} dict={dict} />
@@ -226,8 +231,27 @@ const faqMoreHtml = rich(h("faq.more"), {
   </main>
 </BaseLayout>
 
+<script type="application/json" id="home-setup-dict" set:html={JSON.stringify(setupDict)} />
 <script>
   import { isNative } from "../lib/native/platform";
+
+  // "Pengaturan lengkap" opens the full setup in place (loaded on demand). Without JS the link goes to /kuis.
+  const moreLink = document.querySelector<HTMLAnchorElement>('#home-more a[href$="/kuis"]');
+  moreLink?.addEventListener("click", async (e) => {
+    const form = document.getElementById("mulai");
+    const host = document.getElementById("home-setup");
+    const raw = document.getElementById("home-setup-dict")?.textContent;
+    if (!form || !host || !raw) return;
+    e.preventDefault();
+    try {
+      const { mountHomeSetup } = await import("../lib/homeSetup");
+      await mountHomeSetup(host, document.documentElement.lang as never, JSON.parse(raw));
+      form.hidden = true;
+      host.hidden = false;
+    } catch {
+      location.href = moreLink.href; // load failed (offline): use the regular page
+    }
+  });
 
   // Public counter: shown only when the number is large enough to mean something. Hidden on any error
   // (offline, preview without the API, Android app). Fetches when the block nears the viewport.

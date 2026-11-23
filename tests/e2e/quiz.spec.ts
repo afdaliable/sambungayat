@@ -221,3 +221,23 @@ test("daily result shows the day streak and exports a result image", async ({ pa
   await page.getByRole("button", { name: "Bagikan gambar" }).click();
   expect((await dl).suggestedFilename()).toBe("sambungayat-hasil.png");
 });
+
+test("home: 'pengaturan lengkap' opens the full setup in place and starts a quiz", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const framework = () =>
+    page.evaluate(() =>
+      performance
+        .getEntriesByType("resource")
+        .some((r) => /\/_astro\/(react|client)\./.test(r.name)),
+    );
+  expect(await framework()).toBe(false); // static until asked
+  await page.locator('#home-more a[href$="/kuis"]').click();
+  const setup = page.locator("#home-setup");
+  await expect(setup.getByLabel("Jenis cakupan")).toBeVisible();
+  await expect(page.locator("#mulai")).toBeHidden();
+  await setup.getByText("29", { exact: true }).click();
+  await setup.getByRole("button", { name: "Mulai", exact: true }).click();
+  await expect(page).toHaveURL(/\/kuis\?.*scope=juz:29,30/);
+});

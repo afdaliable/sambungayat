@@ -19,7 +19,7 @@ async function htmlFiles(dir: string): Promise<string[]> {
   return out;
 }
 
-// 1. CSP hashes for every executable inline script (JSON-LD data blocks are not executed).
+// 1. CSP hashes for every executable inline script (JSON data blocks such as JSON-LD are not executed).
 const hashes = new Set<string>();
 const SCRIPT = /<script\b([^>]*)>([\s\S]*?)<\/script>/g;
 const pages = await htmlFiles(DIST);
@@ -28,7 +28,8 @@ for (const f of pages) {
   for (const m of html.matchAll(SCRIPT)) {
     const attrs = m[1] ?? "";
     const body = m[2] ?? "";
-    if (/\bsrc=/.test(attrs) || /application\/ld\+json/.test(attrs) || body.trim() === "") continue;
+    if (/\bsrc=/.test(attrs) || /application\/(?:ld\+)?json/.test(attrs) || body.trim() === "")
+      continue;
     hashes.add(`'sha256-${createHash("sha256").update(body).digest("base64")}'`);
   }
 }
