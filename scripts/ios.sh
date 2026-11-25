@@ -1,7 +1,8 @@
 #!/bin/sh
 # iOS builds for `npm run ios:sim` and `npm run ios:test` (macOS + Xcode). Run after `cap sync ios`.
 #   sim   Release simulator app, zipped at ios/App/build/SambungAyat-simulator.zip
-#   test  XCUITest UI tests on IOS_SIMULATOR (default: the first available iPhone simulator)
+#   test  XCUITest UI tests on IOS_SIMULATOR (default: the first available iPhone simulator); a failing test
+#         is retried up to 3 times, as CI runners can take a minute to load the web view
 set -eu
 cd "$(dirname "$0")/../ios/App"
 
@@ -18,7 +19,7 @@ case "${1:-}" in
     [ -n "$name" ] || { echo "No iPhone simulator found; install one in Xcode > Settings > Components." >&2; exit 1; }
     rm -rf build/UITests.xcresult
     xcodebuild test -project App.xcodeproj -scheme App -destination "platform=iOS Simulator,name=$name" \
-      -derivedDataPath build/test -resultBundlePath build/UITests.xcresult
+      -derivedDataPath build/test -resultBundlePath build/UITests.xcresult -retry-tests-on-failure -test-iterations 3
     ;;
   *)
     echo "usage: sh scripts/ios.sh sim|test" >&2

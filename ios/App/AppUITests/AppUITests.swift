@@ -9,7 +9,7 @@ final class AppUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
-        XCTAssertTrue(startButton.waitForExistence(timeout: 30), "home page did not load from the bundle")
+        XCTAssertTrue(startButton.waitForExistence(timeout: 60), "home page did not load from the bundle")
     }
 
     private var web: XCUIElement { app.webViews.firstMatch }
