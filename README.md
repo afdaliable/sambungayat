@@ -12,7 +12,7 @@ Dokumentasi teknis: [Bahasa Indonesia](docs/developer-guide.id.md) · [English](
 - Tantangan Harian: 10 soal yang sama untuk semua orang (hari Jakarta), skor resmi = percobaan pertama.
 - Mode Guru: tautan + QR yang menghasilkan soal identik di semua perangkat.
 - Riwayat dan penguasaan per surah, disimpan di perangkat (localStorage).
-- 114 halaman surah statis untuk SEO, PWA offline (Juz 30), APK Android (Capacitor).
+- 114 halaman surah statis untuk SEO, PWA offline (Juz 30), APK Android dan aplikasi iOS (Capacitor).
 
 ## Arsitektur
 
@@ -21,7 +21,7 @@ flowchart LR
   A[data/raw<br/>api.alquran.cloud] --> B[scripts/build-data.ts]
   B --> C[Build Astro dan JSON per surah]
   C --> D[Cloudflare Pages / PWA]
-  C --> G[Aplikasi Android / Capacitor]
+  C --> G[Aplikasi Android dan iOS / Capacitor]
   D --> E[Engine kuis deterministik]
   G --> E
   E --> F[(localStorage)]
@@ -66,6 +66,7 @@ npm run preview    # http://localhost:4321
 | `npm run data:fetch`         | Unduh ulang semua data mentah ke `data/raw` |
 | `npm run data:verify-audio`  | Cek URL audio tiap qari                     |
 | `npm run android:apk`        | APK debug (butuh JDK 21 dan Android SDK)    |
+| `npm run ios:sim`            | Build simulator iOS (butuh macOS dan Xcode) |
 
 Untuk Playwright, pasang browser sekali: `npx playwright install chromium`.
 

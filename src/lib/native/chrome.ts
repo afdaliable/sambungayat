@@ -1,16 +1,18 @@
-import { SystemBars, SystemBarsStyle, SystemBarType } from "@capacitor/core";
+import { Capacitor, SystemBars, SystemBarsStyle, SystemBarType } from "@capacitor/core";
 
 /**
- * Android system bars follow the page. The header band is dark teal in both themes, so status bar icons
- * are always light. The navigation bar sits on the page background and follows the light/dark theme, except
+ * System bars follow the page. The header band is dark teal in both themes, so status bar icons are always
+ * light. On Android the navigation bar sits on the page background and follows the light/dark theme, except
  * on WebView < 140: there the WebView does not draw under the bars and the window colour (teal) shows.
+ * iOS has no navigation bar, and its SystemBars ignores `bar`, so only the status bar is set there.
  * Call once, only inside the native app.
  */
 export function initChrome(): void {
+  void SystemBars.setStyle({ style: SystemBarsStyle.Dark, bar: SystemBarType.StatusBar });
+  if (Capacitor.getPlatform() !== "android") return;
   const chrome = Number(/Chrome\/(\d+)/.exec(navigator.userAgent)?.[1] ?? 999);
   const apply = () => {
     const dark = document.documentElement.classList.contains("dark") || chrome < 140;
-    void SystemBars.setStyle({ style: SystemBarsStyle.Dark, bar: SystemBarType.StatusBar });
     void SystemBars.setStyle({
       style: dark ? SystemBarsStyle.Dark : SystemBarsStyle.Light,
       bar: SystemBarType.NavigationBar,

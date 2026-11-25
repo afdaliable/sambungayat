@@ -1,4 +1,4 @@
-/** True inside the Capacitor Android app (the bridge injects `window.Capacitor`). Safe on the server. */
+/** True inside the Capacitor app, Android or iOS (the bridge injects `window.Capacitor`). Safe on the server. */
 export const isNative = (): boolean =>
   typeof window !== "undefined" && !!(window as unknown as { Capacitor?: unknown }).Capacitor;
 

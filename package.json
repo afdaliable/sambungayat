@@ -20,7 +20,10 @@
     "data:verify-audio": "tsx scripts/verify-audio.ts",
     "android:sync": "npm run build && cap sync android",
     "android:apk": "npm run android:sync && cd android && ./gradlew assembleDebug",
-    "android:aab": "npm run android:sync && cd android && ./gradlew bundleRelease assembleRelease"
+    "android:aab": "npm run android:sync && cd android && ./gradlew bundleRelease assembleRelease",
+    "ios:sync": "npm run build && cap sync ios",
+    "ios:sim": "npm run ios:sync && sh scripts/ios.sh sim",
+    "ios:test": "npm run ios:sync && sh scripts/ios.sh test"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -30,6 +33,7 @@
     "@capacitor/core": "^8.6.0",
     "@capacitor/file-transfer": "^2.0.6",
     "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/ios": "^8.6.2",
     "@capacitor/local-notifications": "^8.3.1",
     "@capacitor/network": "^8.0.1",
     "@capacitor/share": "^8.0.3",

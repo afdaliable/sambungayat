@@ -1,6 +1,6 @@
 # Sambung Ayat (sambungayat.com)
 
-Static Quran-memorization quiz (web, PWA and Android). No backend for the quiz itself. See [CONTRIBUTING.md](CONTRIBUTING.md) and the technical guide ([Bahasa Indonesia](docs/developer-guide.id.md) / [English](docs/developer-guide.md)) first; this file is a denser technical reference for people and tools working in the code.
+Static Quran-memorization quiz (web, PWA, Android and iOS). No backend for the quiz itself. See [CONTRIBUTING.md](CONTRIBUTING.md) and the technical guide ([Bahasa Indonesia](docs/developer-guide.id.md) / [English](docs/developer-guide.md)) first; this file is a denser technical reference for people and tools working in the code.
 
 ## Stack
 Astro 5 (static) + React islands + Tailwind 4 (`@tailwindcss/vite`) + TypeScript strict. Vitest, Playwright, ESLint, Prettier. Node version in `.nvmrc` (`source ~/.nvm/nvm.sh && nvm use`).
@@ -66,6 +66,11 @@ Astro 5.x (`@vite-pwa/astro` peer range), `@astrojs/react` 4.x, TypeScript ~6.0 
 - Native code lives in `src/lib/native/*` and is only reached through `isNative()` and dynamic imports, so the web bundle is unchanged. Edge-to-edge handling uses `--sat/--sab` and `html[data-native]` rules in `global.css`.
 - App links: `toAppPath()` maps `https://sambungayat.com` URLs to bundled pages; the manifest has an `autoVerify` intent filter.
 - Tailwind 4 needs Chrome 111+: on an older WebView the app shows a plain notice (`#old-webview`).
+
+## iOS (Capacitor 8, Swift Package Manager)
+- `ios/App`, same app id, iOS 16.4+ (first WebKit that renders Tailwind 4). Serves `dist` from `capacitor://localhost`; the `BaseLayout` `.html` shims accept both schemes. `scripts/ios.sh` backs `ios:sim` (simulator zip) and `ios:test` (XCUITest in `ios/App/AppUITests`); both need macOS + Xcode.
+- No Back button: `BridgeViewController` enables the WKWebView edge swipe. `native/chrome.ts` only sets the status bar on iOS.
+- Signing team, App Store Connect, TestFlight and review are manual (see the technical guide). Universal Links need `apple-app-site-association` on the site.
 
 ## Visual identity ("Buku Setoran")
 - Palette: cream paper plus deep teal. Do not introduce blue or violet. Tokens in `src/styles/global.css` (`--paper --card --ink --muted --line --rule --accent --band --band-soft --good --bad --stamp` and dark counterparts). Details: `DESIGN.md`.

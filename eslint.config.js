@@ -8,6 +8,7 @@ export default [
       "dist/",
       ".wrangler/",
       "android/",
+      "ios/",
       "public/",
       ".env",
       ".astro/",
