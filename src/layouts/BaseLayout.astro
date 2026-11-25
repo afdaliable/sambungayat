@@ -152,9 +152,13 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       <link rel="preload" href="/fonts/amiri-quran.woff2" as="font" type="font/woff2" crossorigin />
     )}
     <script is:inline>
-      // Android app (Capacitor serves https://localhost and falls back to index.html for extensionless paths):
-      // send extensionless internal links to their .html file.
-      if (window.Capacitor && location.hostname === "localhost" && location.protocol === "https:") {
+      // Native app (Capacitor serves https://localhost on Android and capacitor://localhost on iOS, and falls
+      // back to index.html for extensionless paths): send extensionless internal links to their .html file.
+      if (
+        window.Capacitor &&
+        location.hostname === "localhost" &&
+        (location.protocol === "https:" || location.protocol === "capacitor:")
+      ) {
         document.addEventListener(
           "click",
           (e) => {
@@ -204,7 +208,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       /* eslint-enable no-var */
     </script>
     <script>
-      // Android app only: hardware Back button (the chunk is never fetched in a browser).
+      // Native app only: Android Back button, system bars, app links (the chunks are never fetched in a browser).
       import { isNative } from "../lib/native/platform";
       if (isNative()) {
         void import("../lib/native/back").then((m) => m.initBack());

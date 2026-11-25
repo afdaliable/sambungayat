@@ -602,6 +602,16 @@ header.band {
 footer.mt-16 {
   padding-bottom: var(--sab);
 }
+/* Native app: the header scrolls away, so keep a band-coloured strip under the (light) status bar icons. */
+html[data-native] body::before {
+  content: "";
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  height: var(--sat);
+  background: var(--band);
+}
 
 /* Android app: 48 dp touch targets (the web keeps 44 px). data-native is set by the head script in BaseLayout. */
 html[data-native] :is(.min-h-10, .min-h-11, .lnk, main summary, header a) {

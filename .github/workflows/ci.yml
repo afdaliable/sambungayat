@@ -36,3 +36,32 @@ jobs:
           path: |
             playwright-report/
             test-results/
+
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: |
+            data/raw/tr.*.json
+            data/raw/id.indonesian.json
+          key: raw-translations-${{ hashFiles('data/translations.json', 'scripts/fetch-quran.ts') }}
+      - run: npm run data:fetch -- --missing-only
+      - run: npm run ios:sync
+      - run: sh scripts/ios.sh sim
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulator-app
+          path: ios/App/build/SambungAyat-simulator.zip
+      - run: sh scripts/ios.sh test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: ios-ui-test-results
+          path: ios/App/build/UITests.xcresult

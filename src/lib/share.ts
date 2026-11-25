@@ -7,7 +7,7 @@ export const canShare = () => isNative() || typeof navigator.share === "function
 export async function shareText(
   text: string,
   url?: string,
-): Promise<"shared" | "copied" | "failed"> {
+): Promise<"shared" | "copied" | "canceled" | "failed"> {
   try {
     if (isNative()) {
       const { Share } = await import("@capacitor/share");
@@ -20,7 +20,8 @@ export async function shareText(
     }
   } catch (err) {
     // The user dismissed the sheet (web: AbortError, Capacitor: "Share canceled").
-    if ((err as { name?: string }).name === "AbortError" || /cancel/i.test(String(err))) return "failed";
+    if ((err as { name?: string }).name === "AbortError" || /cancel/i.test(String(err)))
+      return "canceled";
   }
   try {
     await navigator.clipboard.writeText(url ? `${text} ${url}` : text);

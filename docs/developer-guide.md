@@ -2,7 +2,7 @@
 
 [Bahasa Indonesia](developer-guide.id.md) · **English**
 
-For web, PWA, and Android maintainers. Start with the [contribution rules](../CONTRIBUTING.md) and [data attribution](../NOTICE.md). For interface translations, see the [translation review guide](translation-review-guide.md); for UI and visual identity, see [DESIGN.md](../DESIGN.md) and [BRAND.md](../BRAND.md).
+For web, PWA, Android, and iOS maintainers. Start with the [contribution rules](../CONTRIBUTING.md) and [data attribution](../NOTICE.md). For interface translations, see the [translation review guide](translation-review-guide.md); for UI and visual identity, see [DESIGN.md](../DESIGN.md) and [BRAND.md](../BRAND.md).
 
 ## 1. Local development
 
@@ -123,7 +123,7 @@ Example: [`/kuis?mode=sambung&scope=juz:30&n=10&d=mudah&seed=contoh`](https://sa
 
 The client counts finished non-practice rounds, including daily challenges, on web only. D1 aggregates by UTC day and mode, not Jakarta day. The counter does not store scores, names, raw IPs, or quiz history. It uses a salted daily IP hash to cap submissions at 300 and deletes older hash rows on the first submission from a client for a new day. Failures do not prevent completing a quiz.
 
-## 7. Android
+## 7. Android and iOS
 
 Install JDK 21 and the Android SDK (compile/target API 36, minimum API 24; see [`android/variables.gradle`](../android/variables.gradle)). Set `ANDROID_HOME` and fetch the Quran data first.
 
@@ -136,6 +136,22 @@ Install JDK 21 and the Android SDK (compile/target API 36, minimum API 24; see [
 The maintainer supplies the keystore and the ignored `android/keystore.properties` (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`). Never commit them. Update `versionCode` and `versionName` in [`app/build.gradle`](../android/app/build.gradle) as appropriate for a release.
 
 Capacitor loads bundled `dist` from `https://localhost` and skips the service worker. Internal navigation targets bundled `.html` files; shared links use the public `SITE.url`, not the WebView's origin. [`native/links.ts`](../src/lib/native/links.ts) maps supported public links to bundled pages while retaining quiz parameters. Verified App Links require a deployed `/.well-known/assetlinks.json` with the app signing certificate fingerprint; the manifest alone is not enough. Tailwind 4 styling needs Chromium 111+; older WebViews show an update notice.
+
+### iOS
+
+Needs macOS with Xcode 16 or later (Swift Package Manager; no CocoaPods) and the Quran data. The app targets iOS 16.4+ (Safari 16.4 is the first WebKit that renders Tailwind 4).
+
+| Command            | Output                                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `npm run ios:sync` | Builds `dist` and syncs it into `ios/App`. Open `ios/App/App.xcodeproj` in Xcode to run it.                        |
+| `npm run ios:sim`  | Release simulator build at `ios/App/build/SambungAyat-simulator.zip` (no Apple account needed).                    |
+| `npm run ios:test` | XCUITest UI tests ([`ios/App/AppUITests`](../ios/App/AppUITests)) on a simulator; `IOS_SIMULATOR=<name>` picks it. |
+
+Testers install the simulator build by unzipping it and dragging `App.app` onto a booted simulator, or with `xcrun simctl install booted App.app`. CI uploads the same zip as the `ios-simulator-app` artifact. It does not run on a physical iPhone.
+
+iOS serves `dist` from `capacitor://localhost` (WKWebView cannot serve `https`), so the `.html` link shims accept both schemes. There is no Back button: a left-edge swipe goes back. Universal Links (`applinks:` entitlement in [`App.entitlements`](../ios/App/App/App.entitlements)) need a deployed `/.well-known/apple-app-site-association` naming `<TEAM_ID>.com.sambungayat.app`.
+
+A person with the Apple Developer account must still: pick the signing team in Xcode (`DEVELOPMENT_TEAM`; certificates and profiles are never committed), create the app in App Store Connect, archive and upload a build for TestFlight, and submit it for App Store review (privacy labels: no data collected, matching [`PrivacyInfo.xcprivacy`](../ios/App/App/PrivacyInfo.xcprivacy)). Bump `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` per release.
 
 ## 8. Tests, maintenance, and troubleshooting
 

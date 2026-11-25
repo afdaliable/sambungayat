@@ -2,7 +2,7 @@
 
 **Bahasa Indonesia** · [English](developer-guide.md)
 
-Untuk pengelola aplikasi web, PWA, dan Android. Mulai dari [aturan kontribusi](../CONTRIBUTING.md) dan [atribusi data](../NOTICE.md). Untuk terjemahan antarmuka, baca [panduan peninjauan terjemahan](translation-review-guide.md); untuk tampilan dan identitas visual, baca [DESIGN.md](../DESIGN.md) dan [BRAND.md](../BRAND.md).
+Untuk pengelola aplikasi web, PWA, Android, dan iOS. Mulai dari [aturan kontribusi](../CONTRIBUTING.md) dan [atribusi data](../NOTICE.md). Untuk terjemahan antarmuka, baca [panduan peninjauan terjemahan](translation-review-guide.md); untuk tampilan dan identitas visual, baca [DESIGN.md](../DESIGN.md) dan [BRAND.md](../BRAND.md).
 
 ## 1. Pengembangan lokal
 
@@ -123,7 +123,7 @@ Contoh: [`/kuis?mode=sambung&scope=juz:30&n=10&d=mudah&seed=contoh`](https://sam
 
 Klien menghitung kuis yang selesai, termasuk tantangan harian tetapi bukan latihan ulang, hanya di web. D1 mengagregasi berdasarkan tanggal UTC dan mode, bukan tanggal Jakarta. Penghitung tidak menyimpan skor, nama, IP mentah, atau riwayat kuis. Hash IP harian dengan salt membatasi pengiriman sampai 300 per hari; baris hash lama dihapus saat pengiriman pertama dari suatu klien pada hari baru diproses. Kegagalan API tidak menghalangi penyelesaian kuis.
 
-## 7. Android
+## 7. Android dan iOS
 
 Pasang JDK 21 dan Android SDK (compile/target API 36, minimum API 24; lihat [`android/variables.gradle`](../android/variables.gradle)). Atur `ANDROID_HOME` dan unduh data Al-Qur'an sebelum build.
 
@@ -136,6 +136,22 @@ Pasang JDK 21 dan Android SDK (compile/target API 36, minimum API 24; lihat [`an
 Pengelola menyediakan keystore dan `android/keystore.properties` yang diabaikan Git (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`). Jangan commit berkas ini. Perbarui `versionCode` dan `versionName` di [`app/build.gradle`](../android/app/build.gradle) sesuai rilis.
 
 Capacitor memuat `dist` yang dibundel melalui `https://localhost` tanpa service worker. Navigasi internal mengarah ke berkas `.html` dalam paket; tautan berbagi memakai `SITE.url` publik, bukan origin WebView. [`native/links.ts`](../src/lib/native/links.ts) memetakan tautan publik yang didukung ke halaman di paket sambil mempertahankan parameter kuis. Verifikasi App Links memerlukan `/.well-known/assetlinks.json` di server dengan sidik jari sertifikat penandatangan aplikasi; filter di manifest saja tidak cukup. Tampilan Tailwind 4 memerlukan Chromium 111+; WebView yang lebih lama menampilkan pemberitahuan untuk memperbarui.
+
+### iOS
+
+Memerlukan macOS dengan Xcode 16 atau lebih baru (Swift Package Manager; tanpa CocoaPods) dan data Al-Qur'an. Aplikasi menargetkan iOS 16.4+ (Safari 16.4 adalah WebKit pertama yang bisa menampilkan Tailwind 4).
+
+| Perintah           | Keluaran                                                                                                                   |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `npm run ios:sync` | Membuat `dist` dan menyinkronkannya ke `ios/App`. Buka `ios/App/App.xcodeproj` di Xcode untuk menjalankannya.              |
+| `npm run ios:sim`  | Build simulator rilis di `ios/App/build/SambungAyat-simulator.zip` (tanpa akun Apple).                                     |
+| `npm run ios:test` | Uji UI XCUITest ([`ios/App/AppUITests`](../ios/App/AppUITests)) di simulator; `IOS_SIMULATOR=<nama>` memilih simulatornya. |
+
+Penguji memasang build simulator dengan mengekstrak zip lalu menyeret `App.app` ke simulator yang sedang berjalan, atau dengan `xcrun simctl install booted App.app`. CI mengunggah zip yang sama sebagai artefak `ios-simulator-app`. Build ini tidak bisa dipasang di iPhone fisik.
+
+iOS menyajikan `dist` dari `capacitor://localhost` (WKWebView tidak bisa menyajikan `https`), jadi shim tautan `.html` menerima kedua skema. Tidak ada tombol Kembali: usap dari tepi kiri untuk kembali. Universal Links (entitlement `applinks:` di [`App.entitlements`](../ios/App/App/App.entitlements)) memerlukan `/.well-known/apple-app-site-association` di server yang menyebut `<TEAM_ID>.com.sambungayat.app`.
+
+Pemilik akun Apple Developer masih harus: memilih tim penandatangan di Xcode (`DEVELOPMENT_TEAM`; sertifikat dan profil tidak pernah di-commit), membuat aplikasi di App Store Connect, mengarsipkan dan mengunggah build untuk TestFlight, lalu mengajukannya untuk review App Store (label privasi: tidak ada data yang dikumpulkan, sesuai [`PrivacyInfo.xcprivacy`](../ios/App/App/PrivacyInfo.xcprivacy)). Naikkan `MARKETING_VERSION` dan `CURRENT_PROJECT_VERSION` setiap rilis.
 
 ## 8. Pengujian, pemeliharaan, dan pemecahan masalah
 
