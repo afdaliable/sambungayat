@@ -149,7 +149,7 @@ Needs macOS with Xcode 16 or later (Swift Package Manager; no CocoaPods) and the
 
 Testers install the simulator build by unzipping it and dragging `App.app` onto a booted simulator, or with `xcrun simctl install booted App.app`. CI uploads the same zip as the `ios-simulator-app` artifact. It does not run on a physical iPhone.
 
-iOS serves `dist` from `capacitor://localhost` (WKWebView cannot serve `https`), so the `.html` link shims accept both schemes. There is no Back button: the web view allows the edge swipe back. Universal Links (`applinks:` entitlement in [`App.entitlements`](../ios/App/App/App.entitlements)) need a deployed `/.well-known/apple-app-site-association` naming `<TEAM_ID>.com.sambungayat.app`.
+iOS serves `dist` from `capacitor://localhost` (WKWebView cannot serve `https`), so the `.html` link shims accept both schemes. There is no Back button: a left-edge swipe goes back. Universal Links (`applinks:` entitlement in [`App.entitlements`](../ios/App/App/App.entitlements)) need a deployed `/.well-known/apple-app-site-association` naming `<TEAM_ID>.com.sambungayat.app`.
 
 A person with the Apple Developer account must still: pick the signing team in Xcode (`DEVELOPMENT_TEAM`; certificates and profiles are never committed), create the app in App Store Connect, archive and upload a build for TestFlight, and submit it for App Store review (privacy labels: no data collected, matching [`PrivacyInfo.xcprivacy`](../ios/App/App/PrivacyInfo.xcprivacy)). Bump `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` per release.
 

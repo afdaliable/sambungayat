@@ -149,7 +149,7 @@ Memerlukan macOS dengan Xcode 16 atau lebih baru (Swift Package Manager; tanpa C
 
 Penguji memasang build simulator dengan mengekstrak zip lalu menyeret `App.app` ke simulator yang sedang berjalan, atau dengan `xcrun simctl install booted App.app`. CI mengunggah zip yang sama sebagai artefak `ios-simulator-app`. Build ini tidak bisa dipasang di iPhone fisik.
 
-iOS menyajikan `dist` dari `capacitor://localhost` (WKWebView tidak bisa menyajikan `https`), jadi shim tautan `.html` menerima kedua skema. Tidak ada tombol Kembali: web view mengizinkan usap dari tepi untuk kembali. Universal Links (entitlement `applinks:` di [`App.entitlements`](../ios/App/App/App.entitlements)) memerlukan `/.well-known/apple-app-site-association` di server yang menyebut `<TEAM_ID>.com.sambungayat.app`.
+iOS menyajikan `dist` dari `capacitor://localhost` (WKWebView tidak bisa menyajikan `https`), jadi shim tautan `.html` menerima kedua skema. Tidak ada tombol Kembali: usap dari tepi kiri untuk kembali. Universal Links (entitlement `applinks:` di [`App.entitlements`](../ios/App/App/App.entitlements)) memerlukan `/.well-known/apple-app-site-association` di server yang menyebut `<TEAM_ID>.com.sambungayat.app`.
 
 Pemilik akun Apple Developer masih harus: memilih tim penandatangan di Xcode (`DEVELOPMENT_TEAM`; sertifikat dan profil tidak pernah di-commit), membuat aplikasi di App Store Connect, mengarsipkan dan mengunggah build untuk TestFlight, lalu mengajukannya untuk review App Store (label privasi: tidak ada data yang dikumpulkan, sesuai [`PrivacyInfo.xcprivacy`](../ios/App/App/PrivacyInfo.xcprivacy)). Naikkan `MARKETING_VERSION` dan `CURRENT_PROJECT_VERSION` setiap rilis.
 

@@ -80,6 +80,7 @@ export default function ResultView({
           t("quiz.share_text", { mode: modeTitle, score, total }),
           `${SITE.url}${path("/")}`,
         );
+    if (r === "canceled") return;
     setShareMsg(
       r === "copied"
         ? t("quiz.share.copied")

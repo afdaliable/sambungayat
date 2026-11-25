@@ -69,7 +69,7 @@ Astro 5.x (`@vite-pwa/astro` peer range), `@astrojs/react` 4.x, TypeScript ~6.0 
 
 ## iOS (Capacitor 8, Swift Package Manager)
 - `ios/App`, same app id, iOS 16.4+ (first WebKit that renders Tailwind 4). Serves `dist` from `capacitor://localhost`; the `BaseLayout` `.html` shims accept both schemes. `scripts/ios.sh` backs `ios:sim` (simulator zip) and `ios:test` (XCUITest in `ios/App/AppUITests`); both need macOS + Xcode.
-- No Back button: `BridgeViewController` enables the WKWebView edge swipe. `native/chrome.ts` only sets the status bar on iOS.
+- No Back button: `BridgeViewController` adds a left-edge swipe that calls `webView.goBack()` (the built-in WKWebView gesture did not respond). The native status bar sits over a fixed band strip (`html[data-native] body::before`). `native/chrome.ts` only sets the status bar on iOS.
 - Signing team, App Store Connect, TestFlight and review are manual (see the technical guide). Universal Links need `apple-app-site-association` on the site.
 
 ## Visual identity ("Buku Setoran")

@@ -49,5 +49,10 @@ final class AppUITests: XCTestCase {
         let surahStart = web.staticTexts.matching(NSPredicate(format: "label CONTAINS 'Al-Fatihah'")).firstMatch
         XCTAssertTrue(surahStart.waitForExistence(timeout: 15))
         XCTAssertFalse(web.staticTexts["Daftar surah"].exists, "surah page did not open")
+
+        // Left-edge swipe goes back to the surah list.
+        let edge = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0.5))
+        edge.press(forDuration: 0.05, thenDragTo: app.coordinate(withNormalizedOffset: CGVector(dx: 0.7, dy: 0.5)))
+        XCTAssertTrue(web.staticTexts["Daftar surah"].waitForExistence(timeout: 15), "edge swipe did not go back")
     }
 }
