@@ -12,7 +12,7 @@ Dokumentasi teknis: [Bahasa Indonesia](docs/developer-guide.id.md) · [English](
 - Tantangan Harian: 10 soal yang sama untuk semua orang (hari Jakarta), skor resmi = percobaan pertama.
 - Mode Guru: tautan + QR yang menghasilkan soal identik di semua perangkat.
 - Riwayat dan penguasaan per surah, disimpan di perangkat (localStorage).
-- 114 halaman surah statis untuk SEO, PWA offline (Juz 30), APK Android dan aplikasi iOS (Capacitor).
+- 114 halaman surah statis untuk SEO, PWA offline (Juz 30), APK Android (Capacitor).
 
 ## Arsitektur
 
@@ -21,7 +21,7 @@ flowchart LR
   A[data/raw<br/>api.alquran.cloud] --> B[scripts/build-data.ts]
   B --> C[Build Astro dan JSON per surah]
   C --> D[Cloudflare Pages / PWA]
-  C --> G[Aplikasi Android dan iOS / Capacitor]
+  C --> G[Aplikasi Android / Capacitor]
   D --> E[Engine kuis deterministik]
   G --> E
   E --> F[(localStorage)]
@@ -66,7 +66,6 @@ npm run preview    # http://localhost:4321
 | `npm run data:fetch`         | Unduh ulang semua data mentah ke `data/raw` |
 | `npm run data:verify-audio`  | Cek URL audio tiap qari                     |
 | `npm run android:apk`        | APK debug (butuh JDK 21 dan Android SDK)    |
-| `npm run ios:sim`            | Build simulator iOS (butuh macOS dan Xcode) |
 
 Untuk Playwright, pasang browser sekali: `npx playwright install chromium`.
 
@@ -77,6 +76,12 @@ Unit test (Vitest) memakai data hasil build sungguhan, termasuk uji properti gen
 ## Statistik
 
 Tidak ada akun. Penghitung opsional menerima ID mode, menyimpan total per tanggal UTC, dan memakai hash IP harian untuk mencegah penyalahgunaan. Analitik web juga opsional. Rinciannya ada di [kebijakan privasi](https://sambungayat.com/privasi).
+
+## Terjemahan antarmuka
+
+Teks antarmuka diterjemahkan lewat [Hosted Weblate](https://hosted.weblate.org/projects/sambung-ayat/) (proyek perangkat lunak bebas, hosting Libre). Terjemahan masuk ke repo sebagai pull request. Panduan: [docs/weblate-setup.md](docs/weblate-setup.md).
+
+[![Status terjemahan](https://hosted.weblate.org/widget/sambung-ayat/svg-badge.svg)](https://hosted.weblate.org/engage/sambung-ayat/)
 
 ## Roadmap
 
