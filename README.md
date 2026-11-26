@@ -83,6 +83,12 @@ Teks antarmuka diterjemahkan lewat [Hosted Weblate](https://hosted.weblate.org/p
 
 [![Status terjemahan](https://hosted.weblate.org/widget/sambung-ayat/svg-badge.svg)](https://hosted.weblate.org/engage/sambung-ayat/)
 
+## Terjemahan antarmuka
+
+Teks antarmuka diterjemahkan lewat [Hosted Weblate](https://hosted.weblate.org/projects/sambung-ayat/) (proyek perangkat lunak bebas, hosting Libre). Terjemahan masuk ke repo sebagai pull request. Panduan: [docs/weblate-setup.md](docs/weblate-setup.md).
+
+[![Status terjemahan](https://hosted.weblate.org/widget/sambung-ayat/svg-badge.svg)](https://hosted.weblate.org/engage/sambung-ayat/)
+
 ## Roadmap
 
 Arti nama surah, qari tambahan, tinjauan terjemahan oleh penutur asli, mode kelas dengan papan skor lokal. Ide dan tugas awal: [docs/good-first-issues.md](docs/good-first-issues.md).
